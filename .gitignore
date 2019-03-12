@@ -71,7 +71,7 @@ build/
 tests/unit_tests
 
 # Default binary.
-BINARY_NAME
+arcade
 
 html/*
 latex/*

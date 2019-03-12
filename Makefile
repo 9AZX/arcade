@@ -21,7 +21,8 @@ CC	=	g++
 
 NAME	=	arcade
 
-CPPFLAGS	=	-I./include/core/	\
+CPPFLAGS	=	-I./include/shared/	\
+			-I./include/core/	\
 			-I./include/games/	\
 			-I./include/graphics/
 
@@ -29,11 +30,15 @@ CXXFLAGS	=	-std=c++17 -Wall -Wextra -Werror
 
 all:	core games graphicals
 
+%.o:	%.cpp
+	$(CC) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+	@echo "- Compilation of file: $@"
+
 $(NAME):	$(OBJ)
 	$(CC) -o $(NAME) $(OBJ)
 
 #$(GAME_SNAKE):	$(OBJ_GAME_SNAKE)
-#	$(CC) -shared -fPIC -o $(GAME_SNAKE) $(OBJ_GAME_SNAKE)
+#	$(CC) $(INCLUDE_GAMES) -shared -fPIC -o $(GAME_SNAKE) $(OBJ_GAME_SNAKE)
 
 .SILENT:
 
