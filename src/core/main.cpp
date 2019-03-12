@@ -20,6 +20,10 @@ int main(int argc, char const *argv[])
 		std::cerr << e.what() << std::endl;
 		return 84;
 	}
+	catch (const std::bad_alloc &e) {
+		std::cerr << "Allocation failed: " << e.what() << std::endl;
+		return 84;
+	}
 	catch (...) {
 		std::cerr << "An internal error occured." << std::endl;
 		return 84;
