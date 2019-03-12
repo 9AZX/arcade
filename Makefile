@@ -32,7 +32,7 @@ all:	core games graphicals
 
 %.o:	%.cpp
 	$(CC) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
-	@echo "- Compilation of file: $@"
+	@echo "- Compilation of file: $<"
 
 $(NAME):	$(OBJ)
 	$(CC) -o $(NAME) $(OBJ)
