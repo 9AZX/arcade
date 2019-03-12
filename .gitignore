@@ -72,3 +72,7 @@ tests/unit_tests
 
 # Default binary.
 BINARY_NAME
+
+html/*
+latex/*
+man/*

@@ -13,11 +13,16 @@ class IGameModule {
 		IGameModule();
 		~IGameModule();
 
-        void play();
-        void pause();
-        void end_game();
+		void play();
+		void pause();
+		void endGame();
+		char *getMap();
+		int getScore();
+
 	protected:
 	private:
+		char *_map;
+		int _score;
 };
 
 #endif /* !IGAMEMODULE_HPP_ */
