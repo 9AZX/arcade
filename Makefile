@@ -26,7 +26,7 @@ CPPFLAGS	=	-I./include/shared/	\
 			-I./include/games/	\
 			-I./include/graphics/
 
-CXXFLAGS	=	-std=c++17 -Wall -Wextra -Werror
+CXXFLAGS	=	-std=c++17 -Wall -Wextra
 
 all:	core games graphicals
 

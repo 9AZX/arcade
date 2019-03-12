@@ -11,6 +11,8 @@
 #include <string>
 #include <exception>
 
+#define	ERR_USAGE	"USAGE:\n\t./arcade [GRAPHIC LIB PATH]"
+
 class Exception : public std::exception
 {
 public:

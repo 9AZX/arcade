@@ -5,10 +5,12 @@
 ** Application
 */
 
-#include <iostream>
 #include "Application.hpp"
+#include "Exception.hpp"
 
-void Application::init(const std::string &str)
+void Application::init(const int argc, const char **argv)
 {
-	std::cout << "Init: " << str << std::endl;
+	if (argc != 2) {
+		throw Exception(ERR_USAGE);
+	}
 }

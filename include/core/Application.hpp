@@ -17,7 +17,7 @@ public:
 		~Application() = default;
 
 public:
-	void init(const std::string &str);
+	void init(const int argc, const char **argv);
 };
 
 #endif	/* !APPLICATION_HPP_ */
