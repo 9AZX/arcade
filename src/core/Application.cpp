@@ -5,11 +5,10 @@
 ** Application
 */
 
+#include <iostream>
 #include "Application.hpp"
-
-Application::Application() {}
 
 void Application::init(const std::string &str)
 {
-    std::cout << "Init: " << str << std::endl;
+	std::cout << "Init: " << str << std::endl;
 }
