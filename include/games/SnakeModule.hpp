@@ -6,17 +6,19 @@
 */
 
 #ifndef SNAKEMODULE_HPP_
-    #define SNAKEMODULE_HPP_
+#define SNAKEMODULE_HPP_
 
 #include "IGameModule.hpp"
 
-class SnakeModule : public IGameModule {
-	public:
-		SnakeModule();
-		~SnakeModule();
+class SnakeModule : public IGameModule
+{
+  public:
+	SnakeModule();
+	~SnakeModule();
+	void play();
 
-	protected:
-	private:
+  protected:
+  private:
 };
 
 #endif /* !SNAKEMODULE_HPP_ */

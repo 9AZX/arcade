@@ -6,23 +6,26 @@
 */
 
 #ifndef IGAMEMODULE_HPP_
-    #define IGAMEMODULE_HPP_
+#define IGAMEMODULE_HPP_
 
-class IGameModule {
-	public:
-		IGameModule();
-		~IGameModule();
+#include <iostream>
 
-		void play();
-		void pause();
-		void endGame();
-		char *getMap();
-		int getScore();
+class IGameModule
+{
+  public:
+	IGameModule();
+	~IGameModule();
 
-	protected:
-	private:
-		char *_map;
-		int _score;
+	virtual void play() = 0;
+	virtual void pause() = 0;
+	virtual void endGame() = 0;
+	virtual char *getMap() = 0;
+	virtual int getScore() = 0;
+
+  protected:
+  private:
+	char *_map;
+	int _score;
 };
 
 #endif /* !IGAMEMODULE_HPP_ */

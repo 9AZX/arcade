@@ -14,3 +14,8 @@ SnakeModule::SnakeModule()
 SnakeModule::~SnakeModule()
 {
 }
+
+void SnakeModule::play()
+{
+	std::cout << "SNAKEEEEEEE" << std::endl;
+}
