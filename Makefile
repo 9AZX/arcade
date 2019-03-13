@@ -5,9 +5,11 @@
 ## Standard Makefile for compile the project.
 ##
 
-SRC_GAME_SNAKE	=	./src/games/snake/SnakeModule.cpp
+SRC_GAME_SNAKE	=	./src/games/snake/entry.cpp		\
+			./src/games/snake/SnakeModule.cpp
 
-SRC_GAME_PACMAN	=	./src/games/pacman/PacmanModule.cpp
+SRC_GAME_PACMAN	=	./src/games/pacman/entry.cpp		\
+			./src/games/pacman/PacmanModule.cpp
 
 SRC_CLASS	=	./src/core/Application.cpp	\
 			./src/core/Exception.cpp	\

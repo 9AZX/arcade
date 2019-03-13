@@ -16,6 +16,8 @@ void Application::init(const int argc, const char **argv)
 	try {
 		this->_graphic = std::make_unique<Library>(argv[1]);
 		this->_graphic->open();
+		this->fptr_graphic = (void (*)()) this->_graphic->sym("EntryGame");
+		(*this->fptr_graphic)();
 	}
 	catch (...) {
 		throw;
@@ -25,8 +27,8 @@ void Application::init(const int argc, const char **argv)
 void Application::stop()
 {
 	try {
-		this->_game->close();
-		this->_graphic->close();
+		//this->_game->close();
+		//this->_graphic->close();
 	}
 	catch (...) {
 		throw;
