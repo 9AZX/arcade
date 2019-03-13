@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:05
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 18:46:11
+** @Last Modified time: 13-03-2019 19:11:49
 */
 
 #include "Library.hpp"
@@ -72,4 +72,9 @@ void *Library::sym(const std::string &symbol)
 		throw Exception(dlerror());
 	}
 	return (sym);
+}
+
+const std::string &Library::get_path() noexcept
+{
+	return this->_path;
 }

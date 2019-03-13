@@ -12,6 +12,9 @@
 #include <memory>
 #include "Library.hpp"
 
+#define	ENTRY_POINT_GAME	"EntryGame"
+#define	ENTRY_POINT_GRAPHIC	"EntryGraph"
+
 class Application
 {
 public:
@@ -21,6 +24,8 @@ public:
 public:
 	void init(const int argc, const char **argv);
 	void stop();
+	void open_graphical_library();
+	void open_game_library();
 
 protected:
 	std::unique_ptr<Library> _game = nullptr;
