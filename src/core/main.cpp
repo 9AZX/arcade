@@ -15,6 +15,7 @@ int main(int argc, char const *argv[])
 	try {
 		std::unique_ptr<Application> app(new Application);
 		app->init(argc, argv);
+		app->stop();
 	}
 	catch (const Exception &e) {
 		std::cerr << e.what() << std::endl;

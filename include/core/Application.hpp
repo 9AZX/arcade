@@ -20,10 +20,11 @@ public:
 
 public:
 	void init(const int argc, const char **argv);
+	void stop();
 
 protected:
-	std::unique_ptr<Library> _game = NULL;
-	std::unique_ptr<Library> _graphic = NULL;
+	std::unique_ptr<Library> _game = nullptr;
+	std::unique_ptr<Library> _graphic = nullptr;
 };
 
 #endif	/* !APPLICATION_HPP_ */

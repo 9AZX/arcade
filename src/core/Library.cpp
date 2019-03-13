@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:05
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 16:25:07
+** @Last Modified time: 13-03-2019 16:59:51
 */
 
 #include "Library.hpp"
@@ -18,12 +18,7 @@ Library::Library(const std::string &path)
 
 Library::~Library()
 {
-	try {
-		this->close();
-	}
-	catch (...) {
-		throw;
-	}
+	this->close();
 }
 
 #if	defined(LIBRARY_PLATEFORM_FNC) && LIBRARY_PLATEFORM_FNC == 0
@@ -62,7 +57,8 @@ void Library::close()
 	if (!this->_handle) {
 		return;
 	}
-	if (this->_handle && dlclose(this->_handle) == -1) {
+	else if (this->_handle && dlclose(this->_handle) == -1) {
 		throw Exception(dlerror());
 	}
+	this->_handle = nullptr;
 }
