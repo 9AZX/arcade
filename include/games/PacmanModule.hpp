@@ -6,17 +6,20 @@
 */
 
 #ifndef PACMANMODULE_HPP_
-    #define PACMANMODULE_HPP_
+#define PACMANMODULE_HPP_
 
 #include "IGameModule.hpp"
 
-class PacmanModule : public IGameModule {
-	public:
-		PacmanModule();
-		~PacmanModule();
+class PacmanModule : public IGameModule
+{
+  public:
+	PacmanModule();
+	~PacmanModule();
 
-	protected:
-	private:
+	void play();
+
+  protected:
+  private:
 };
 
 #endif /* !PACMANMODULE_HPP_ */

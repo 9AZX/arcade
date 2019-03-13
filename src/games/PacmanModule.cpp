@@ -14,3 +14,8 @@ PacmanModule::PacmanModule()
 PacmanModule::~PacmanModule()
 {
 }
+
+void PacmanModule::play()
+{
+	std::cout << "Njut Njut Pacman" << std::endl;
+}
