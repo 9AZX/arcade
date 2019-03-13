@@ -9,6 +9,8 @@
 #define	APPLICATION_HPP_
 
 #include <string>
+#include <memory>
+#include "Library.hpp"
 
 class Application
 {
@@ -18,6 +20,10 @@ public:
 
 public:
 	void init(const int argc, const char **argv);
+
+protected:
+	std::unique_ptr<Library> _game = NULL;
+	std::unique_ptr<Library> _graphic = NULL;
 };
 
 #endif	/* !APPLICATION_HPP_ */
