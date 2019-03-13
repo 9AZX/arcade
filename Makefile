@@ -73,6 +73,7 @@ clean:
 
 fclean:	clean
 	@rm -f $(NAME)
+	@rm -f ./games/$(GAME_SNAKE)
 	@rm -f ./games/$(GAME_PACMAN)
 	@echo "FCLEAN: OK"
 
