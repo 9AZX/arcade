@@ -25,6 +25,10 @@ public:
 protected:
 	std::unique_ptr<Library> _game = nullptr;
 	std::unique_ptr<Library> _graphic = nullptr;
+	void (*fptr_game)() = nullptr;
+	void (*fptr_graphic)() = nullptr;
 };
+
+typedef	void (*fptr_game)(void);
 
 #endif	/* !APPLICATION_HPP_ */

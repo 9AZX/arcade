@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:35
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 17:18:32
+** @Last Modified time: 13-03-2019 18:00:15
 */
 
 #ifndef	LIBRARY_HPP_
@@ -40,6 +40,7 @@ public:
 public:
 	bool open();
 	void close();
+	void *sym(const std::string &symbol);
 
 protected:
 	std::string _path = "";
