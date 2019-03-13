@@ -73,6 +73,10 @@ tests/unit_tests
 # Default binary.
 arcade
 
+# doxygen
 html/*
 latex/*
 man/*
+
+# test
+test/*
