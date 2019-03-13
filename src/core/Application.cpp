@@ -21,3 +21,14 @@ void Application::init(const int argc, const char **argv)
 		throw;
 	}
 }
+
+void Application::stop()
+{
+	try {
+		this->_game->close();
+		this->_graphic->close();
+	}
+	catch (...) {
+		throw;
+	}
+}

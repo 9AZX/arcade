@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:35
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 15:14:31
+** @Last Modified time: 13-03-2019 16:51:17
 */
 
 #ifndef	LIBRARY_HPP_
@@ -43,7 +43,7 @@ public:
 
 protected:
 	std::string _path = "";
-	void *_handle = NULL;
+	void *_handle = nullptr;
 };
 
 #endif	/* !LIBRARY_HPP_ */
