@@ -29,6 +29,4 @@ protected:
 	void (*fptr_graphic)() = nullptr;
 };
 
-typedef	void (*fptr_game)(void);
-
 #endif	/* !APPLICATION_HPP_ */

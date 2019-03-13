@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:05
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 18:00:08
+** @Last Modified time: 13-03-2019 18:46:11
 */
 
 #include "Library.hpp"
@@ -54,10 +54,7 @@ bool Library::open()
 
 void Library::close()
 {
-	if (!this->_handle) {
-		return;
-	}
-	else if (this->_handle && dlclose(this->_handle) == -1) {
+	if (this->_handle && dlclose(this->_handle) == -1) {
 		throw Exception(dlerror());
 	}
 	this->_handle = nullptr;

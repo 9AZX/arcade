@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:35
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 18:00:15
+** @Last Modified time: 13-03-2019 18:39:41
 */
 
 #ifndef	LIBRARY_HPP_
