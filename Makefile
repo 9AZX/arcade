@@ -5,9 +5,9 @@
 ## Standard Makefile for compile the project.
 ##
 
-SRC_GAME_SNAKE	=	./src/games/SnakeModule.cpp
+SRC_GAME_SNAKE	=	./src/games/snake/SnakeModule.cpp
 
-SRC_GAME_PACMAN	=	./src/games/PacmanModule.cpp
+SRC_GAME_PACMAN	=	./src/games/pacman/PacmanModule.cpp
 
 SRC_CLASS	=	./src/core/Application.cpp	\
 			./src/core/Exception.cpp	\
@@ -73,6 +73,7 @@ clean:
 
 fclean:	clean
 	@rm -f $(NAME)
+	@rm -f ./games/$(GAME_SNAKE)
 	@rm -f ./games/$(GAME_PACMAN)
 	@echo "FCLEAN: OK"
 

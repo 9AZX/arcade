@@ -5,21 +5,19 @@
 ** PacmanModule
 */
 
-#ifndef PACMANMODULE_HPP_
-#define PACMANMODULE_HPP_
+#ifndef	PACMANMODULE_HPP_
+#define	PACMANMODULE_HPP_
 
 #include "IGameModule.hpp"
 
 class PacmanModule : public IGameModule
 {
-  public:
-	PacmanModule();
-	~PacmanModule();
+public:
+	PacmanModule() = default;
+	~PacmanModule() = default;
 
+public:
 	void play();
-
-  protected:
-  private:
 };
 
-#endif /* !PACMANMODULE_HPP_ */
+#endif	/* !PACMANMODULE_HPP_ */
