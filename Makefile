@@ -8,7 +8,8 @@
 #SRC_GAME_SNAKE	=
 
 SRC_CLASS	=	./src/core/Application.cpp	\
-			./src/core/Exception.cpp
+			./src/core/Exception.cpp	\
+			./src/core/Library.cpp
 
 SRC	=	$(SRC_CLASS)	\
 		./src/core/main.cpp
