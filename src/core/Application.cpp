@@ -15,6 +15,7 @@ void Application::init(const int argc, const char **argv)
 	}
 	try {
 		this->_graphic = std::make_unique<Library>(argv[1]);
+		this->_graphic->open();
 	}
 	catch (...) {
 		throw;

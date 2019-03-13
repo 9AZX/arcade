@@ -6,13 +6,15 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:35
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 14:55:41
+** @Last Modified time: 13-03-2019 15:14:31
 */
 
 #ifndef	LIBRARY_HPP_
 #define	LIBRARY_HPP_
 
 #include <string>
+#include <dlfcn.h>
+#include "Exception.hpp"
 
 #if	!defined(LIBRARY_PLATEFORM_FNC)
 #	if	defined(__APPLE__)
@@ -33,10 +35,11 @@ class Library
 {
 public:
 	Library(const std::string &path);
-	~Library() = default;
+	~Library();
 
 public:
-	bool open(void);
+	bool open();
+	void close();
 
 protected:
 	std::string _path = "";

@@ -36,7 +36,7 @@ all:	core games graphicals
 	@echo "- Compilation of file: $<"
 
 $(NAME):	$(OBJ)
-	$(CC) -o $(NAME) $(OBJ)
+	$(CC) -o $(NAME) $(OBJ) -ldl
 
 #$(GAME_SNAKE):	$(OBJ_GAME_SNAKE)
 #	$(CC) $(INCLUDE_GAMES) -shared -fPIC -o $(GAME_SNAKE) $(OBJ_GAME_SNAKE)
