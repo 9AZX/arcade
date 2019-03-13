@@ -44,7 +44,7 @@ all:	core games graphicals
 	@echo "- Compilation of file: $<"
 
 $(NAME):	$(OBJ)
-	$(CC) -o $(NAME) $(OBJ) -ldl
+	$(CC) -rdynamic -o $(NAME) $(OBJ) -ldl
 
 $(GAME_SNAKE):	$(OBJ_GAME_SNAKE)
 	$(CC) -shared -o $(GAME_SNAKE) $(OBJ_GAME_SNAKE)
