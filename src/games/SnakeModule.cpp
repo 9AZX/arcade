@@ -5,15 +5,8 @@
 ** SnakeModule
 */
 
+#include <iostream>
 #include "SnakeModule.hpp"
-
-SnakeModule::SnakeModule()
-{
-}
-
-SnakeModule::~SnakeModule()
-{
-}
 
 void SnakeModule::play()
 {

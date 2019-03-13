@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:35
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 16:51:17
+** @Last Modified time: 13-03-2019 17:18:32
 */
 
 #ifndef	LIBRARY_HPP_
@@ -22,12 +22,12 @@
 #		if	defined(TARGET_OS_MAC)
 #			define	LIBRARY_PLATEFORM_FNC	0
 #		else
-#			error	"Plateform not supported."
+#			error	"Plateform is not supported."
 #		endif
 #	elif	defined(__linux__)
 #		define	LIBRARY_PLATEFORM_FNC	1
 #	else
-#		error	"Plateform not supported."
+#		error	"Plateform is not supported."
 #	endif
 #endif
 

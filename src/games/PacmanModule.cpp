@@ -5,15 +5,8 @@
 ** PacmanModule
 */
 
+#include <iostream>
 #include "PacmanModule.hpp"
-
-PacmanModule::PacmanModule()
-{
-}
-
-PacmanModule::~PacmanModule()
-{
-}
 
 void PacmanModule::play()
 {
