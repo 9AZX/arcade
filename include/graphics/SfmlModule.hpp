@@ -15,6 +15,10 @@ class SfmlModule : public  IDisplayModule {
 		SfmlModule();
 		~SfmlModule();
 
+		// void initSound();
+		// void initMusic();
+		void playSound();
+		void playMusic();
 	protected:
 	private:
 };

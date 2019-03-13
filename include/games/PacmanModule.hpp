@@ -17,7 +17,11 @@ public:
 	~PacmanModule() = default;
 
 public:
-	void play();
+	void play() override;
+	void pause() override;
+	void endGame() override;
+	char *getMap() override;
+	int getScore() override;
 };
 
 #endif	/* !PACMANMODULE_HPP_ */
