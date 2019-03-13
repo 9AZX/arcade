@@ -62,7 +62,7 @@ void Application::open_game_library()
 
 	try {
 		this->fptr_game = reinterpret_cast<void (*)()>(
-			this->_game->sym(ENTRY_POINT_GRAPHIC)
+			this->_game->sym(ENTRY_POINT_GAME)
 		);
 	}
 	catch (...) {
