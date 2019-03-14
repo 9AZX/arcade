@@ -13,7 +13,8 @@ SRC_GAME_PACMAN	=	./src/games/pacman/library_main.cpp	\
 
 SRC_CLASS	=	./src/core/Application.cpp	\
 			./src/core/Exception.cpp	\
-			./src/core/Library.cpp
+			./src/core/Library.cpp		\
+			./src/core/Log.cpp
 
 SRC	=	$(SRC_CLASS)	\
 		./src/core/main.cpp

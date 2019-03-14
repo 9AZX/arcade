@@ -80,3 +80,4 @@ man/*
 
 # test
 test/*
+*.log
