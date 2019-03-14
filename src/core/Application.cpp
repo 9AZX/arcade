@@ -67,7 +67,7 @@ void Application::open_game_library()
 	}
 	catch (...) {
 		error += "Library (";
-		error += this->_graphic->get_path();
+		error += this->_game->get_path();
 		error += ") isn't a game library.";
 		throw Exception(error);
 	}
