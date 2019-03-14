@@ -5,23 +5,23 @@
 ** PacmanModule
 */
 
-#ifndef PACMANMODULE_HPP_
-#define PACMANMODULE_HPP_
+#ifndef	PACMANMODULE_HPP_
+#define	PACMANMODULE_HPP_
 
 #include "IGameModule.hpp"
 
 class PacmanModule : public IGameModule
 {
-  public:
+public:
 	PacmanModule() = default;
 	~PacmanModule() = default;
 
-  public:
+public:
 	void play() override;
-	void pause() override;
-	void endGame() override;
-	std::unique_ptr<Map> getMap() override;
-	int getScore() override;
+	//void pause() override;
+	//void endGame() override;
+	//int getScore() override;
+	//std::unique_ptr<Map> getMap() override;
 };
 
-#endif /* !PACMANMODULE_HPP_ */
+#endif	/* !PACMANMODULE_HPP_ */
