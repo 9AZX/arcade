@@ -8,19 +8,22 @@
 #ifndef SFMLMODULE_HPP_
     #define SFMLMODULE_HPP_
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
 #include "IDisplayModule.hpp"
 
 class SfmlModule : public  IDisplayModule {
 	public:
 		SfmlModule();
 		~SfmlModule();
+		sf::RenderWindow *initWindow();
 
-		// void initSound();
-		// void initMusic();
-		void playSound();
-		void playMusic();
+		// void playSound();
+		// void playMusic();
 	protected:
 	private:
+		sf::RenderWindow *window;
 };
 
 #endif /* !SFMLMODULE_HPP_ */
