@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   14-03-2019 09:58:22
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 14-03-2019 11:04:49
+** @Last Modified time: 14-03-2019 11:08:03
 */
 
 #include <ctime>
@@ -17,7 +17,9 @@
 
 void Log::write(const std::string &str)
 {
-	std::time_t time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	std::time_t time = std::chrono::system_clock::to_time_t(
+		std::chrono::system_clock::now()
+	);
 	std::ofstream file;
 
 	if (str.empty()) {
