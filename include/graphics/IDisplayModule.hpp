@@ -6,15 +6,18 @@
 */
 
 #ifndef IDISPLAYMODULE_HPP_
-    #define IDISPLAYMODULE_HPP_
+#define IDISPLAYMODULE_HPP_
 
-class IDisplayModule {
-	public:
-		IDisplayModule();
-		~IDisplayModule();
+#include "Map.hpp"
 
-	protected:
-	private:
+class IDisplayModule
+{
+  public:
+	IDisplayModule();
+	~IDisplayModule();
+
+  protected:
+  private:
 };
 
 #endif /* !IDISPLAYMODULE_HPP_ */
