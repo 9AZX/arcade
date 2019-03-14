@@ -9,6 +9,7 @@
 #define	IGAMEMODULE_HPP_
 
 #include "Map.hpp"
+#include "Player.hpp"
 #include "memory"
 
 class IGameModule
@@ -26,6 +27,8 @@ public:
 
 private:
 	int _score = -1;
+	Map _map;
+	Player _player;
 };
 
 #endif	/* !IGAMEMODULE_HPP_ */
