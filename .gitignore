@@ -56,7 +56,7 @@ dkms.conf
 .idea/
 CMakeLists.txt
 cmake-build-debug/
-*.txt
+# *.txt -> bitmap
 *.sh
 .tags
 .DS_STORE
