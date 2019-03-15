@@ -10,21 +10,23 @@
 
 #include <memory>
 #include <iostream>
+#include <vector>
 
 class Map
 {
   public:
-	Map();
-	~Map();
 	enum byteMap
 	{
 		VOID = -1,
 		GROUND = 0,
 		WALL = 1,
-		PLAYER = 2,
-		ENTITY = 3,
-		PLAYER_BODY = 4
+		FOOD = 2,
+		EXTRA = 3
 	};
+
+	Map(std::string path);
+	~Map();
+
 	std::string assets_void = "";
 	std::string assets_ground = "";
 	std::string assets_wall = "";
@@ -38,9 +40,12 @@ class Map
 	char ncurses_player;
 	char ncurses_player_body;
 	char ncurses_void_entity;
+	char ncurses_food;
+	char ncurses_extra;
 
+	byteMap getMap(unsigned int);
   private:
-	std::unique_ptr<byteMap> _map = nullptr;
+	std::vector<byteMap> _map;
 };
 
 #endif /* !MAP_HPP_ */

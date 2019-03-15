@@ -6,11 +6,3 @@
 */
 
 #include "SfmlModule.hpp"
-
-SfmlModule::SfmlModule()
-{
-}
-
-SfmlModule::~SfmlModule()
-{
-}

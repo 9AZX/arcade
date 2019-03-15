@@ -11,10 +11,7 @@
 
 #include "Exception.hpp"
 
-Exception::Exception(const std::string &msg)
-{
-	this->_msg = msg;
-}
+Exception::Exception(const std::string &msg) : _msg(msg) {}
 
 const char *Exception::what() const noexcept
 {

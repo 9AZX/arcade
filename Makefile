@@ -12,10 +12,14 @@ SRC_GAME_PACMAN	=	./src/games/pacman/library_main.cpp	\
 			./src/games/pacman/PacmanModule.cpp
 
 SRC_GRAPHIC_NCURSES	=	./src/graphics/ncurses/library_main.cpp	\
-			./src/graphics/ncurses/NcursesModule.cpp
+			./src/graphics/ncurses/NcursesModule.cpp			\
+			./src/graphics/IDisplayModule.cpp					\
+			./src/core/Map.cpp
 
 SRC_GRAPHIC_SFML	=	./src/graphics/sfml/library_main.cpp	\
-			./src/graphics/sfml/SfmlModule.cpp
+			./src/graphics/sfml/SfmlModule.cpp			\
+			./src/graphics/IDisplayModule.cpp			\
+			./src/core/Map.cpp
 
 SRC_CLASS	=	./src/core/Application.cpp	\
 			./src/core/Exception.cpp	\
@@ -70,7 +74,7 @@ $(GAME_PACMAN):	$(OBJ_GAME_PACMAN)
 	$(CC) -shared -o $(GAME_PACMAN) $(OBJ_GAME_PACMAN)
 
 $(GRAPHIC_NCURSES):	$(OBJ_GRAPHIC_NCURSES)
-	$(CC) -shared -o $(GRAPHIC_NCURSES) $(OBJ_GRAPHIC_NCURSES)
+	$(CC) -shared -lncurses -o $(GRAPHIC_NCURSES) $(OBJ_GRAPHIC_NCURSES)
 
 $(GRAPHIC_SFML):	$(OBJ_GRAPHIC_SFML)
 	$(CC) -shared -o $(GRAPHIC_SFML) $(OBJ_GRAPHIC_SFML)

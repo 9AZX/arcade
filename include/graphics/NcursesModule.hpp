@@ -9,11 +9,14 @@
     #define NCURSESMODULE_HPP_
 
 #include "IDisplayModule.hpp"
+#include <ncurses.h>
 
 class NcursesModule : public IDisplayModule {
 	public:
 		NcursesModule();
 		~NcursesModule();
+		void print_map(Map) override;
+
 
 	protected:
 	private:
