@@ -9,12 +9,15 @@
 #define IDISPLAYMODULE_HPP_
 
 #include "Map.hpp"
+#include <iostream>
 
 class IDisplayModule
 {
   public:
 	IDisplayModule();
 	~IDisplayModule();
+	virtual void print_map(Map) = 0;
+
 
   protected:
   private:

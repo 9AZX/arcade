@@ -5,11 +5,18 @@
 ** Entry point for the lib ncurses.
 */
 
-#include <iostream>
+#include "NcursesModule.hpp"
 
 extern "C" void EntryGraph();
 
 void EntryGraph()
 {
-	std::cout << "call (ncurses): ok" << std::endl;
+	Map map("ok");
+	NcursesModule ncurses;
+
+	initscr();
+	ncurses.print_map(map);
+	refresh();
+	getch();
+	endwin();
 }
