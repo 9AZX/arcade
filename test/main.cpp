@@ -164,6 +164,7 @@ int main()
                     break;
             }
         }
+
         // MOVE PLAYER
         pos = pacmanSprite.getPosition();
         if (move_right && moveRight(&pos, map)) {
