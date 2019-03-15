@@ -79,5 +79,5 @@ latex/*
 man/*
 
 # test
-test/*
+# test/*
 *.log
