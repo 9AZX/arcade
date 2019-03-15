@@ -109,6 +109,21 @@ int main()
     wallSprite.setTexture(wallText, true);
     wallSprite.setOrigin(16, 16);
 
+    // MUSIC INIT
+    sf::Music intro;
+    sf::Clock clock;
+    sf::Time elapsed = clock.getElapsedTime();;
+    if (!intro.openFromFile("../assets/pacman_beginning.wav"))
+        return -1;
+    
+    intro.play();
+        window.draw(pacmanSprite);
+        window.display();
+
+    while (elapsed.asSeconds() <= 4) {
+        elapsed = clock.getElapsedTime();
+    }
+
     // SOUND INIT
     sf::SoundBuffer walkSound;
     if (!walkSound.loadFromFile("../assets/pacman_chomp.wav"))
