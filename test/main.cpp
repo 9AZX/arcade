@@ -5,9 +5,6 @@
 
 bool moveRight(sf::Vector2f *playerPos, std::string map)
 {
-    playerPos->y = (playerPos->y / 32) * 32;
-    playerPos->x = (playerPos->x / 32) * 32;
-
     int cell_x = playerPos->x / 32 - 1;
     int cell_y = playerPos->y / 32 - 1;
 
@@ -19,9 +16,6 @@ bool moveRight(sf::Vector2f *playerPos, std::string map)
 
 bool moveLeft(sf::Vector2f *playerPos, std::string map)
 {
-    playerPos->y = (playerPos->y / 32) * 32;
-    playerPos->x = (playerPos->x / 32) * 32;
-
     int cell_x = playerPos->x / 32 - 1;
     int cell_y = playerPos->y / 32 - 1;
 
@@ -33,9 +27,6 @@ bool moveLeft(sf::Vector2f *playerPos, std::string map)
 
 bool moveUp(sf::Vector2f *playerPos, std::string map)
 {
-    playerPos->y = (playerPos->y / 32) * 32;
-    playerPos->x = (playerPos->x / 32) * 32;
-
     int cell_x = playerPos->x / 32 - 1;
     int cell_y = playerPos->y / 32 - 1;
 
@@ -47,9 +38,6 @@ bool moveUp(sf::Vector2f *playerPos, std::string map)
 
 bool moveDown(sf::Vector2f *playerPos, std::string map)
 {
-    playerPos->y = (playerPos->y / 32) * 32;
-    playerPos->x = (playerPos->x / 32) * 32;
-
     int cell_x = playerPos->x / 32 - 1;
     int cell_y = playerPos->y / 32 - 1;
 
@@ -79,7 +67,7 @@ int main()
 {
     // INIT WINDOW
     std::string map = "111111111111111111112222222222222222211311211121211121131122222222222222222112112121111121211211222212221222122221111121110101112111100012100000001210001111210110110121111000020010001002000011112101111101211110001210000000121000111121011111012111112222222212222222211211211121211121121132122222222222123111212121111121212111222212221222122221121111112121111112112222222222222222211111111111111111111";
-    sf::RenderWindow window(sf::VideoMode(800, 800), "SFML - Pacman");
+    sf::RenderWindow window(sf::VideoMode(650, 700), "SFML - Pacman");
     sf::Event event;
     sf::Texture ghostText;
     sf::Texture pacmanText;
@@ -96,14 +84,21 @@ int main()
     bool move_up = false;
     bool move_down = false;
 
+    bool move_right1 = false;
+    bool move_left1 = false;
+    bool move_up1 = false;
+    bool move_down1 = false;
+
     bool is_moving = false;
+    bool is_moving1 = false;
     int it = 0;
+    int it1 = 0;
 
     // SPRITE INIT
     ghostText.loadFromFile("../assets/ghost.png");
     ghostSprite.setTexture(ghostText, true);
-    ghostSprite.setPosition(300, 15);
-    ghostSprite.setScale(0.5, 0.5);
+    ghostSprite.setPosition(9 * 32 + 32, 10 * 32);
+    ghostSprite.setOrigin(16, 16);
 
     pacmanText.loadFromFile("../assets/pacman.png");
     pacmanSprite.setTexture(pacmanText, true);
@@ -158,24 +153,19 @@ int main()
         pos = pacmanSprite.getPosition();
         if (move_right && moveRight(&pos, map)) {
             pacmanSprite.setRotation(0);
-            // pacmanSprite.move(32, 0);
             is_moving = true;
         } else if (move_left && moveLeft(&pos, map)) {
             pacmanSprite.setRotation(180);
-            // pacmanSprite.move(-32, 0);
             is_moving = true;
         } else if (move_up && moveUp(&pos, map)) {
             pacmanSprite.setRotation(270);
-            // pacmanSprite.move(0, -32);
             is_moving = true;
         } else if (move_down && moveDown(&pos, map)) {
             pacmanSprite.setRotation(90);
-            // pacmanSprite.move(0, 32);
             is_moving = true;
         }
 
         if (is_moving == true) {
-
             if (it < 64) {
                 if (move_right) {
                     pacmanSprite.move(0.5, 0);
@@ -190,16 +180,73 @@ int main()
             } else {
                 it = 0;
                 is_moving = false;
+                move_right = false;
+                move_left = false;
+                move_up = false;
+                move_down = false;
             }
         }
 
-        std::cout << "[" << (pos.x / 32) - 1 << ", " << (pos.y / 32) - 1 << "]" << std::endl;
+        // MOVE GHOST
+        int random = rand() % 4;
+
+        pos = ghostSprite.getPosition();
+        switch (random) {
+            case 0:
+                if (moveRight(&pos, map) && !is_moving1)
+                    // ghostSprite.move(32, 0);
+                    move_right1 = true;
+                    is_moving1 = true;
+                break;
+            case 1:
+                if (moveLeft(&pos, map) && !is_moving1)
+                    // ghostSprite.move(-32, 0);
+                    move_left1 = true;
+                    is_moving1 = true;
+                break;
+            case 2:
+                if (moveUp(&pos, map) && !is_moving1)
+                    // ghostSprite.move(0, -32);
+                    move_up1 = true;
+                    is_moving1 = true;
+                break;
+            case 3:
+                if (moveDown(&pos, map) && !is_moving1)
+                    // ghostSprite.move(0, 32);
+                    move_down1 = true;
+                    is_moving1 = true;
+                break;
+            default:
+                break;
+        }
+        if (is_moving1 == true) {
+            if (it1 < 128) {
+                if (move_right1) {
+                    ghostSprite.move(0.25, 0);
+                } else if (move_left1) {
+                    ghostSprite.move(-0.25, 0);
+                } else if (move_up1) {
+                    ghostSprite.move(0, -0.25);
+                } else if (move_down1) {
+                    ghostSprite.move(0, 0.25);
+                }
+                it1++;
+            } else {
+                it1 = 0;
+                is_moving1 = false;
+                move_right1 = false;
+                move_left1 = false;
+                move_up1 = false;
+                move_down1 = false;
+            }
+        }
+
+        // std::cout << "[" << (pos.x / 32) - 1 << ", " << (pos.y / 32) - 1 << "]" << std::endl;
 
         // DRAW / REFRESH
         window.clear();
-        // window.draw(ghostSprite);
+        window.draw(ghostSprite);
         window.draw(pacmanSprite);
-        // window.draw(wallSprite);
         drawMap(&window, &wallSprite, map);
         window.display();
     }
