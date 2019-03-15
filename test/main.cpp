@@ -95,7 +95,9 @@ int main()
     bool move_left = false;
     bool move_up = false;
     bool move_down = false;
+
     bool is_moving = false;
+    int it = 0;
 
     // SPRITE INIT
     ghostText.loadFromFile("../assets/ghost.png");
@@ -128,6 +130,7 @@ int main()
                 case sf::Event::Closed:
                     window.close();
                     break;
+
                 // KEYBOARD INPUT
                 case sf::Event::KeyPressed:
                     if (is_moving)
@@ -155,21 +158,40 @@ int main()
         pos = pacmanSprite.getPosition();
         if (move_right && moveRight(&pos, map)) {
             pacmanSprite.setRotation(0);
-            pacmanSprite.move(32, 0);
+            // pacmanSprite.move(32, 0);
+            is_moving = true;
         } else if (move_left && moveLeft(&pos, map)) {
             pacmanSprite.setRotation(180);
-            pacmanSprite.move(-32, 0);
+            // pacmanSprite.move(-32, 0);
+            is_moving = true;
         } else if (move_up && moveUp(&pos, map)) {
             pacmanSprite.setRotation(270);
-            pacmanSprite.move(0, -32);
+            // pacmanSprite.move(0, -32);
+            is_moving = true;
         } else if (move_down && moveDown(&pos, map)) {
             pacmanSprite.setRotation(90);
-            pacmanSprite.move(0, 32);
+            // pacmanSprite.move(0, 32);
+            is_moving = true;
         }
-        move_right = false;
-        move_left = false;
-        move_up = false;
-        move_down = false;
+
+        if (is_moving == true) {
+
+            if (it < 64) {
+                if (move_right) {
+                    pacmanSprite.move(0.5, 0);
+                } else if (move_left) {
+                    pacmanSprite.move(-0.5, 0);
+                } else if (move_up) {
+                    pacmanSprite.move(0, -0.5);
+                } else if (move_down) {
+                    pacmanSprite.move(0, 0.5);
+                }
+                it++;                
+            } else {
+                it = 0;
+                is_moving = false;
+            }
+        }
 
         std::cout << "[" << (pos.x / 32) - 1 << ", " << (pos.y / 32) - 1 << "]" << std::endl;
 
