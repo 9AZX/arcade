@@ -11,7 +11,7 @@ extern "C" void EntryGraph();
 
 void EntryGraph()
 {
-	Map map("ok");
+	Map map("./assets/pacmanMap.txt");
 	NcursesModule ncurses;
 
 	initscr();

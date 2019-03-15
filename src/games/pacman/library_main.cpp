@@ -15,5 +15,4 @@ extern "C" void EntryGame();
 
 void EntryGame()
 {
-	std::cout << "call (pacman): ok" << std::endl;
 }
