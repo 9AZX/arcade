@@ -53,8 +53,8 @@ void drawMap(sf::RenderWindow *window, sf::Sprite *wallSprite, std::string map)
     int mapHeight = 21;
     int wallSpriteSize = 32;
 
-    for (int ith = 0; ith < mapHeight; ith++) {
-        for (int itl = 0; itl < mapLength; itl++) {
+    for (unsigned int ith = 0; ith < mapHeight; ith++) {
+        for (unsigned int itl = 0; itl < mapLength; itl++) {
             if (map[ith * mapLength + itl] == '1') {
                 wallSprite->setPosition(itl * wallSpriteSize + 32, ith * wallSpriteSize + 32);
                 window->draw(*wallSprite);
@@ -62,6 +62,21 @@ void drawMap(sf::RenderWindow *window, sf::Sprite *wallSprite, std::string map)
         }
     }
 }
+
+void pacmanMoveAnimation(int it, sf::Sprite *pacmanSprite)
+{
+    sf::IntRect r1(0, 0, 32, 32);
+    sf::IntRect r2(32, 0, 32, 32);
+    sf::IntRect r3(64, 0, 32, 32);
+
+    if (it < 32) {
+        pacmanSprite->setTextureRect(r2);
+    } else if (it >= 32 && it < 63)
+        pacmanSprite->setTextureRect(r3);
+    else
+        pacmanSprite->setTextureRect(r1);
+}
+
 
 int main()
 {
@@ -100,14 +115,17 @@ int main()
     ghostSprite.setPosition(9 * 32 + 32, 10 * 32);
     ghostSprite.setOrigin(16, 16);
 
-    pacmanText.loadFromFile("../assets/pacman.png");
+    pacmanText.loadFromFile("../assets/pacmans.png");
     pacmanSprite.setTexture(pacmanText, true);
     pacmanSprite.setPosition(9 * 32 + 32, 10 * 32 + 32 + 32); // map center
     pacmanSprite.setOrigin(16, 16);
+    sf::IntRect r1(64, 0, 32, 32);
+    pacmanSprite.setTextureRect(r1);
 
     wallText.loadFromFile("../assets/wall.png");
     wallSprite.setTexture(wallText, true);
     wallSprite.setOrigin(16, 16);
+    wallSprite.setColor(sf::Color::Blue);
 
     // MUSIC INIT
     sf::Music intro;
@@ -117,8 +135,9 @@ int main()
         return -1;
     
     intro.play();
-        window.draw(pacmanSprite);
-        window.display();
+    window.draw(pacmanSprite);
+    drawMap(&window, &wallSprite, map);
+    window.display();
 
     while (elapsed.asSeconds() <= 4) {
         elapsed = clock.getElapsedTime();
@@ -185,12 +204,16 @@ int main()
             if (it < 64) {
                 if (move_right) {
                     pacmanSprite.move(0.5, 0);
+                    pacmanMoveAnimation(it, &pacmanSprite);
                 } else if (move_left) {
                     pacmanSprite.move(-0.5, 0);
+                    pacmanMoveAnimation(it, &pacmanSprite);
                 } else if (move_up) {
                     pacmanSprite.move(0, -0.5);
+                    pacmanMoveAnimation(it, &pacmanSprite);
                 } else if (move_down) {
                     pacmanSprite.move(0, 0.5);
+                    pacmanMoveAnimation(it, &pacmanSprite);
                 }
                 it++;                
             } else {
@@ -210,25 +233,21 @@ int main()
         switch (random) {
             case 0:
                 if (moveRight(&pos, map) && !is_moving1)
-                    // ghostSprite.move(32, 0);
                     move_right1 = true;
                     is_moving1 = true;
                 break;
             case 1:
                 if (moveLeft(&pos, map) && !is_moving1)
-                    // ghostSprite.move(-32, 0);
                     move_left1 = true;
                     is_moving1 = true;
                 break;
             case 2:
                 if (moveUp(&pos, map) && !is_moving1)
-                    // ghostSprite.move(0, -32);
                     move_up1 = true;
                     is_moving1 = true;
                 break;
             case 3:
                 if (moveDown(&pos, map) && !is_moving1)
-                    // ghostSprite.move(0, 32);
                     move_down1 = true;
                     is_moving1 = true;
                 break;
