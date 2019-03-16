@@ -17,7 +17,7 @@ class Map
   public:
 	enum byteMap
 	{
-		VOID = -1,
+		VOID = '\n',
 		GROUND = 0,
 		WALL = 1,
 		FOOD = 2,
@@ -44,6 +44,7 @@ class Map
 	char ncurses_extra;
 
 	byteMap getMap(unsigned int);
+
   private:
 	std::vector<byteMap> _map;
 };
