@@ -77,6 +77,33 @@ void pacmanMoveAnimation(int it, sf::Sprite *pacmanSprite)
         pacmanSprite->setTextureRect(r1);
 }
 
+bool checkCollision(sf::Vector2f pacman, sf::Vector2f ghost)
+{
+    int pacman_x = pacman.x / 32 - 1;
+    int pacman_y = pacman.y / 32 - 1;
+    int ghost_x = ghost.x / 32 - 1;
+    int ghost_y = ghost.y / 32 - 1;
+
+    if (pacman_x == ghost_x && pacman_y == ghost_y)
+        return true;
+    return false;
+}
+
+void gameOver(sf::Clock *clock, sf::Time *elapsed, sf::Sound *sound)
+{
+    sf::Music gameOver;
+
+    clock->restart();
+    *elapsed = clock->getElapsedTime();
+    if (!gameOver.openFromFile("../assets/pacman_death.wav"))
+        exit(-1);
+    sound->pause();
+    gameOver.play();
+    while (elapsed->asSeconds() < 3) {
+        *elapsed = clock->getElapsedTime();
+    }
+    std::cout << "Game Over!" << std::endl;
+}
 
 int main()
 {
@@ -276,12 +303,17 @@ int main()
             }
         }
 
+        if (checkCollision(pacmanSprite.getPosition(), ghostSprite.getPosition())) {
+            gameOver(&clock, &elapsed, &sound);
+            return 0;
+        }
+
         // std::cout << "[" << (pos.x / 32) - 1 << ", " << (pos.y / 32) - 1 << "]" << std::endl;
 
         // DRAW / REFRESH
         window.clear();
-        window.draw(ghostSprite);
         window.draw(pacmanSprite);
+        window.draw(ghostSprite);
         drawMap(&window, &wallSprite, map);
         window.display();
     }
