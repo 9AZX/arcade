@@ -114,9 +114,11 @@ int main()
     sf::Texture ghostText;
     sf::Texture pacmanText;
     sf::Texture wallText;
+    sf::Texture pacgumText;
     sf::Sprite ghostSprite;
     sf::Sprite pacmanSprite;
     sf::Sprite wallSprite;
+    sf::Sprite pacgumSprite;
 
     sf::Vector2f pos;
 
@@ -153,6 +155,10 @@ int main()
     wallSprite.setTexture(wallText, true);
     wallSprite.setOrigin(16, 16);
     wallSprite.setColor(sf::Color::Blue);
+
+    pacgumText.loadFromFile("../assets/pacgum.png");
+    pacgumSprite.setTexture(pacgumText, true);
+    pacgumSprite.setOrigin(16, 16);
 
     // MUSIC INIT
     sf::Music intro;
@@ -251,6 +257,11 @@ int main()
                 move_up = false;
                 move_down = false;
             }
+        }
+
+        if (checkCollision(pacmanSprite.getPosition(), ghostSprite.getPosition())) {
+            gameOver(&clock, &elapsed, &sound);
+            return 0;
         }
 
         // MOVE GHOST
