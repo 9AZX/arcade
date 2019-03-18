@@ -24,7 +24,7 @@ class Map
 		EXTRA = 3
 	};
 
-	Map(std::string path);
+	Map(std::string map);
 	~Map();
 
 	std::string assets_void = "";
@@ -46,7 +46,7 @@ class Map
 	byteMap getMap(unsigned int);
 
   private:
-	std::vector<byteMap> _map;
+	std::string _map;
 };
 
 #endif /* !MAP_HPP_ */

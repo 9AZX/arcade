@@ -8,31 +8,9 @@
 #include "Map.hpp"
 #include <fstream>
 
-Map::Map(std::string path)
+Map::Map(std::string map)
 {
-    char c = 0;
-    std::string buf;
-    std::ifstream file;
-
-    file.open(path);
-    if (!file)
-    {
-        std::cerr << "Error: Couldn't open the file" << std::endl;
-    }
-
-    while (!file.eof())
-    {
-        getline(file, buf);
-        if (buf.compare(0, 8, "#bitmap:") == 0)
-        {
-            std::cout << buf << std::endl;
-            while (file.get(c) && file.is_open() && (c != '\n' && _map.back() != '\n'))
-            {
-                c -= '0';
-                this->_map.push_back(static_cast<byteMap>(c));
-            }
-        }
-    }
+    this->_map = map;
     this->ncurses_ground = ' ';
     this->ncurses_wall = '#';
     this->ncurses_player = 'G';
@@ -47,5 +25,5 @@ Map::~Map()
 
 Map::byteMap Map::getMap(unsigned int i)
 {
-    return this->_map[i];
+    return (Map::byteMap)(this->_map[i] - '0');
 }
