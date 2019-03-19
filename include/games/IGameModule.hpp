@@ -15,8 +15,8 @@
 class IGameModule
 {
 public:
-	IGameModule();
-	~IGameModule();
+	IGameModule() = default;
+	~IGameModule() = default;
 
 public:
 	virtual void play() = 0;
@@ -26,7 +26,7 @@ public:
 	virtual int getScore() = 0;
 
 private:
-	int _score = -1;
+	//int _score = -1;
 	Map _map;
 	Player _player;
 };

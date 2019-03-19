@@ -13,14 +13,13 @@
 
 class IDisplayModule
 {
-  public:
-	IDisplayModule();
-	~IDisplayModule();
-  virtual void initScreen() = 0;
-	virtual void print_map(Map) = 0;
+public:
+	IDisplayModule() = default;
+	~IDisplayModule() = default;
 
-  protected:
-  private:
+public:
+	virtual void initScreen() = 0;
+	virtual void print_map(Map) = 0;
 };
 
 #endif /* !IDISPLAYMODULE_HPP_ */

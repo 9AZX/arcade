@@ -5,16 +5,16 @@
 ** SnakeModule
 */
 
-#ifndef	SNAKEMODULE_HPP_
-#define	SNAKEMODULE_HPP_
+#ifndef	NIBBLERMODULE_HPP_
+#define	NIBBLERMODULE_HPP_
 
 #include "IGameModule.hpp"
 
-class SnakeModule : public IGameModule
+class NibblerModule : public IGameModule
 {
 public:
-	SnakeModule() = default;
-	~SnakeModule() = default;
+	NibblerModule() = default;
+	~NibblerModule() = default;
 
 public:
 	void play() override;
@@ -24,4 +24,4 @@ public:
 	//std::unique_ptr<Map> getMap() override;
 };
 
-#endif	/* !SNAKEMODULE_HPP_ */
+#endif	/* !NIBBLERMODULE_HPP_ */

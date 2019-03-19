@@ -6,9 +6,9 @@
 */
 
 #include <iostream>
-#include "SnakeModule.hpp"
+#include "NibblerModule.hpp"
 
-void SnakeModule::play()
+void NibblerModule::play()
 {
 	std::cout << "SNAKEEEEEEE" << std::endl;
 }
