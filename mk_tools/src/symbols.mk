@@ -72,6 +72,12 @@ endif
 endif
 
 ifneq ($(origin CALL_FROM_MAIN),undefined)
+core:	all
+
+games:	all
+
+graphicals:	all
+
 load_lib:
 	@$(MAKE) --no-print-directory -C $(LIB_INDEX_PATH)	\
 		CALL_FROM_SUB_MAKEFILE=
@@ -247,6 +253,6 @@ endif
 
 re:	fclean all
 
-.PHONY:	all $(PROJECT_BINARY_NAME) debug load_lib compile_after clean fclean re
+.PHONY:	all $(PROJECT_BINARY_NAME) core games graphicals debug load_lib compile_after clean fclean re
 
 endif	# !HEADER_SYMBOLS_
