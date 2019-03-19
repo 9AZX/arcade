@@ -42,7 +42,7 @@ void NcursesModule::print_map(Map map_info)
             }
             total += 1;
         }
-        total += 1;
+        std::cout << '\n';
         addch('\n');
     }
 }
