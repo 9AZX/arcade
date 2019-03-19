@@ -12,13 +12,11 @@ SRC_GAME_PACMAN	=	./src/games/pacman/library_main.cpp	\
 			./src/games/pacman/PacmanModule.cpp
 
 SRC_GRAPHIC_NCURSES	=	./src/graphics/ncurses/library_main.cpp	\
-			./src/graphics/ncurses/NcursesModule.cpp			\
-			./src/graphics/IDisplayModule.cpp					\
+			./src/graphics/ncurses/NcursesModule.cpp					\
 			./src/core/Map.cpp
 
 SRC_GRAPHIC_SFML	=	./src/graphics/sfml/library_main.cpp	\
 			./src/graphics/sfml/SfmlModule.cpp			\
-			./src/graphics/IDisplayModule.cpp			\
 			./src/core/Map.cpp
 
 SRC_CLASS	=	./src/core/Application.cpp	\

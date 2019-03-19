@@ -16,8 +16,8 @@ class IDisplayModule
   public:
 	IDisplayModule();
 	~IDisplayModule();
+  virtual void initScreen() = 0;
 	virtual void print_map(Map) = 0;
-
 
   protected:
   private:

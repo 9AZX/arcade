@@ -17,13 +17,13 @@ class SfmlModule : public  IDisplayModule {
 	public:
 		SfmlModule();
 		~SfmlModule();
-		sf::RenderWindow *initWindow();
+  		void initScreen() override;
+		void print_map(Map) override {};
+		void drawScreen();
 
-		// void playSound();
-		// void playMusic();
 	protected:
 	private:
-		sf::RenderWindow *window;
+		sf::RenderWindow _window;
 };
 
 #endif /* !SFMLMODULE_HPP_ */

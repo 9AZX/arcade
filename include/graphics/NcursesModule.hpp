@@ -16,7 +16,7 @@ class NcursesModule : public IDisplayModule {
 		NcursesModule();
 		~NcursesModule();
 		void print_map(Map) override;
-
+  		void initScreen() override;
 
 	protected:
 	private:
