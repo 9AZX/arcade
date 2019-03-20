@@ -18,7 +18,7 @@ PROJECT_BINARY_NAME	:=	"arcade"
 
 PROJECT_LIBRARY_DIR	:=	-L./build/
 
-PROJECT_LIB	:=	-ltools
+PROJECT_LIB	:=	-ltools -ldl
 
 PROJECT_INCLUDE	:=	-I./include/ -I./build/include/
 
