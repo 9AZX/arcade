@@ -126,8 +126,8 @@ clean:
 	@for dir in $(TMP_VAR_); do					\
 		$(MAKE) --no-print-directory -C "$${dir}"		\
 			clean CALL_FROM_SUB_MAKEFILE=;			\
-		if [ "$(DISP_SILENT_MODE)" == "$(BOOL_TRUE)" ] ||	\
-			[ "$(DISP_CLEAN_SILENT)" == "$(BOOL_TRUE)" ]; then\
+		if [ "$(DISP_SILENT_MODE)" = "$(BOOL_TRUE)" ] ||	\
+			[ "$(DISP_CLEAN_SILENT)" = "$(BOOL_TRUE)" ]; then\
 			echo "CLEAN ($${dir})";			\
 		elif [ "$${dir}" != $(lastword $(TMP_VAR_)) ]; then	\
 			echo "";					\
@@ -187,8 +187,8 @@ fclean:
 	@for dir in $(TMP_VAR_); do					\
 		$(MAKE) --no-print-directory -C "$${dir}"		\
 			fclean CALL_FROM_SUB_MAKEFILE=;			\
-		if [ "$(DISP_SILENT_MODE)" == "$(BOOL_TRUE)" ] ||	\
-			[ "$(DISP_CLEAN_SILENT)" == "$(BOOL_TRUE)" ]; then\
+		if [ "$(DISP_SILENT_MODE)" = "$(BOOL_TRUE)" ] ||	\
+			[ "$(DISP_CLEAN_SILENT)" = "$(BOOL_TRUE)" ]; then\
 			echo "FCLEAN ($${dir})";			\
 		elif [ "$${dir}" != $(lastword $(TMP_VAR_)) ]; then	\
 			echo "";					\

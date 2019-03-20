@@ -48,7 +48,8 @@ endef
 
 define	 message_clean_header
 	$(eval TMP_VAR_ := $(shell $(1)))
-	@if [ "$(DISP_SILENT_MODE)" != "$(BOOL_TRUE)" ] && [ "$(DISP_CLEAN_SILENT)" != "$(BOOL_TRUE)" ]; then\
+	@if [ "$(DISP_SILENT_MODE)" != "$(BOOL_TRUE)" ] &&		\
+			[ "$(DISP_CLEAN_SILENT)" != "$(BOOL_TRUE)" ]; then\
 		printf $(DISP_STAPE);					\
 		echo $(LANG_FCLEAN_HEADER1); 				\
 		for file in $(TMP_VAR_); do				\
