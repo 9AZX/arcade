@@ -67,6 +67,7 @@ cmake-build-debug/
 *.c.gcov
 
 # Projet rules
+build/
 tests/unit_tests
 
 # Default binary.
