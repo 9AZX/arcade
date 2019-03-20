@@ -12,10 +12,10 @@ extern "C" void EntryGraph();
 void EntryGraph()
 {
 	Map map(MAP1);
-	//NcursesModule *ncurses = nullptr;
+	NcursesModule ncurses;
 
 	initscr();
-	//ncurses->print_map(map);
+	ncurses.print_map(map);
 	refresh();
 	getch();
 	endwin();
