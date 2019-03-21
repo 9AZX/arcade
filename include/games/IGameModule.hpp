@@ -5,30 +5,28 @@
 ** IGameModule
 */
 
-#ifndef	IGAMEMODULE_HPP_
-#define	IGAMEMODULE_HPP_
+#ifndef IGAMEMODULE_HPP_
+#define IGAMEMODULE_HPP_
 
-#include "Map.hpp"
+#include "GameMap.hpp"
 #include "Player.hpp"
 #include "memory"
 
 class IGameModule
 {
-public:
-	IGameModule() = default;
-	~IGameModule() = default;
+  public:
+	IGameModule();
+	~IGameModule();
 
-public:
+  public:
 	virtual void play() = 0;
-	virtual void pause() = 0;
+	virtual void pauseMenu() = 0;
 	virtual void endGame() = 0;
-	virtual std::unique_ptr<Map> getMap() = 0;
-	virtual int getScore() = 0;
+	virtual const GameMap &getMap() const noexcept = 0;
+	virtual long getScore() const = 0;
 
-private:
-	//int _score = -1;
-	Map _map;
-	Player _player;
+  private:
+	long _score = -1;
 };
 
-#endif	/* !IGAMEMODULE_HPP_ */
+#endif /* !IGAMEMODULE_HPP_ */
