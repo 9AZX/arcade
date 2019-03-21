@@ -5,23 +5,28 @@
 ** SnakeModule
 */
 
-#ifndef	NIBBLERMODULE_HPP_
-#define	NIBBLERMODULE_HPP_
+#ifndef NIBBLERMODULE_HPP_
+#define NIBBLERMODULE_HPP_
 
 #include "IGameModule.hpp"
+#include "ICore.hpp"
 
 class NibblerModule : public IGameModule
 {
-public:
-	NibblerModule() = default;
+  public:
+	NibblerModule() = delete;
+	NibblerModule(ICore *core);
 	~NibblerModule() = default;
 
-public:
-	void play() override;
-	//void pause() override;
-	//void endGame() override;
-	//int getScore() override;
-	//std::unique_ptr<Map> getMap() override;
+	void play() final;
+	//void pauseMenu() final;
+	//void endGame() final;
+	//long getScore() const final;
+	//const GameMap &getMap() const noexcept final;
+
+  private:
+	Icore *_core;
+	const GameMap _map;
 };
 
-#endif	/* !NIBBLERMODULE_HPP_ */
+#endif /* !NIBBLERMODULE_HPP_ */
