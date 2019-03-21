@@ -8,18 +8,20 @@
 #ifndef IDISPLAYMODULE_HPP_
 #define IDISPLAYMODULE_HPP_
 
-#include "Map.hpp"
+#include "Entity.hpp"
 #include <iostream>
+#include <vector>
 
 class IDisplayModule
 {
 public:
-	IDisplayModule() = default;
+	IDisplayModule();
 	~IDisplayModule() = default;
 
-public:
-	virtual void initScreen() = 0;
-	virtual void print_map(Map) = 0;
+	// virtual std::vector<enum gameInputs> getInputs() = 0;
+	// virtual void displayEntity(AEntity &) = 0;
+	// virtual void displayMap() = 0;
+
 };
 
 #endif /* !IDISPLAYMODULE_HPP_ */

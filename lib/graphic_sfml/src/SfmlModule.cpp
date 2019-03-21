@@ -22,6 +22,7 @@ SfmlModule::~SfmlModule()
 
 void SfmlModule::initScreen()
 {
+	std::cout << "init screen" << std::endl;
 }
 
 void SfmlModule::drawScreen()
