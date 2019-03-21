@@ -9,13 +9,13 @@
 #define NIBBLERMODULE_HPP_
 
 #include "IGameModule.hpp"
-#include "ICore.hpp"
+#include "ICoreModule.hpp"
 
 class NibblerModule : public IGameModule
 {
   public:
 	NibblerModule() = delete;
-	NibblerModule(ICore *core);
+	NibblerModule(ICoreModule *core);
 	~NibblerModule() = default;
 
 	void play() final;
@@ -25,7 +25,7 @@ class NibblerModule : public IGameModule
 	//const GameMap &getMap() const noexcept final;
 
   private:
-	Icore *_core;
+	ICoreModule *_core;
 	const GameMap _map;
 };
 

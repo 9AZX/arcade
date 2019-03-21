@@ -20,7 +20,6 @@ PROJECT_INCLUDE	:=	-I../../include/graphics/	\
 			-I./include/
 
 PROJECT_SRC	:=	./src/NcursesModule.cpp	\
-			./src/Map.cpp		\
 			./src/init.cpp
 
 LIB_BINARY_MOVE_TO	:=	"../"

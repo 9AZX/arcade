@@ -10,14 +10,14 @@
 
 #include "Entity.hpp"
 
-class IRender {
-	public:
-		// IRender();
-		// ~IRender();
+class IRender
+{
+  public:
+	IRender();
+	~IRender();
 
-        // virtual void renderTextEntity(AEntity &) const = 0;
-        // virtual void renderGameEntity(AEntity &) const = 0;
-
+	virtual void renderTextEntity(AEntity &) const = 0;
+	virtual void renderGameEntity(AEntity &) const = 0;
 };
 
 #endif /* !IRENDER_HPP_ */

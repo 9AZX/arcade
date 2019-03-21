@@ -7,16 +7,14 @@
 
 #include "NcursesModule.hpp"
 
-extern "C" void EntryGraph();
+extern "C" void *EntryGraph();
 
-void EntryGraph()
+void *EntryGraph()
 {
-	Map map(MAP1);
-	NcursesModule ncurses;
-
-	initscr();
-	ncurses.print_map(map);
-	refresh();
-	getch();
-	endwin();
+	// initscr();
+	// ncurses.print_map(map);
+	// refresh();
+	// getch();
+	// endwin();
+	return new NcursesModule;
 }
