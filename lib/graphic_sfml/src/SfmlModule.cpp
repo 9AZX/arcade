@@ -17,7 +17,7 @@ SfmlModule::~SfmlModule()
 
 // sf::RenderWindow &SfmlModule::getWindow()
 // {
-//     return this->_window;
+// 	return this->_window;
 // }
 
 void SfmlModule::initScreen()
@@ -26,6 +26,6 @@ void SfmlModule::initScreen()
 
 void SfmlModule::drawScreen()
 {
-    this->_window.clear();
-    this->_window.display();
+	this->_window.clear();
+	this->_window.display();
 }

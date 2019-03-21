@@ -13,7 +13,11 @@ PROJECT_BINARY_TYPE	:=	"SHARED"
 
 PROJECT_BINARY_NAME	:=	"_arcade_sfml"
 
-PROJECT_LIB	:=	-lncurses
+PROJECT_LIB	:=	-lncurses		\
+			-lsfml-graphics	\
+			-lsfml-window		\
+			-lsfml-system		\
+			-lsfml-audio
 
 PROJECT_INCLUDE	:=	-I../../include/graphics/	\
 			-I../../include/shared/		\
