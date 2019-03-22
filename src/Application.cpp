@@ -17,12 +17,12 @@ void Application::init(const int argc, const char **argv)
 		this->_graphic = std::make_unique<Library>(argv[1]);
 		this->_graphic->open();
 		this->open_graphical_library();
-		(*this->fptr_graphic)();
+		this->_graphClass = (*this->fptr_graphic)();
 
 		this->_game = std::make_unique<Library>(argv[2]);
 		this->_game->open();
 		this->open_game_library();
-		(*this->fptr_game)();
+		this->_gameClass = (*this->fptr_game)();
 	}
 	catch (...) {
 		throw;

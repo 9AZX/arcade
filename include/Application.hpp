@@ -26,6 +26,8 @@ public:
 	void stop();
 	void open_graphical_library();
 	void open_game_library();
+	void *_gameClass = nullptr;
+	void *_graphClass = nullptr;
 
 protected:
 	std::unique_ptr<Library> _game = nullptr;
