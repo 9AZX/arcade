@@ -16,5 +16,6 @@ void *EntryGraph()
 	// refresh();
 	// getch();
 	// endwin();
+	std::cout << "call (ncurses): ok" << std::endl;
 	return new NcursesModule;
 }

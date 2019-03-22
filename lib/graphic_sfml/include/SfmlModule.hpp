@@ -19,7 +19,7 @@
 class SfmlModule : public IDisplayModule, public IRender
 {
 public:
-	SfmlModule();
+	SfmlModule() = default;
 	~SfmlModule() = default;
 
 	std::vector<enum gameInputs> getInputs() final;

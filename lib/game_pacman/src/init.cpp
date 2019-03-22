@@ -9,10 +9,11 @@
 ** @Last Modified time: 13-03-2019 18:25:15
 */
 
-#include <iostream>
+#include "PacmanModule.hpp"
 
-extern "C" void EntryGame();
+extern "C" std::unique_ptr<IGameModule> EntryGame();
 
-void EntryGame()
+std::unique_ptr<IGameModule> EntryGame()
 {
+	return nullptr;
 }

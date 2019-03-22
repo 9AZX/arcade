@@ -10,7 +10,7 @@
 
 #include "GameMap.hpp"
 #include "Player.hpp"
-#include "memory"
+#include <memory>
 
 class IGameModule
 {

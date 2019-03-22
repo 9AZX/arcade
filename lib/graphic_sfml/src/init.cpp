@@ -5,7 +5,6 @@
 ** Entry point for the lib sfml.
 */
 
-#include <iostream>
 #include "SfmlModule.hpp"
 
 extern "C" void *EntryGraph();

@@ -7,23 +7,27 @@
 
 #include "SfmlModule.hpp"
 
-SfmlModule::SfmlModule()
-//: _window(sf::VideoMode(650, 700), "SFML - Pacman")
+std::vector<enum gameInputs> SfmlModule::getInputs()
+{
+	std::vector<enum gameInputs> mdr;
+	return mdr;
+}
+
+void SfmlModule::displayEntity(AEntity &)
+{
+}
+void SfmlModule::displayMap()
+{
+}
+void SfmlModule::renderTextEntity(AEntity &) const
+{
+}
+void SfmlModule::renderGameEntity(AEntity &) const
 {
 }
 
-// sf::RenderWindow &SfmlModule::getWindow()
-// {
-// 	return this->_window;
-// }
-
-// void SfmlModule::initScreen()
-// {
-// 	std::cout << "init screen" << std::endl;
-// }
-
-// void SfmlModule::drawScreen()
-// {
-// 	this->_window.clear();
-// 	this->_window.display();
-// }
+void SfmlModule::matchInputs(std::vector<enum gameInputs> &inputs, sf::Keyboard::Key key)
+{
+	(void)inputs;
+	(void)key;
+}

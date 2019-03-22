@@ -9,11 +9,12 @@
 ** @Last Modified time: 13-03-2019 18:26:01
 */
 
-#include <iostream>
+#include "NibblerModule.hpp"
 
-extern "C" void EntryGame();
+extern "C" std::unique_ptr<IGameModule> EntryGame();
 
-void EntryGame()
+std::unique_ptr<IGameModule> EntryGame()
 {
 	std::cout << "call (snake): ok" << std::endl;
+	return nullptr;
 }
