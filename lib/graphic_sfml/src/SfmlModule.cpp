@@ -5,7 +5,30 @@
 ** SfmlModule
 */
 
+#include <iostream>
 #include "SfmlModule.hpp"
+
+SfmlModule::SfmlModule()
+{
+	this->_window = std::make_unique<sf::Window>(
+		sf::VideoMode(SFML_WINDOW_HEIGHT, SFML_WINDOW_WIDTH),
+		SFML_WINDOW_NAME
+	);
+	this->_window->setFramerateLimit(SFML_WINDOW_FRAMERATE);
+	while (this->_window->isOpen()) {
+		sf::Event event;
+		while (this->_window->pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				this->_window->close();
+			}
+		}
+	}
+}
+
+SfmlModule::~SfmlModule()
+{
+	std::cout << "ceci est un super test" << std::endl;
+}
 
 std::vector<enum gameInputs> SfmlModule::getInputs()
 {

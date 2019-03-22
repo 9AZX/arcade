@@ -17,8 +17,8 @@
 class NcursesModule : public IDisplayModule, public IRender
 {
 public:
-	NcursesModule() = default;
-	~NcursesModule() = default;
+	NcursesModule();
+	~NcursesModule();
 
 public:
 	std::vector<enum gameInputs> getInputs() final;
