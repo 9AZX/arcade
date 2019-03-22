@@ -5,8 +5,8 @@
 ** NcursesModule
 */
 
-#ifndef NCURSESMODULE_HPP_
-#define NCURSESMODULE_HPP_
+#ifndef	NCURSESMODULE_HPP_
+#define	NCURSESMODULE_HPP_
 
 #include "IDisplayModule.hpp"
 #include "IRender.hpp"
@@ -16,17 +16,19 @@
 
 class NcursesModule : public IDisplayModule, public IRender
 {
-  public:
+public:
 	NcursesModule() = default;
 	~NcursesModule() = default;
+
+public:
 	std::vector<enum gameInputs> getInputs() final;
 	void displayEntity(AEntity &) final;
 	void displayMap() final;
 	void renderTextEntity(AEntity &) const final;
 	void renderGameEntity(AEntity &) const final;
 
-  private:
+private:
 	void matchInputs(std::vector<enum gameInputs> &inputs, int key);
 };
 
-#endif /* !NCURSESMODULE_HPP_ */
+#endif	/* !NCURSESMODULE_HPP_ */
