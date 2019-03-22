@@ -11,9 +11,9 @@
 
 #include "PacmanModule.hpp"
 
-extern "C" std::unique_ptr<IGameModule> EntryGame();
+extern "C" void *EntryGame();
 
-std::unique_ptr<IGameModule> EntryGame()
+void *EntryGame()
 {
 	return nullptr;
 }

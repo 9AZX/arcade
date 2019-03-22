@@ -11,9 +11,9 @@
 
 #include "NibblerModule.hpp"
 
-extern "C" std::unique_ptr<IGameModule> EntryGame();
+extern "C" void *EntryGame();
 
-std::unique_ptr<IGameModule> EntryGame()
+void *EntryGame()
 {
 	std::cout << "call (snake): ok" << std::endl;
 	return nullptr;
