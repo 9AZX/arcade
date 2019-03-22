@@ -10,20 +10,18 @@
 
 #include <vector>
 #include "Entity.hpp"
+#include "Inputs.hpp"
 
 class ICoreModule
 {
-  public:
-	ICoreModule();
-	virtual ~ICoreModule() = default;
+public:
+	virtual void storeGameEntity(AEntity *entity) = 0;
+	virtual AEntity &getEntity(std::string name) = 0;
+	virtual std::vector<enum gameInputs> getInputs() = 0;
+	virtual void renderAll() = 0;
 
-	// virtual void storeGameEntity(AEntity *entity) = 0;
-	// virtual AEntity &getEntity(std::string name) = 0;
-	// virtual std::vector<enum gameInputs> getInputs() = 0;
-	// virtual void renderAll() = 0;
-
-  protected:
-  private:
+protected:
+private:
 };
 
 #endif /* !ICOREMODULE_HPP_ */

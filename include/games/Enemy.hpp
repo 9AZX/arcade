@@ -6,19 +6,18 @@
 */
 
 #ifndef ENEMY_HPP_
-    #define ENEMY_HPP_
+#define ENEMY_HPP_
 
 #include "Entity.hpp"
 
-class Enemy : public Entity
+class Enemy : public AEntity
 {
-	public:
-		Enemy();
-		~Enemy();
+  public:
+	Enemy();
+	~Enemy();
 
-	protected:
-	private:
-        
+  protected:
+  private:
 };
 
 #endif /* !ENEMY_HPP_ */

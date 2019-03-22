@@ -14,18 +14,17 @@
 
 class IGameModule
 {
-  public:
-	IGameModule();
-	~IGameModule();
+public:
+	virtual ~IGameModule() = default;
 
-  public:
+public:
 	virtual void play() = 0;
 	virtual void pauseMenu() = 0;
 	virtual void endGame() = 0;
 	virtual const GameMap &getMap() const noexcept = 0;
 	virtual long getScore() const = 0;
 
-  private:
+private:
 	long _score = -1;
 };
 

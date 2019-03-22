@@ -13,9 +13,6 @@
 class IRender
 {
   public:
-	IRender();
-	~IRender();
-
 	virtual void renderTextEntity(AEntity &) const = 0;
 	virtual void renderGameEntity(AEntity &) const = 0;
 };
