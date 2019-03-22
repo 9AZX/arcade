@@ -17,12 +17,12 @@ int main(int argc, char const *argv[])
 		app->init(argc, argv);
 		app->stop();
 	}
-	catch (const Exception &e) {
-		std::cerr << e.what() << std::endl;
-		return 84;
-	}
 	catch (const std::bad_alloc &e) {
 		std::cerr << "Allocation failed: " << e.what() << std::endl;
+		return 84;
+	}
+	catch (const Exception &e) {
+		std::cerr << e.what() << std::endl;
 		return 84;
 	}
 	catch (...) {
