@@ -20,7 +20,11 @@ PROJECT_LIBRARY_DIR	:=	-L./build/
 
 PROJECT_LIB	:=	-ltools -ldl
 
-PROJECT_INCLUDE	:=	-I./include/ -I./build/include/
+PROJECT_INCLUDE	:=	-I./build/include/	\
+			-I./include/games/	\
+			-I./include/graphics	\
+			-I./include/shared	\
+			-I./include/
 
 PROJECT_SRC	:=	./src/Application.cpp	\
 			./src/Library.cpp	\
