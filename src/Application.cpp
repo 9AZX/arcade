@@ -50,7 +50,8 @@ void Application::open_graphical_library()
 
 	try {
 		this->fptr_graphic = reinterpret_cast<void *(*)()>(
-			this->_graphic->sym(ENTRY_POINT_GRAPHIC));
+			this->_graphic->sym(ENTRY_POINT_GRAPHIC)
+		);
 	}
 	catch (...) {
 		error += "Library (";
@@ -66,7 +67,8 @@ void Application::open_game_library()
 
 	try {
 		this->fptr_game = reinterpret_cast<void *(*)()>(
-			this->_game->sym(ENTRY_POINT_GAME));
+			this->_game->sym(ENTRY_POINT_GAME)
+		);
 	}
 	catch (...) {
 		error += "Library (";
