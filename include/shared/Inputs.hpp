@@ -5,24 +5,34 @@
 ** Inputs
 */
 
-#ifndef	INPUTS_HPP_
-#define	INPUTS_HPP_
+#ifndef INPUTS_HPP_
+#define INPUTS_HPP_
+
+#include <iostream>
+#include <vector>
 
 enum gameInputs {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	ONE,
-	TWO,
-	THREE,
-	FOUR,
-	FIVE,
-	ESCAPE,
-	ENTER,
-	BACK,
-	EXIT,
-	SPACE
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    ONE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    ESCAPE,
+    ENTER,
+    BACK,
+    EXIT,
+    SPACE
 };
 
-#endif	/* !INPUTS_HPP_ */
+struct Events {
+    std::vector<enum gameInputs> keys;
+    std::string ascii;
+};
+
+typedef struct Events Events;
+
+#endif /* !INPUTS_HPP_ */
