@@ -5,8 +5,8 @@
 ** IDisplayModule
 */
 
-#ifndef IDISPLAYMODULE_HPP_
-#define IDISPLAYMODULE_HPP_
+#ifndef	IDISPLAYMODULE_HPP_
+#define	IDISPLAYMODULE_HPP_
 
 #include "Entity.hpp"
 #include "Inputs.hpp"
@@ -22,4 +22,4 @@ public:
   virtual void displayMap() = 0;
 };
 
-#endif /* !IDISPLAYMODULE_HPP_ */
+#endif	/* !IDISPLAYMODULE_HPP_ */

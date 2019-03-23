@@ -5,23 +5,27 @@
 ** SfmlModule
 */
 
-#ifndef SFMLMODULE_HPP_
-#define SFMLMODULE_HPP_
+#ifndef	SFMLMODULE_HPP_
+#define	SFMLMODULE_HPP_
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <iostream>
 #include <vector>
-#include <memory>
 #include "IDisplayModule.hpp"
 #include "IRender.hpp"
+
+#define	SFML_WINDOW_NAME	"Pacman"
+#define	SFML_WINDOW_WIDTH	650
+#define	SFML_WINDOW_HEIGHT	700
+#define	SFML_WINDOW_FRAMERATE	60
 
 class SfmlModule : public IDisplayModule, public IRender
 {
 public:
-	SfmlModule() = default;
-	~SfmlModule() = default;
+	SfmlModule();
+	~SfmlModule();
 
+public:
 	std::vector<enum gameInputs> getInputs() final;
 	void displayEntity(AEntity &) final;
 	void displayMap() final;
@@ -33,4 +37,4 @@ private:
 	void matchInputs(std::vector<enum gameInputs> &inputs, sf::Keyboard::Key key);
 };
 
-#endif /* !SFMLMODULE_HPP_ */
+#endif	/* !SFMLMODULE_HPP_ */

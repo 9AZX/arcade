@@ -7,6 +7,19 @@
 
 #include "NcursesModule.hpp"
 
+NcursesModule::NcursesModule()
+{
+	initscr();
+	refresh();
+	getch();
+	endwin();
+}
+
+NcursesModule::~NcursesModule()
+{
+	//
+}
+
 std::vector<enum gameInputs> NcursesModule::getInputs()
 {
 	std::vector<enum gameInputs> mdr;

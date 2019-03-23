@@ -5,16 +5,16 @@
 ** IRender
 */
 
-#ifndef IRENDER_HPP_
-#define IRENDER_HPP_
+#ifndef	IRENDER_HPP_
+#define	IRENDER_HPP_
 
 #include "Entity.hpp"
 
 class IRender
 {
-  public:
+public:
 	virtual void renderTextEntity(AEntity &) const = 0;
 	virtual void renderGameEntity(AEntity &) const = 0;
 };
 
-#endif /* !IRENDER_HPP_ */
+#endif	/* !IRENDER_HPP_ */

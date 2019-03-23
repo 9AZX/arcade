@@ -5,8 +5,8 @@
 ** IGameModule
 */
 
-#ifndef IGAMEMODULE_HPP_
-#define IGAMEMODULE_HPP_
+#ifndef	IGAMEMODULE_HPP_
+#define	IGAMEMODULE_HPP_
 
 #include "GameMap.hpp"
 #include "Player.hpp"
@@ -28,4 +28,4 @@ private:
 	long _score = -1;
 };
 
-#endif /* !IGAMEMODULE_HPP_ */
+#endif	/* !IGAMEMODULE_HPP_ */
