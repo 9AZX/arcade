@@ -29,7 +29,6 @@ public:
 	void stop();
 	void open_graphical_library();
 	void open_game_library();
-
 	void storeGameEntity(AEntity *entity) final;
 	AEntity &getEntity(std::string name) final;
 	std::vector<enum gameInputs> getInputs() final;
