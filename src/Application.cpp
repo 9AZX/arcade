@@ -83,7 +83,7 @@ void Application::storeGameEntity(AEntity* entity)
 {
 }
 
-AEntity& Application::getEntity(std::string name)
+AEntity &Application::getEntity(std::string name)
 {
 }
 
