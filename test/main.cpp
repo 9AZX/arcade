@@ -95,7 +95,7 @@ void gameOver(sf::Clock *clock, sf::Time *elapsed, sf::Sound *sound)
 
     clock->restart();
     *elapsed = clock->getElapsedTime();
-    if (!gameOver.openFromFile("../assets/pacman_death.wav"))
+    if (!gameOver.openFromFile("../assets/pacman/pacman_death.wav"))
         exit(-1);
     sound->pause();
     gameOver.play();
@@ -139,24 +139,24 @@ int main()
     int it1 = 0;
 
     // SPRITE INIT
-    ghostText.loadFromFile("../assets/ghost.png");
+    ghostText.loadFromFile("../assets/pacman/ghost.png");
     ghostSprite.setTexture(ghostText, true);
     ghostSprite.setPosition(9 * 32 + 32, 10 * 32);
     ghostSprite.setOrigin(16, 16);
 
-    pacmanText.loadFromFile("../assets/pacmans.png");
+    pacmanText.loadFromFile("../assets/pacman/pacmans.png");
     pacmanSprite.setTexture(pacmanText, true);
     pacmanSprite.setPosition(9 * 32 + 32, 10 * 32 + 32 + 32); // map center
     pacmanSprite.setOrigin(16, 16);
     sf::IntRect r1(64, 0, 32, 32);
     pacmanSprite.setTextureRect(r1);
 
-    wallText.loadFromFile("../assets/wall.png");
+    wallText.loadFromFile("../assets/pacman/wall.png");
     wallSprite.setTexture(wallText, true);
     wallSprite.setOrigin(16, 16);
     wallSprite.setColor(sf::Color::Blue);
 
-    pacgumText.loadFromFile("../assets/pacgum.png");
+    pacgumText.loadFromFile("../assets/pacman/pacgum.png");
     pacgumSprite.setTexture(pacgumText, true);
     pacgumSprite.setOrigin(16, 16);
 
@@ -164,7 +164,7 @@ int main()
     sf::Music intro;
     sf::Clock clock;
     sf::Time elapsed = clock.getElapsedTime();;
-    if (!intro.openFromFile("../assets/pacman_beginning.wav"))
+    if (!intro.openFromFile("../assets/pacman/pacman_beginning.wav"))
         return -1;
     
     intro.play();
@@ -178,7 +178,7 @@ int main()
 
     // SOUND INIT
     sf::SoundBuffer walkSound;
-    if (!walkSound.loadFromFile("../assets/pacman_chomp.wav"))
+    if (!walkSound.loadFromFile("../assets/pacman/pacman_chomp.wav"))
         return -1;
     sf::Sound sound;
     sound.setBuffer(walkSound);
