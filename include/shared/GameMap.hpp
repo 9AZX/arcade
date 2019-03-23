@@ -20,8 +20,7 @@
 			 "100100000000000100111010101111101010111000010001000100001" \
 			 "101111110101111110110000000000000000011111111111111111111"
 
-enum byteMap
-{
+enum byteMap {
 	VOID = '\n',
 	GROUND = 0,
 	WALL = 1,
@@ -29,8 +28,7 @@ enum byteMap
 	EXTRA = 3
 };
 
-struct GameMap
-{
+struct GameMap {
 	const int height;
 	const int width;
 	std::vector<std::string> grid;

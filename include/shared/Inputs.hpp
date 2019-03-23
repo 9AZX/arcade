@@ -5,11 +5,10 @@
 ** Inputs
 */
 
-#ifndef INPUTS_HPP_
-#define INPUTS_HPP_
+#ifndef	INPUTS_HPP_
+#define	INPUTS_HPP_
 
-enum gameInputs
-{
+enum gameInputs {
 	UP,
 	DOWN,
 	LEFT,
@@ -26,4 +25,4 @@ enum gameInputs
 	SPACE
 };
 
-#endif /* !INPUTS_HPP_ */
+#endif	/* !INPUTS_HPP_ */
