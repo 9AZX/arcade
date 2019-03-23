@@ -15,8 +15,8 @@
 #include "ICoreModule.hpp"
 #include "Library.hpp"
 
-#define ENTRY_POINT_GAME "EntryGame"
-#define ENTRY_POINT_GRAPHIC "EntryGraph"
+#define ENTRY_POINT_GAME	"EntryGame"
+#define ENTRY_POINT_GRAPHIC	"EntryGraph"
 
 class Application : public ICoreModule
 {
