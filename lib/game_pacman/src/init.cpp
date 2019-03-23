@@ -11,9 +11,6 @@
 
 #include "PacmanModule.hpp"
 
-extern "C" void *EntryGame();
+extern "C" void *EntryGame(ICoreModule *);
 
-void *EntryGame()
-{
-	return nullptr;
-}
+void *EntryGame(ICoreModule *core) { return new PacmanModule(core); }

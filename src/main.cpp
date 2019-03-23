@@ -12,20 +12,24 @@
 
 int main(int argc, char const *argv[])
 {
-	try {
+	try
+	{
 		std::unique_ptr<Application> app(new Application);
 		app->init(argc, argv);
 		app->stop();
 	}
-	catch (const std::bad_alloc &e) {
+	catch (const std::bad_alloc &e)
+	{
 		std::cerr << "Allocation failed: " << e.what() << std::endl;
 		return 84;
 	}
-	catch (const Exception &e) {
+	catch (const Exception &e)
+	{
 		std::cerr << e.what() << std::endl;
 		return 84;
 	}
-	catch (...) {
+	catch (...)
+	{
 		std::cerr << "An internal error occured." << std::endl;
 		return 84;
 	}

@@ -12,48 +12,37 @@
 #include "IGameModule.hpp"
 
 class PacmanModule : public IGameModule {
-public:
-    PacmanModule() = default;
-    ~PacmanModule() = default;
+ public:
+  PacmanModule() = delete;
+  PacmanModule(ICoreModule *);
+  ~PacmanModule() = default;
 
-public:
-    void play() override;
-    //void pause() override;
-    //void endGame() override;
-    //int getScore() override;
-    //std::unique_ptr<Map> getMap() override;
-private:
-    ICoreModule* _core;
-    const GameMap _map = {
-        21,
-        19,
-        std::vector<std::string>{
-            { "###################" },
-            { "#                 #" },
-            { "# ## ### # ### ## #" },
-            { "#                 #" },
-            { "# ## # ##### # ## #" },
-            { "#    #   #   #    #" },
-            { "#### ### # ### ####" },
-            { "   # #       # #   " },
-            { "#### # ##### # ####" },
-            { "       #   #       " },
-            { "#### # ##### # ####" },
-            { "   # #       # #   " },
-            { "#### # ##### # ####" },
-            { "#        #        #" },
-            { "# ## ### # ### ## #" },
-            { "#  #           #  #" },
-            { "## # # ##### # # ##" },
-            { "#    #   #   #    #" },
-            { "# ###### # ###### #" },
-            { "#                 #" },
-            { "###################" } },
-        std::map<char, struct MapBlock>{
-            { '#', { "", true, BLUE } },
-            { 'O', { "", false, RED } },
-        }
-    };
+ public:
+  void play() final;
+  void pauseMenu() final;
+  void endGame() final;
+  const GameMap &getMap() const noexcept;
+  long getScore() const final;
+
+ private:
+  ICoreModule *_core;
+  const GameMap _map = {
+      21, 19,
+      std::vector<std::string>{{"###################"}, {"#                 #"},
+                               {"# ## ### # ### ## #"}, {"#                 #"},
+                               {"# ## # ##### # ## #"}, {"#    #   #   #    #"},
+                               {"#### ### # ### ####"}, {"   # #       # #   "},
+                               {"#### # ##### # ####"}, {"       #   #       "},
+                               {"#### # ##### # ####"}, {"   # #       # #   "},
+                               {"#### # ##### # ####"}, {"#        #        #"},
+                               {"# ## ### # ### ## #"}, {"#  #           #  #"},
+                               {"## # # ##### # # ##"}, {"#    #   #   #    #"},
+                               {"# ###### # ###### #"}, {"#                 #"},
+                               {"###################"}},
+      std::map<char, struct MapBlock>{
+          {'#', {"", true, BLUE}},
+          {'O', {"", false, RED}},
+      }};
 };
 
 #endif /* !PACMANMODULE_HPP_ */
