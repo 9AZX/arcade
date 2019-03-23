@@ -5,23 +5,24 @@
 ** Class Application
 */
 
-#ifndef	APPLICATION_HPP_
-#define	APPLICATION_HPP_
+#ifndef APPLICATION_HPP_
+#define APPLICATION_HPP_
 
-#include <string>
-#include <memory>
+#include "ICoreModule.hpp"
 #include "Library.hpp"
+#include <memory>
+#include <string>
 
-#define	ENTRY_POINT_GAME	"EntryGame"
-#define	ENTRY_POINT_GRAPHIC	"EntryGraph"
+#define ENTRY_POINT_GAME "EntryGame"
+#define ENTRY_POINT_GRAPHIC "EntryGraph"
 
-class Application
+class Application : public ICoreModule
 {
-public:
+  public:
 	Application() = default;
 	~Application() = default;
 
-public:
+  public:
 	void init(const int argc, const char **argv);
 	void stop();
 	void open_graphical_library();
@@ -29,11 +30,17 @@ public:
 	void *_gameClass = nullptr;
 	void *_graphClass = nullptr;
 
-protected:
+	void storeGameEntity(AEntity *entity) final;
+	AEntity &getEntity(std::string name) final;
+	std::vector<enum gameInputs> getInputs() final;
+	void renderAll() final;
+	void setMap(GameMap &map) final;
+
+  protected:
 	std::unique_ptr<Library> _game = nullptr;
 	std::unique_ptr<Library> _graphic = nullptr;
 	void *(*fptr_game)() = nullptr;
 	void *(*fptr_graphic)() = nullptr;
 };
 
-#endif	/* !APPLICATION_HPP_ */
+#endif /* !APPLICATION_HPP_ */

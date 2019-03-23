@@ -25,8 +25,8 @@ public:
 private:
     ICoreModule* _core;
     const GameMap _map = {
-        25,
-        25,
+        21,
+        19,
         std::vector<std::string>{
             { "###################" },
             { "#                 #" },
