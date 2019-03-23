@@ -20,10 +20,7 @@ public:
     virtual AEntity& getEntity(std::string name) = 0;
     virtual std::vector<enum gameInputs> getInputs() = 0;
     virtual void renderAll() = 0;
-    virtual void setMap(GameMap& map);
-
-protected:
-private:
+    virtual void setMap(GameMap& map) = 0;
 };
 
 #endif /* !ICOREMODULE_HPP_ */

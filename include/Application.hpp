@@ -12,12 +12,12 @@
 #include <memory>
 #include "IDisplayModule.hpp"
 #include "IGameModule.hpp"
-#include "Library.hpp"
+#include "ICoreModule.hpp"
 
-#define	ENTRY_POINT_GAME	"EntryGame"
-#define	ENTRY_POINT_GRAPHIC	"EntryGraph"
+#define ENTRY_POINT_GAME "EntryGame"
+#define ENTRY_POINT_GRAPHIC "EntryGraph"
 
-class Application
+class Application : public ICoreModule
 {
 public:
 	Application() = default;
@@ -28,6 +28,12 @@ public:
 	void stop();
 	void open_graphical_library();
 	void open_game_library();
+
+	void storeGameEntity(AEntity *entity) final;
+	AEntity &getEntity(std::string name) final;
+	std::vector<enum gameInputs> getInputs() final;
+	void renderAll() final;
+	void setMap(GameMap &map) final;
 
 protected:
 	std::unique_ptr<Library> _game = nullptr;

@@ -18,12 +18,12 @@ void Application::init(const int argc, const char** argv)
 		this->_graphic->open();
 		this->open_graphical_library();
 		this->_graphClass = (IDisplayModule *)(*this->fptr_graphic)();
-
 		this->_game = std::make_unique<Library>(argv[2]);
 		this->_game->open();
 		this->open_game_library();
 		this->_gameClass = (IGameModule *)(*this->fptr_game)();
-	} catch (...) {
+	}
+	catch (...) {
 		throw;
 	}
 }
@@ -39,7 +39,8 @@ void Application::stop()
 			this->_graphClass->destructor();
 			this->_graphic->close();
 		}
-	} catch (...) {
+	}
+	catch (...) {
 		throw;
 	}
 }
@@ -49,10 +50,11 @@ void Application::open_graphical_library()
 	std::string error = "";
 
 	try {
-		this->fptr_graphic = reinterpret_cast<void* (*)()>(
+		this->fptr_graphic = reinterpret_cast<void *(*)()>(
 			this->_graphic->sym(ENTRY_POINT_GRAPHIC)
 		);
-	} catch (...) {
+	}
+	catch (...) {
 		error += "Library (";
 		error += this->_graphic->get_path();
 		error += ") isn't a graphical library.";
@@ -65,13 +67,36 @@ void Application::open_game_library()
 	std::string error = "";
 
 	try {
-		this->fptr_game = reinterpret_cast<void* (*)()>(
+		this->fptr_game = reinterpret_cast<void *(*)()>(
 			this->_game->sym(ENTRY_POINT_GAME)
 		);
-	} catch (...) {
+	}
+	catch (...) {
 		error += "Library (";
 		error += this->_game->get_path();
 		error += ") isn't a game library.";
 		throw Exception(error);
 	}
+}
+
+void Application::storeGameEntity(AEntity* entity)
+{
+}
+
+AEntity& Application::getEntity(std::string name)
+{
+}
+
+std::vector<enum gameInputs> Application::getInputs()
+{
+	std::vector<enum gameInputs> mdr;
+	return mdr;
+}
+
+void Application::renderAll()
+{
+}
+
+void Application::setMap(GameMap& map)
+{
 }
