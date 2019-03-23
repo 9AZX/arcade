@@ -23,7 +23,7 @@ class SfmlModule : public IDisplayModule, public IRender
 {
 public:
 	SfmlModule();
-	~SfmlModule();
+	virtual ~SfmlModule();
 
 public:
 	std::vector<enum gameInputs> getInputs() final;
@@ -31,6 +31,7 @@ public:
 	void displayMap() final;
 	void renderTextEntity(AEntity &) const final;
 	void renderGameEntity(AEntity &) const final;
+	void destructor() final;
 
 private:
 	std::unique_ptr<sf::Window> _window;

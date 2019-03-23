@@ -29,12 +29,15 @@ std::vector<enum gameInputs> NcursesModule::getInputs()
 void NcursesModule::displayEntity(AEntity &)
 {
 }
+
 void NcursesModule::displayMap()
 {
 }
+
 void NcursesModule::renderTextEntity(AEntity &) const
 {
 }
+
 void NcursesModule::renderGameEntity(AEntity &) const
 {
 }
@@ -43,4 +46,9 @@ void NcursesModule::matchInputs(std::vector<enum gameInputs> &inputs, int key)
 {
 	(void)inputs;
 	(void)key;
+}
+
+void NcursesModule::destructor()
+{
+	delete this;
 }

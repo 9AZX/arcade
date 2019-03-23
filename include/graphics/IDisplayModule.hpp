@@ -20,6 +20,7 @@ public:
   virtual std::vector<enum gameInputs> getInputs() = 0;
   virtual void displayEntity(AEntity &) = 0;
   virtual void displayMap() = 0;
+  virtual void destructor() = 0;
 };
 
 #endif	/* !IDISPLAYMODULE_HPP_ */

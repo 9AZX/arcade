@@ -27,7 +27,6 @@ SfmlModule::SfmlModule()
 
 SfmlModule::~SfmlModule()
 {
-	std::cout << "ceci est un super test" << std::endl;
 }
 
 std::vector<enum gameInputs> SfmlModule::getInputs()
@@ -53,4 +52,9 @@ void SfmlModule::matchInputs(std::vector<enum gameInputs> &inputs, sf::Keyboard:
 {
 	(void)inputs;
 	(void)key;
+}
+
+void SfmlModule::destructor()
+{
+	delete this;
 }

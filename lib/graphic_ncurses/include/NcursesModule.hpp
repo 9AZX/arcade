@@ -18,7 +18,7 @@ class NcursesModule : public IDisplayModule, public IRender
 {
 public:
 	NcursesModule();
-	~NcursesModule();
+	virtual ~NcursesModule();
 
 public:
 	std::vector<enum gameInputs> getInputs() final;
@@ -26,6 +26,7 @@ public:
 	void displayMap() final;
 	void renderTextEntity(AEntity &) const final;
 	void renderGameEntity(AEntity &) const final;
+	void destructor() final;
 
 private:
 	void matchInputs(std::vector<enum gameInputs> &inputs, int key);
