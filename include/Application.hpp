@@ -13,6 +13,7 @@
 #include "IDisplayModule.hpp"
 #include "IGameModule.hpp"
 #include "ICoreModule.hpp"
+#include "Library.hpp"
 
 #define ENTRY_POINT_GAME "EntryGame"
 #define ENTRY_POINT_GRAPHIC "EntryGraph"
