@@ -5,23 +5,55 @@
 ** PacmanModule
 */
 
-#ifndef	PACMANMODULE_HPP_
-#define	PACMANMODULE_HPP_
+#ifndef PACMANMODULE_HPP_
+#define PACMANMODULE_HPP_
 
+#include "ICoreModule.hpp"
 #include "IGameModule.hpp"
 
-class PacmanModule : public IGameModule
-{
+class PacmanModule : public IGameModule {
 public:
-	PacmanModule() = default;
-	~PacmanModule() = default;
+    PacmanModule() = default;
+    ~PacmanModule() = default;
 
 public:
-	void play() override;
-	//void pause() override;
-	//void endGame() override;
-	//int getScore() override;
-	//std::unique_ptr<Map> getMap() override;
+    void play() override;
+    //void pause() override;
+    //void endGame() override;
+    //int getScore() override;
+    //std::unique_ptr<Map> getMap() override;
+private:
+    ICoreModule* _core;
+    const GameMap _map = {
+        25,
+        25,
+        std::vector<std::string>{
+            { "###################" },
+            { "#                 #" },
+            { "# ## ### # ### ## #" },
+            { "#                 #" },
+            { "# ## # ##### # ## #" },
+            { "#    #   #   #    #" },
+            { "#### ### # ### ####" },
+            { "   # #       # #   " },
+            { "#### # ##### # ####" },
+            { "       #   #       " },
+            { "#### # ##### # ####" },
+            { "   # #       # #   " },
+            { "#### # ##### # ####" },
+            { "#        #        #" },
+            { "# ## ### # ### ## #" },
+            { "#  #           #  #" },
+            { "## # # ##### # # ##" },
+            { "#    #   #   #    #" },
+            { "# ###### # ###### #" },
+            { "#                 #" },
+            { "###################" } },
+        std::map<char, struct MapBlock>{
+            { '#', { "", true, BLUE } },
+            { 'O', { "", false, RED } },
+        }
+    };
 };
 
-#endif	/* !PACMANMODULE_HPP_ */
+#endif /* !PACMANMODULE_HPP_ */

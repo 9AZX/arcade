@@ -30,7 +30,7 @@ void NcursesModule::displayEntity(AEntity&)
 {
 }
 
-void NcursesModule::displayMap()
+void NcursesModule::displayMap(GameMap map)
 {
 }
 
