@@ -9,24 +9,24 @@
 
 NcursesModule::NcursesModule()
 {
-	initscr();
-	refresh();
-	getch();
-	endwin();
+    initscr();
+    refresh();
+    getch();
+    endwin();
 }
 
 NcursesModule::~NcursesModule()
 {
-	//
+    //
 }
 
 std::vector<enum gameInputs> NcursesModule::getInputs()
 {
-	std::vector<enum gameInputs> mdr;
-	return mdr;
+    std::vector<enum gameInputs> mdr;
+    return mdr;
 }
 
-void NcursesModule::displayEntity(AEntity &)
+void NcursesModule::displayEntity(AEntity&)
 {
 }
 
@@ -34,21 +34,21 @@ void NcursesModule::displayMap()
 {
 }
 
-void NcursesModule::renderTextEntity(AEntity &) const
+void NcursesModule::renderTextEntity(AEntity&) const
 {
 }
 
-void NcursesModule::renderGameEntity(AEntity &) const
+void NcursesModule::renderGameEntity(AEntity&) const
 {
 }
 
-void NcursesModule::matchInputs(std::vector<enum gameInputs> &inputs, int key)
+void NcursesModule::matchInputs(std::vector<enum gameInputs>& inputs, int key)
 {
-	(void)inputs;
-	(void)key;
+    (void)inputs;
+    (void)key;
 }
 
 void NcursesModule::destructor()
 {
-	delete this;
+    delete this;
 }
