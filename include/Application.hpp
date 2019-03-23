@@ -26,12 +26,12 @@ public:
 	void stop();
 	void open_graphical_library();
 	void open_game_library();
-	void *_gameClass = nullptr;
-	void *_graphClass = nullptr;
 
 protected:
 	std::unique_ptr<Library> _game = nullptr;
 	std::unique_ptr<Library> _graphic = nullptr;
+	void *_gameClass = nullptr;
+	void *_graphClass = nullptr;
 	void *(*fptr_game)() = nullptr;
 	void *(*fptr_graphic)() = nullptr;
 };
