@@ -10,6 +10,8 @@
 
 #include <string>
 #include <memory>
+#include "IDisplayModule.hpp"
+#include "IGameModule.hpp"
 #include "Library.hpp"
 
 #define	ENTRY_POINT_GAME	"EntryGame"
@@ -30,8 +32,8 @@ public:
 protected:
 	std::unique_ptr<Library> _game = nullptr;
 	std::unique_ptr<Library> _graphic = nullptr;
-	void *_gameClass = nullptr;
-	void *_graphClass = nullptr;
+	IGameModule *_gameClass = nullptr;
+	IDisplayModule *_graphClass = nullptr;
 	void *(*fptr_game)() = nullptr;
 	void *(*fptr_graphic)() = nullptr;
 };
