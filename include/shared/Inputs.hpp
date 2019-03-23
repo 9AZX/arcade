@@ -12,27 +12,27 @@
 #include <vector>
 
 enum gameInputs {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    ONE,
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    ESCAPE,
-    ENTER,
-    BACK,
-    EXIT,
-    SPACE
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	ONE,
+	TWO,
+	THREE,
+	FOUR,
+	FIVE,
+	ESCAPE,
+	ENTER,
+	BACK,
+	EXIT,
+	SPACE
 };
 
 struct Events {
-    std::vector<enum gameInputs> keys;
-    std::string ascii;
+	std::vector<enum gameInputs> keys;
+	std::string ascii;
 };
 
 typedef struct Events Events;
 
-#endif /* !INPUTS_HPP_ */
+#endif  /* !INPUTS_HPP_ */
