@@ -45,6 +45,12 @@ ifeq ($(DISP_FORCE_COLOR),$(BOOL_TRUE))
 	FLAGS_CPP_DEF	+=	-fdiagnostics-color
 endif
 
+# Remove -Werror flag if debug mode is active.
+ifeq ($(DISP_DEBUGGING_MODE),$(BOOL_TRUE))
+	FLAGS_C_DEF	:=	$(filter-out -Werror,$(FLAGS_C_DEF))
+	FLAGS_CPP_DEF	:=	$(filter-out -Werror,$(FLAGS_CPP_DEF))
+endif
+
 # Choose compilation rules by language.
 TMP_VAR_	:=	$(PROJECT_BINARY_NAME)
 ifeq ($(PROJECT_LANGUAGE),"C")

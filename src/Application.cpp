@@ -7,8 +7,6 @@
 
 #include "Application.hpp"
 #include "Exception.hpp"
-#include "IDisplayModule.hpp"
-#include "IGameModule.hpp"
 
 void Application::init(const int argc, const char** argv)
 {

@@ -13,7 +13,8 @@ endef
 FLAGS_CPP_DEF	=	-std=c++17	\
 			-O2		\
 			-Wall		\
-			-Wextra
+			-Wextra		\
+			-Werror
 
 FLAGS_CPP_DEBUG	=	$(FLAGS_CPP_DEF)	\
 			-g

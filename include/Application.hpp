@@ -27,8 +27,6 @@ class Application : public ICoreModule
 	void stop();
 	void open_graphical_library();
 	void open_game_library();
-	void *_gameClass = nullptr;
-	void *_graphClass = nullptr;
 
 	void storeGameEntity(AEntity *entity) final;
 	AEntity &getEntity(std::string name) final;
@@ -39,6 +37,8 @@ class Application : public ICoreModule
   protected:
 	std::unique_ptr<Library> _game = nullptr;
 	std::unique_ptr<Library> _graphic = nullptr;
+	void *_gameClass = nullptr;
+	void *_graphClass = nullptr;
 	void *(*fptr_game)() = nullptr;
 	void *(*fptr_graphic)() = nullptr;
 };
