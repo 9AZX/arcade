@@ -5,19 +5,16 @@
 ** Enemy
 */
 
-#ifndef ENEMY_HPP_
-#define ENEMY_HPP_
+#ifndef	ENEMY_HPP_
+#define	ENEMY_HPP_
 
 #include "Entity.hpp"
 
 class Enemy : public AEntity
 {
-  public:
+public:
 	Enemy();
 	~Enemy();
-
-  protected:
-  private:
 };
 
-#endif /* !ENEMY_HPP_ */
+#endif	/* !ENEMY_HPP_ */

@@ -5,16 +5,15 @@
 ** Entity
 */
 
-#ifndef ENTITY_HPP_
-#define ENTITY_HPP_
+#ifndef	ENTITY_HPP_
+#define	ENTITY_HPP_
 
 #include <iostream>
 
 class AEntity
 {
 public:
-	enum EntityType
-	{
+	enum EntityType {
 		DEFAULT,
 		GAME,
 		TEXT
@@ -35,4 +34,4 @@ protected:
 	enum EntityType _type = DEFAULT;
 };
 
-#endif /* !ENTITY_HPP_ */
+#endif	/* !ENTITY_HPP_ */
