@@ -11,9 +11,8 @@
 PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {}
 
 void PacmanModule::play() {
-  std::cout << "Njut Njut Pacman" << std::endl;
+  this->_core->renderAll();
   while (1) {
-    this->_core->renderAll();
   }
 }
 

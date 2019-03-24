@@ -8,6 +8,12 @@
 #include "Application.hpp"
 #include "Exception.hpp"
 
+static const struct libs libraries[] = {
+    {Library::LIB_GAME, "nibbler", "./games/lib_arcade_nibbler.so"},
+    {Library::LIB_GAME, "pacman", "./games/lib_arcade_pacman.so"},
+    {Library::LIB_GRAPHIC, "ncurses", "./lib/lib_arcade_ncurses.so"},
+    {Library::LIB_GRAPHIC, "sfml", "./lib/lib_arcade_sfml.so"}};
+
 void Application::init(const int argc, const char **argv) {
   if (argc < 2) {
     throw Exception(ERR_USAGE);
@@ -76,11 +82,11 @@ AEntity &Application::getEntity(std::string name) {}
 
 std::vector<enum gameInputs> Application::getInputs() {
   std::vector<enum gameInputs> mdr;
+
   return mdr;
 }
 
 void Application::renderAll() {
-  std::cout << "mdr";
   this->_graphClass->displayMap(this->_gameClass->getMap());
 }
 

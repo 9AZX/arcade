@@ -7,47 +7,37 @@
 
 #include "NcursesModule.hpp"
 
-NcursesModule::NcursesModule()
-{
-	initscr();
-	refresh();
-	getch();
+NcursesModule::NcursesModule() { initscr(); }
+
+NcursesModule::~NcursesModule() { endwin(); }
+
+std::vector<enum gameInputs> NcursesModule::getInputs() {
+  std::vector<enum gameInputs> mdr;
+  return mdr;
 }
 
-NcursesModule::~NcursesModule()
-{
-	endwin();
+void NcursesModule::displayEntity(AEntity&) {}
+
+void NcursesModule::displayMap(GameMap map) {
+  for (unsigned int i = 0; i < map.grid.size(); ++i) {
+    for (unsigned int idx = 0; idx < map.grid.at(i).length(); ++idx) {
+      start_color();
+      init_pair(1, COLOR_WHITE, COLOR_MAGENTA);
+      attron(1);
+      addch(map.grid[i].at(idx));
+    }
+    addch('\n');
+  }
+  refresh();
 }
 
-std::vector<enum gameInputs> NcursesModule::getInputs()
-{
-	std::vector<enum gameInputs> mdr;
-	return mdr;
-}
+void NcursesModule::destructor() { delete this; }
 
-void NcursesModule::displayEntity(AEntity&)
-{
-}
+void NcursesModule::renderTextEntity(AEntity&) const {}
 
-void NcursesModule::displayMap(GameMap map)
-{
-}
+void NcursesModule::renderGameEntity(AEntity&) const {}
 
-void NcursesModule::destructor()
-{
-	delete this;
-}
-
-void NcursesModule::renderTextEntity(AEntity&) const
-{
-}
-
-void NcursesModule::renderGameEntity(AEntity&) const
-{
-}
-
-void NcursesModule::matchInputs(std::vector<enum gameInputs>& inputs, int key)
-{
-	(void)inputs;
-	(void)key;
+void NcursesModule::matchInputs(std::vector<enum gameInputs>& inputs, int key) {
+  (void)inputs;
+  (void)key;
 }
