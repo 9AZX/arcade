@@ -5,10 +5,21 @@
 ** SnakeModule
 */
 
-#include <iostream>
 #include "NibblerModule.hpp"
+#include <iostream>
 
-void NibblerModule::play()
-{
-	std::cout << "SNAKEEEEEEE" << std::endl;
+NibblerModule::NibblerModule(ICoreModule *core) : _core(core) {}
+
+void NibblerModule::play() {
+  this->_core->renderAll();
+  while (1) {
+  }
 }
+
+void NibblerModule::pauseMenu() {}
+
+void NibblerModule::endGame() {}
+
+long NibblerModule::getScore() const { return 0; }
+
+const GameMap &NibblerModule::getMap() const noexcept { return this->_map; }

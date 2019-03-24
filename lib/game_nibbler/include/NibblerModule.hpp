@@ -8,25 +8,44 @@
 #ifndef NIBBLERMODULE_HPP_
 #define NIBBLERMODULE_HPP_
 
-#include "IGameModule.hpp"
 #include "ICoreModule.hpp"
+#include "IGameModule.hpp"
 
-class NibblerModule : public IGameModule
-{
-  public:
-	NibblerModule() = delete;
-	NibblerModule(ICoreModule *core);
-	~NibblerModule() = default;
+class NibblerModule : public IGameModule {
+ public:
+  NibblerModule() = delete;
+  NibblerModule(ICoreModule *core);
+  ~NibblerModule() = default;
 
-	void play() final;
-	//void pauseMenu() final;
-	//void endGame() final;
-	//long getScore() const final;
-	//const GameMap &getMap() const noexcept final;
+ public:
+  void play() final;
+  long getScore() const final;
+  void pauseMenu() final;
+  void endGame() final;
+  const GameMap &getMap() const noexcept;
 
-  private:
-	ICoreModule *_core;
-	const GameMap _map;
+ private:
+  ICoreModule *_core;
+  const GameMap _map = {
+      21, 19,
+      std::vector<std::string>{
+          {"#########################"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#                       #"}, {"#                       #"},
+          {"#########################"}},
+      std::map<char, struct MapBlock>{
+          {'#', {"./assets/pacman/wall.png", true, CYAN, BLACK}},
+          {' ', {"", false, BLACK, BLACK}},
+      }};
 };
 
 #endif /* !NIBBLERMODULE_HPP_ */
