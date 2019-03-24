@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:35
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 19:09:12
+** @Last Modified time: 24-03-2019 15:50:16
 */
 
 #ifndef	LIBRARY_HPP_
@@ -38,6 +38,10 @@ public:
 	~Library();
 
 public:
+	enum {
+		LIB_GAME,
+		LIB_GRAPHIC
+	};
 	bool open();
 	void close();
 	void *sym(const std::string &symbol);
@@ -46,6 +50,12 @@ public:
 protected:
 	std::string _path = "";
 	void *_handle = nullptr;
+};
+
+struct libs {
+	int type;
+	std::string name;
+	std::string path;
 };
 
 #endif	/* !LIBRARY_HPP_ */
