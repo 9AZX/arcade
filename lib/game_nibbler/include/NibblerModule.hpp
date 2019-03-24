@@ -27,7 +27,7 @@ class NibblerModule : public IGameModule {
  private:
   ICoreModule *_core;
   const GameMap _map = {
-      21, 19,
+      25, 25,
       std::vector<std::string>{
           {"#########################"}, {"#                       #"},
           {"#                       #"}, {"#                       #"},
