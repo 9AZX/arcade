@@ -10,6 +10,7 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <unordered_map>
 #include <vector>
 #include "IDisplayModule.hpp"
 #include "IRender.hpp"
@@ -25,6 +26,7 @@ class SfmlModule : public IDisplayModule, public IRender {
   virtual ~SfmlModule();
 
  public:
+  void initGraphics(GameMap);
   std::vector<enum gameInputs> getInputs() final;
   void displayEntity(AEntity&) final;
   void displayMap(GameMap) final;
@@ -35,6 +37,8 @@ class SfmlModule : public IDisplayModule, public IRender {
  private:
   std::unique_ptr<sf::RenderWindow> _window;
   void matchInputs(std::vector<enum gameInputs>& inputs, sf::Keyboard::Key key);
+  std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>> _sprites =
+      {};
 };
 
 #endif /* !SFMLMODULE_HPP_ */
