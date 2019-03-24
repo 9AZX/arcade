@@ -13,28 +13,20 @@
 #include <memory>
 #include <vector>
 
-enum BlockColor {
-	BLACK,
-	RED,
-	GREEN,
-	YELLOW,
-	BLUE,
-	MAGENTA,
-	CYAN,
-	WHITE
-};
+enum BlockColor { BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
 
 struct GameMap {
-	const int height;
-	const int width;
-	std::vector<std::string> grid;
-	std::map<char, struct MapBlock> blockProperties;
+  const int height;
+  const int width;
+  std::vector<std::string> grid;
+  std::map<char, struct MapBlock> blockProperties;
 };
 
 struct MapBlock {
-	std::string assetPath;
-	bool isSolid;
-	enum BlockColor color;
+  std::string assetPath;
+  bool isSolid;
+  enum BlockColor color;
+  enum BlockColor colorBackground;
 };
 
-#endif  /* !MAP_HPP_ */
+#endif /* !MAP_HPP_ */
