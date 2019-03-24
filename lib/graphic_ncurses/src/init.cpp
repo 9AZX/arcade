@@ -9,13 +9,4 @@
 
 extern "C" void *EntryGraph();
 
-void *EntryGraph()
-{
-	// initscr();
-	// ncurses.print_map(map);
-	// refresh();
-	// getch();
-	// endwin();
-	std::cout << "call (ncurses): ok" << std::endl;
-	return new NcursesModule;
-}
+void *EntryGraph() { return new NcursesModule; }
