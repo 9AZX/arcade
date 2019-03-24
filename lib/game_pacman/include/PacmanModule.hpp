@@ -40,7 +40,7 @@ class PacmanModule : public IGameModule {
                                {"# ###### # ###### #"}, {"#                 #"},
                                {"###################"}},
       std::map<char, struct MapBlock>{
-          {'#', {"", true, BLUE}},
+          {'#', {"./assets/pacman/wall.png", true, BLUE}},
           {'O', {"", false, RED}},
       }};
 };

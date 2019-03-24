@@ -1,332 +1,318 @@
-#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
 
-bool moveRight(sf::Vector2f *playerPos, std::string map)
-{
-    int cell_x = playerPos->x / 32 - 1;
-    int cell_y = playerPos->y / 32 - 1;
+bool moveRight(sf::Vector2f *playerPos, std::string map) {
+  int cell_x = playerPos->x / 32 - 1;
+  int cell_y = playerPos->y / 32 - 1;
 
-    if (map[cell_y * 19 + cell_x + 1] == '1') {
-        return false;
-    }
-    return true;
-}
-
-bool moveLeft(sf::Vector2f *playerPos, std::string map)
-{
-    int cell_x = playerPos->x / 32 - 1;
-    int cell_y = playerPos->y / 32 - 1;
-
-    if (map[cell_y * 19 + cell_x - 1] == '1') {
-        return false;
-    }
-    return true;
-}
-
-bool moveUp(sf::Vector2f *playerPos, std::string map)
-{
-    int cell_x = playerPos->x / 32 - 1;
-    int cell_y = playerPos->y / 32 - 1;
-
-    if (map[(cell_y - 1) * 19 + cell_x] == '1') {
-        return false;
-    }
-    return true;
-}
-
-bool moveDown(sf::Vector2f *playerPos, std::string map)
-{
-    int cell_x = playerPos->x / 32 - 1;
-    int cell_y = playerPos->y / 32 - 1;
-
-    if (map[(cell_y + 1) * 19 + cell_x] == '1') {
-        return false;
-    }
-    return true;
-}
-
-void drawMap(sf::RenderWindow *window, sf::Sprite *wallSprite, std::string map)
-{
-    int mapLength = 19;
-    int mapHeight = 21;
-    int wallSpriteSize = 32;
-
-    for (unsigned int ith = 0; ith < mapHeight; ith++) {
-        for (unsigned int itl = 0; itl < mapLength; itl++) {
-            if (map[ith * mapLength + itl] == '1') {
-                wallSprite->setPosition(itl * wallSpriteSize + 32, ith * wallSpriteSize + 32);
-                window->draw(*wallSprite);
-            }
-        }
-    }
-}
-
-void pacmanMoveAnimation(int it, sf::Sprite *pacmanSprite)
-{
-    sf::IntRect r1(0, 0, 32, 32);
-    sf::IntRect r2(32, 0, 32, 32);
-    sf::IntRect r3(64, 0, 32, 32);
-
-    if (it < 32) {
-        pacmanSprite->setTextureRect(r2);
-    } else if (it >= 32 && it < 63)
-        pacmanSprite->setTextureRect(r3);
-    else
-        pacmanSprite->setTextureRect(r1);
-}
-
-bool checkCollision(sf::Vector2f pacman, sf::Vector2f ghost)
-{
-    int pacman_x = pacman.x / 32 - 1;
-    int pacman_y = pacman.y / 32 - 1;
-    int ghost_x = ghost.x / 32 - 1;
-    int ghost_y = ghost.y / 32 - 1;
-
-    if (pacman_x == ghost_x && pacman_y == ghost_y)
-        return true;
+  if (map[cell_y * 19 + cell_x + 1] == '1') {
     return false;
+  }
+  return true;
 }
 
-void gameOver(sf::Clock *clock, sf::Time *elapsed, sf::Sound *sound)
-{
-    sf::Music gameOver;
+bool moveLeft(sf::Vector2f *playerPos, std::string map) {
+  int cell_x = playerPos->x / 32 - 1;
+  int cell_y = playerPos->y / 32 - 1;
 
-    clock->restart();
-    *elapsed = clock->getElapsedTime();
-    if (!gameOver.openFromFile("../assets/pacman/pacman_death.wav"))
-        exit(-1);
-    sound->pause();
-    gameOver.play();
-    while (elapsed->asSeconds() < 3) {
-        *elapsed = clock->getElapsedTime();
+  if (map[cell_y * 19 + cell_x - 1] == '1') {
+    return false;
+  }
+  return true;
+}
+
+bool moveUp(sf::Vector2f *playerPos, std::string map) {
+  int cell_x = playerPos->x / 32 - 1;
+  int cell_y = playerPos->y / 32 - 1;
+
+  if (map[(cell_y - 1) * 19 + cell_x] == '1') {
+    return false;
+  }
+  return true;
+}
+
+bool moveDown(sf::Vector2f *playerPos, std::string map) {
+  int cell_x = playerPos->x / 32 - 1;
+  int cell_y = playerPos->y / 32 - 1;
+
+  if (map[(cell_y + 1) * 19 + cell_x] == '1') {
+    return false;
+  }
+  return true;
+}
+
+void drawMap(sf::RenderWindow *window, sf::Sprite *wallSprite,
+             std::string map) {
+  int mapLength = 19;
+  int mapHeight = 21;
+  int wallSpriteSize = 32;
+
+  for (unsigned int ith = 0; ith < mapHeight; ith++) {
+    for (unsigned int itl = 0; itl < mapLength; itl++) {
+      if (map[ith * mapLength + itl] == '1') {
+        wallSprite->setPosition(itl * wallSpriteSize + 32,
+                                ith * wallSpriteSize + 32);
+        window->draw(*wallSprite);
+      }
     }
-    std::cout << "Game Over!" << std::endl;
+  }
 }
 
-int main()
-{
-    // INIT WINDOW
-    std::string map = "111111111111111111112222222222222222211311211121211121131122222222222222222112112121111121211211222212221222122221111121110101112111100012100000001210001111210110110121111000020010001002000011112101111101211110001210000000121000111121011111012111112222222212222222211211211121211121121132122222222222123111212121111121212111222212221222122221121111112121111112112222222222222222211111111111111111111";
-    sf::RenderWindow window(sf::VideoMode(650, 700), "SFML - Pacman");
-    sf::Event event;
-    sf::Texture ghostText;
-    sf::Texture pacmanText;
-    sf::Texture wallText;
-    sf::Texture pacgumText;
-    sf::Sprite ghostSprite;
-    sf::Sprite pacmanSprite;
-    sf::Sprite wallSprite;
-    sf::Sprite pacgumSprite;
+void pacmanMoveAnimation(int it, sf::Sprite *pacmanSprite) {
+  sf::IntRect r1(0, 0, 32, 32);
+  sf::IntRect r2(32, 0, 32, 32);
+  sf::IntRect r3(64, 0, 32, 32);
 
-    sf::Vector2f pos;
+  if (it < 32) {
+    pacmanSprite->setTextureRect(r2);
+  } else if (it >= 32 && it < 63)
+    pacmanSprite->setTextureRect(r3);
+  else
+    pacmanSprite->setTextureRect(r1);
+}
 
-    // PLAYER MOVEMENT
-    bool move_right = false;
-    bool move_left = false;
-    bool move_up = false;
-    bool move_down = false;
+bool checkCollision(sf::Vector2f pacman, sf::Vector2f ghost) {
+  int pacman_x = pacman.x / 32 - 1;
+  int pacman_y = pacman.y / 32 - 1;
+  int ghost_x = ghost.x / 32 - 1;
+  int ghost_y = ghost.y / 32 - 1;
 
-    bool move_right1 = false;
-    bool move_left1 = false;
-    bool move_up1 = false;
-    bool move_down1 = false;
+  if (pacman_x == ghost_x && pacman_y == ghost_y) return true;
+  return false;
+}
 
-    bool is_moving = false;
-    bool is_moving1 = false;
-    int it = 0;
-    int it1 = 0;
+void gameOver(sf::Clock *clock, sf::Time *elapsed, sf::Sound *sound) {
+  sf::Music gameOver;
 
-    // SPRITE INIT
-    ghostText.loadFromFile("../assets/pacman/ghost.png");
-    ghostSprite.setTexture(ghostText, true);
-    ghostSprite.setPosition(9 * 32 + 32, 10 * 32);
-    ghostSprite.setOrigin(16, 16);
+  clock->restart();
+  *elapsed = clock->getElapsedTime();
+  if (!gameOver.openFromFile("../assets/pacman/pacman_death.wav")) exit(-1);
+  sound->pause();
+  gameOver.play();
+  while (elapsed->asSeconds() < 3) {
+    *elapsed = clock->getElapsedTime();
+  }
+  std::cout << "Game Over!" << std::endl;
+}
 
-    pacmanText.loadFromFile("../assets/pacman/pacmans.png");
-    pacmanSprite.setTexture(pacmanText, true);
-    pacmanSprite.setPosition(9 * 32 + 32, 10 * 32 + 32 + 32); // map center
-    pacmanSprite.setOrigin(16, 16);
-    sf::IntRect r1(64, 0, 32, 32);
-    pacmanSprite.setTextureRect(r1);
+int main() {
+  // INIT WINDOW
+  std::string map =
+      "111111111111111111112222222222222222211311211121211121131122222222222222"
+      "222112112121111121211211222212221222122221111121110101112111100012100000"
+      "001210001111210110110121111000020010001002000011112101111101211110001210"
+      "000000121000111121011111012111112222222212222222211211211121211121121132"
+      "122222222222123111212121111121212111222212221222122221121111112121111112"
+      "112222222222222222211111111111111111111";
+  sf::RenderWindow window(sf::VideoMode(650, 700), "SFML - Pacman");
+  sf::Event event;
+  sf::Texture ghostText;
+  sf::Texture pacmanText;
+  sf::Texture wallText;
+  sf::Texture pacgumText;
+  sf::Sprite ghostSprite;
+  sf::Sprite pacmanSprite;
+  sf::Sprite wallSprite;
+  sf::Sprite pacgumSprite;
 
-    wallText.loadFromFile("../assets/pacman/wall.png");
-    wallSprite.setTexture(wallText, true);
-    wallSprite.setOrigin(16, 16);
-    wallSprite.setColor(sf::Color::Blue);
+  sf::Vector2f pos;
 
-    pacgumText.loadFromFile("../assets/pacman/pacgum.png");
-    pacgumSprite.setTexture(pacgumText, true);
-    pacgumSprite.setOrigin(16, 16);
+  // PLAYER MOVEMENT
+  bool move_right = false;
+  bool move_left = false;
+  bool move_up = false;
+  bool move_down = false;
 
-    // MUSIC INIT
-    sf::Music intro;
-    sf::Clock clock;
-    sf::Time elapsed = clock.getElapsedTime();;
-    if (!intro.openFromFile("../assets/pacman/pacman_beginning.wav"))
-        return -1;
-    
-    intro.play();
+  bool move_right1 = false;
+  bool move_left1 = false;
+  bool move_up1 = false;
+  bool move_down1 = false;
+
+  bool is_moving = false;
+  bool is_moving1 = false;
+  int it = 0;
+  int it1 = 0;
+
+  // SPRITE INIT
+  ghostText.loadFromFile("../assets/pacman/ghost.png");
+  ghostSprite.setTexture(ghostText, true);
+  ghostSprite.setPosition(9 * 32 + 32, 10 * 32);
+  ghostSprite.setOrigin(16, 16);
+
+  pacmanText.loadFromFile("../assets/pacman/pacmans.png");
+  pacmanSprite.setTexture(pacmanText, true);
+  pacmanSprite.setPosition(9 * 32 + 32, 10 * 32 + 32 + 32);  // map center
+  pacmanSprite.setOrigin(16, 16);
+  sf::IntRect r1(64, 0, 32, 32);
+  pacmanSprite.setTextureRect(r1);
+
+  wallText.loadFromFile("../assets/pacman/wall.png");
+  wallSprite.setTexture(wallText, true);
+  wallSprite.setOrigin(16, 16);
+  wallSprite.setColor(sf::Color::Blue);
+
+  pacgumText.loadFromFile("../assets/pacman/pacgum.png");
+  pacgumSprite.setTexture(pacgumText, true);
+  pacgumSprite.setOrigin(16, 16);
+
+  // MUSIC INIT
+  sf::Music intro;
+  sf::Clock clock;
+  sf::Time elapsed = clock.getElapsedTime();
+  if (!intro.openFromFile("../assets/pacman/pacman_beginning.wav")) return -1;
+
+  intro.play();
+  window.draw(pacmanSprite);
+  drawMap(&window, &wallSprite, map);
+  window.display();
+
+  while (elapsed.asSeconds() <= 4) {
+    elapsed = clock.getElapsedTime();
+  }
+
+  // SOUND INIT
+  sf::SoundBuffer walkSound;
+  if (!walkSound.loadFromFile("../assets/pacman/pacman_chomp.wav")) return -1;
+  sf::Sound sound;
+  sound.setBuffer(walkSound);
+  sound.setLoop(true);
+  sound.play();
+
+  // GAME LOOP
+  while (window.isOpen()) {
+    while (window.pollEvent(event)) {
+      switch (event.type) {
+        case sf::Event::Closed:
+          window.close();
+          break;
+
+        // KEYBOARD INPUT
+        case sf::Event::KeyPressed:
+          if (is_moving) break;
+          move_right = false;
+          move_left = false;
+          move_up = false;
+          move_down = false;
+          if (event.key.code == sf::Keyboard::Right) move_right = true;
+          if (event.key.code == sf::Keyboard::Left) move_left = true;
+          if (event.key.code == sf::Keyboard::Up) move_up = true;
+          if (event.key.code == sf::Keyboard::Down) move_down = true;
+          if (event.key.code == sf::Keyboard::Escape) window.close();
+          break;
+        default:
+          break;
+      }
+    }
+
+    // MOVE PLAYER
+    pos = pacmanSprite.getPosition();
+    if (move_right && moveRight(&pos, map)) {
+      pacmanSprite.setRotation(0);
+      is_moving = true;
+    } else if (move_left && moveLeft(&pos, map)) {
+      pacmanSprite.setRotation(180);
+      is_moving = true;
+    } else if (move_up && moveUp(&pos, map)) {
+      pacmanSprite.setRotation(270);
+      is_moving = true;
+    } else if (move_down && moveDown(&pos, map)) {
+      pacmanSprite.setRotation(90);
+      is_moving = true;
+    }
+
+    if (is_moving == true) {
+      if (it < 64) {
+        if (move_right) {
+          pacmanSprite.move(0.5, 0);
+          pacmanMoveAnimation(it, &pacmanSprite);
+        } else if (move_left) {
+          pacmanSprite.move(-0.5, 0);
+          pacmanMoveAnimation(it, &pacmanSprite);
+        } else if (move_up) {
+          pacmanSprite.move(0, -0.5);
+          pacmanMoveAnimation(it, &pacmanSprite);
+        } else if (move_down) {
+          pacmanSprite.move(0, 0.5);
+          pacmanMoveAnimation(it, &pacmanSprite);
+        }
+        it++;
+      } else {
+        it = 0;
+        is_moving = false;
+        move_right = false;
+        move_left = false;
+        move_up = false;
+        move_down = false;
+      }
+    }
+
+    if (checkCollision(pacmanSprite.getPosition(), ghostSprite.getPosition())) {
+      gameOver(&clock, &elapsed, &sound);
+      return 0;
+    }
+
+    // MOVE GHOST
+    int random = rand() % 4;
+
+    pos = ghostSprite.getPosition();
+    switch (random) {
+      case 0:
+        if (moveRight(&pos, map) && !is_moving1) move_right1 = true;
+        is_moving1 = true;
+        break;
+      case 1:
+        if (moveLeft(&pos, map) && !is_moving1) move_left1 = true;
+        is_moving1 = true;
+        break;
+      case 2:
+        if (moveUp(&pos, map) && !is_moving1) move_up1 = true;
+        is_moving1 = true;
+        break;
+      case 3:
+        if (moveDown(&pos, map) && !is_moving1) move_down1 = true;
+        is_moving1 = true;
+        break;
+      default:
+        break;
+    }
+    if (is_moving1 == true) {
+      if (it1 < 128) {
+        if (move_right1) {
+          ghostSprite.move(0.25, 0);
+        } else if (move_left1) {
+          ghostSprite.move(-0.25, 0);
+        } else if (move_up1) {
+          ghostSprite.move(0, -0.25);
+        } else if (move_down1) {
+          ghostSprite.move(0, 0.25);
+        }
+        it1++;
+      } else {
+        it1 = 0;
+        is_moving1 = false;
+        move_right1 = false;
+        move_left1 = false;
+        move_up1 = false;
+        move_down1 = false;
+      }
+    }
+
+    if (checkCollision(pacmanSprite.getPosition(), ghostSprite.getPosition())) {
+      gameOver(&clock, &elapsed, &sound);
+      return 0;
+    }
+
+    // std::cout << "[" << (pos.x / 32) - 1 << ", " << (pos.y / 32) - 1 << "]"
+    // << std::endl;
+
+    // DRAW / REFRESH
+    window.clear();
     window.draw(pacmanSprite);
+    window.draw(ghostSprite);
     drawMap(&window, &wallSprite, map);
     window.display();
-
-    while (elapsed.asSeconds() <= 4) {
-        elapsed = clock.getElapsedTime();
-    }
-
-    // SOUND INIT
-    sf::SoundBuffer walkSound;
-    if (!walkSound.loadFromFile("../assets/pacman/pacman_chomp.wav"))
-        return -1;
-    sf::Sound sound;
-    sound.setBuffer(walkSound);
-    sound.setLoop(true);
-    sound.play();
-
-    // GAME LOOP
-    while (window.isOpen()) {
-        while (window.pollEvent(event)) {
-            switch (event.type) {
-                case sf::Event::Closed:
-                    window.close();
-                    break;
-
-                // KEYBOARD INPUT
-                case sf::Event::KeyPressed:
-                    if (is_moving)
-                        break;
-                    move_right = false;
-                    move_left = false;
-                    move_up = false;
-                    move_down = false;
-                    if (event.key.code == sf::Keyboard::Right)
-                        move_right = true;
-                    if (event.key.code == sf::Keyboard::Left)
-                        move_left = true;
-                    if (event.key.code == sf::Keyboard::Up)
-                        move_up = true;
-                    if (event.key.code == sf::Keyboard::Down)
-                        move_down = true;
-                    if (event.key.code == sf::Keyboard::Escape)
-                        window.close();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        // MOVE PLAYER
-        pos = pacmanSprite.getPosition();
-        if (move_right && moveRight(&pos, map)) {
-            pacmanSprite.setRotation(0);
-            is_moving = true;
-        } else if (move_left && moveLeft(&pos, map)) {
-            pacmanSprite.setRotation(180);
-            is_moving = true;
-        } else if (move_up && moveUp(&pos, map)) {
-            pacmanSprite.setRotation(270);
-            is_moving = true;
-        } else if (move_down && moveDown(&pos, map)) {
-            pacmanSprite.setRotation(90);
-            is_moving = true;
-        }
-
-        if (is_moving == true) {
-            if (it < 64) {
-                if (move_right) {
-                    pacmanSprite.move(0.5, 0);
-                    pacmanMoveAnimation(it, &pacmanSprite);
-                } else if (move_left) {
-                    pacmanSprite.move(-0.5, 0);
-                    pacmanMoveAnimation(it, &pacmanSprite);
-                } else if (move_up) {
-                    pacmanSprite.move(0, -0.5);
-                    pacmanMoveAnimation(it, &pacmanSprite);
-                } else if (move_down) {
-                    pacmanSprite.move(0, 0.5);
-                    pacmanMoveAnimation(it, &pacmanSprite);
-                }
-                it++;                
-            } else {
-                it = 0;
-                is_moving = false;
-                move_right = false;
-                move_left = false;
-                move_up = false;
-                move_down = false;
-            }
-        }
-
-        if (checkCollision(pacmanSprite.getPosition(), ghostSprite.getPosition())) {
-            gameOver(&clock, &elapsed, &sound);
-            return 0;
-        }
-
-        // MOVE GHOST
-        int random = rand() % 4;
-
-        pos = ghostSprite.getPosition();
-        switch (random) {
-            case 0:
-                if (moveRight(&pos, map) && !is_moving1)
-                    move_right1 = true;
-                    is_moving1 = true;
-                break;
-            case 1:
-                if (moveLeft(&pos, map) && !is_moving1)
-                    move_left1 = true;
-                    is_moving1 = true;
-                break;
-            case 2:
-                if (moveUp(&pos, map) && !is_moving1)
-                    move_up1 = true;
-                    is_moving1 = true;
-                break;
-            case 3:
-                if (moveDown(&pos, map) && !is_moving1)
-                    move_down1 = true;
-                    is_moving1 = true;
-                break;
-            default:
-                break;
-        }
-        if (is_moving1 == true) {
-            if (it1 < 128) {
-                if (move_right1) {
-                    ghostSprite.move(0.25, 0);
-                } else if (move_left1) {
-                    ghostSprite.move(-0.25, 0);
-                } else if (move_up1) {
-                    ghostSprite.move(0, -0.25);
-                } else if (move_down1) {
-                    ghostSprite.move(0, 0.25);
-                }
-                it1++;
-            } else {
-                it1 = 0;
-                is_moving1 = false;
-                move_right1 = false;
-                move_left1 = false;
-                move_up1 = false;
-                move_down1 = false;
-            }
-        }
-
-        if (checkCollision(pacmanSprite.getPosition(), ghostSprite.getPosition())) {
-            gameOver(&clock, &elapsed, &sound);
-            return 0;
-        }
-
-        // std::cout << "[" << (pos.x / 32) - 1 << ", " << (pos.y / 32) - 1 << "]" << std::endl;
-
-        // DRAW / REFRESH
-        window.clear();
-        window.draw(pacmanSprite);
-        window.draw(ghostSprite);
-        drawMap(&window, &wallSprite, map);
-        window.display();
-    }
-    return 0;
+  }
+  return 0;
 }
