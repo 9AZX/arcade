@@ -15,6 +15,16 @@ SfmlModule::SfmlModule() {
 
 SfmlModule::~SfmlModule() {}
 
+void SfmlModule::initGraphics(GameMap map) {
+  sf::Texture wallTexture;
+  sf::Sprite wallSprite;
+
+  wallTexture.loadFromFile(map.blockProperties['#'].assetPath);
+  wallSprite.setOrigin(16, 16);
+  this->_sprites.insert({"wall", std::make_pair(wallSprite, wallTexture)});
+  this->_sprites["wall"].first.setTexture(this->_sprites["wall"].second, true);
+}
+
 std::vector<enum gameInputs> SfmlModule::getInputs() {
   std::vector<enum gameInputs> mdr;
   return mdr;
@@ -23,18 +33,16 @@ std::vector<enum gameInputs> SfmlModule::getInputs() {
 void SfmlModule::displayEntity(AEntity &) {}
 
 void SfmlModule::displayMap(GameMap map) {
-  sf::Texture wallTexture;
-  sf::Sprite wallSprite;
-
-  wallTexture.loadFromFile(map.blockProperties['#'].assetPath);
-  wallSprite.setTexture(wallTexture, true);
-
-  this->_window->clear();
+  if (this->_sprites.empty()) {
+    std::cout << "init graphics" << std::endl;
+    this->initGraphics(map);
+  }
   for (int ith = 0; ith < map.height; ith++) {
     for (int itl = 0; itl < map.width; itl++) {
       if (map.grid[ith][itl] == '#') {
-        wallSprite.setPosition(itl * 32 + 32, ith * 32 + 32);
-        this->_window->draw(wallSprite);
+        this->_sprites["wall"].first.setPosition(itl * 32 + 32, ith * 32 + 32);
+        this->_window->draw(this->_sprites["wall"].first);
+        std::cout << "NDR";
       }
     }
   }

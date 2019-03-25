@@ -22,8 +22,9 @@ void NcursesModule::displayMap(GameMap map) {
   for (unsigned int i = 0; i < map.grid.size(); ++i) {
     for (unsigned int idx = 0; idx < map.grid.at(i).length(); ++idx) {
       start_color();
-      init_pair(1, COLOR_WHITE, COLOR_MAGENTA);
-      attron(1);
+      init_pair(1, map.blockProperties[map.grid[i].at(idx)].color,
+                map.blockProperties[map.grid[i].at(idx)].colorBackground);
+      attron(COLOR_PAIR(1));
       addch(map.grid[i].at(idx));
     }
     addch('\n');
