@@ -100,11 +100,7 @@ void Application::storeGameEntity(AEntity *entity) {}
 
 AEntity &Application::getEntity(std::string name) {}
 
-Events Application::getInputs() {
-  Events mdr;
-
-  return mdr;
-}
+Events Application::getInputs() { return this->_graphClass->getInputs(); }
 
 void Application::renderAll() {
   this->_graphClass->displayMap(this->_gameClass->getMap());

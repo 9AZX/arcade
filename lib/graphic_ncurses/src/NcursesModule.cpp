@@ -7,13 +7,22 @@
 
 #include "NcursesModule.hpp"
 
-NcursesModule::NcursesModule() { initscr(); }
+NcursesModule::NcursesModule() {
+  initscr();
+  noecho();
+  keypad(stdscr, TRUE);
+  refresh();
+}
 
 NcursesModule::~NcursesModule() { endwin(); }
 
 Events NcursesModule::getInputs() {
-  Events mdr;
-  return mdr;
+  Events actual;
+  int ch = 'a';
+  nodelay(stdscr, TRUE);
+
+  if ((ch = getch()) != ERR) actual.ascii += ((char)ch);
+  return actual;
 }
 
 void NcursesModule::displayEntity(AEntity&) {}

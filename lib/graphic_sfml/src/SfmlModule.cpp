@@ -27,8 +27,9 @@ void SfmlModule::initGraphics(GameMap map) {
 }
 
 Events SfmlModule::getInputs() {
-  Events mdr;
-  return mdr;
+  Events actual;
+  if (this->eventSFML.key.code != 0) std::cout << this->eventSFML.key.code;
+  return actual;
 }
 
 void SfmlModule::displayEntity(AEntity &) {}
