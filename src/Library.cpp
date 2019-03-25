@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:05
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 13-03-2019 19:11:49
+** @Last Modified time: 25-03-2019 14:37:14
 */
 
 #include "Library.hpp"
@@ -51,6 +51,18 @@ bool Library::open()
 #else
 #	error	"Include \"Library\" header or the plateform is not supported."
 #endif
+
+void Library::openNew(const std::string &path)
+{
+	try {
+		this->_path = path;
+		this->close();
+		this->open();
+	}
+	catch (...) {
+		throw;
+	}
+}
 
 void Library::close()
 {

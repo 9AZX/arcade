@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:35
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 24-03-2019 15:50:16
+** @Last Modified time: 25-03-2019 14:10:31
 */
 
 #ifndef	LIBRARY_HPP_
@@ -31,6 +31,18 @@
 #	endif
 #endif
 
+#if	defined(LIBRARY_PLATEFORM_FNC) && LIBRARY_PLATEFORM_FNC == 0
+#	define	LIB_GAME_NIBBLER	"./games/lib_arcade_nibbler.dylib"
+#	define	LIB_GAME_PACMAN		"./games/lib_arcade_pacman.dylib"
+#	define	LIB_GRAPHIC_NCURSES	"./lib/lib_arcade_ncurses.dylib"
+#	define	LIB_GRAPHIC_SFML	"./lib/lib_arcade_sfml.dylib"
+#elif	defined(LIBRARY_PLATEFORM_FNC) && LIBRARY_PLATEFORM_FNC == 1
+#	define	LIB_GAME_NIBBLER	"./games/lib_arcade_nibbler.so"
+#	define	LIB_GAME_PACMAN		"./games/lib_arcade_pacman.so"
+#	define	LIB_GRAPHIC_NCURSES	"./lib/lib_arcade_ncurses.so"
+#	define	LIB_GRAPHIC_SFML	"./lib/lib_arcade_sfml.so"
+#endif
+
 class Library
 {
 public:
@@ -43,6 +55,7 @@ public:
 		LIB_GRAPHIC
 	};
 	bool open();
+	void openNew(const std::string &path);
 	void close();
 	void *sym(const std::string &symbol);
 	const std::string &get_path() noexcept;
