@@ -16,8 +16,8 @@
 #include "IRender.hpp"
 
 #define SFML_WINDOW_NAME "Pacman"
-#define SFML_WINDOW_WIDTH 650
-#define SFML_WINDOW_HEIGHT 700
+#define SFML_WINDOW_WIDTH 700
+#define SFML_WINDOW_HEIGHT 650
 #define SFML_WINDOW_FRAMERATE 60
 
 class SfmlModule : public IDisplayModule, public IRender {
@@ -33,6 +33,7 @@ class SfmlModule : public IDisplayModule, public IRender {
   void renderTextEntity(AEntity&) const final;
   void renderGameEntity(AEntity&) const final;
   void destructor() final;
+  bool isOpen() const final;
 
  private:
   std::unique_ptr<sf::RenderWindow> _window;

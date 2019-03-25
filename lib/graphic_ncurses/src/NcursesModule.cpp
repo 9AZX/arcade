@@ -32,6 +32,8 @@ void NcursesModule::displayMap(GameMap map) {
   refresh();
 }
 
+bool NcursesModule::isOpen() const { return true; }
+
 void NcursesModule::destructor() { delete this; }
 
 void NcursesModule::renderTextEntity(AEntity&) const {}

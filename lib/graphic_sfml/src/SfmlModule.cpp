@@ -23,6 +23,7 @@ void SfmlModule::initGraphics(GameMap map) {
   wallSprite.setOrigin(16, 16);
   this->_sprites.insert({"wall", std::make_pair(wallSprite, wallTexture)});
   this->_sprites["wall"].first.setTexture(this->_sprites["wall"].second, true);
+  this->_sprites["wall"].first.setColor(sf::Color::Blue);
 }
 
 std::vector<enum gameInputs> SfmlModule::getInputs() {
@@ -42,12 +43,13 @@ void SfmlModule::displayMap(GameMap map) {
       if (map.grid[ith][itl] == '#') {
         this->_sprites["wall"].first.setPosition(itl * 32 + 32, ith * 32 + 32);
         this->_window->draw(this->_sprites["wall"].first);
-        std::cout << "NDR";
       }
     }
   }
   this->_window->display();
 }
+
+bool SfmlModule::isOpen() const { return this->_window->isOpen(); }
 
 void SfmlModule::destructor() { delete this; }
 
