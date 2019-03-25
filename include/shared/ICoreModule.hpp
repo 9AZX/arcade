@@ -5,23 +5,23 @@
 ** ICoreModule
 */
 
-#ifndef	ICOREMODULE_HPP_
-#define	ICOREMODULE_HPP_
+#ifndef ICOREMODULE_HPP_
+#define ICOREMODULE_HPP_
 
+#include <vector>
 #include "Entity.hpp"
 #include "GameMap.hpp"
 #include "Inputs.hpp"
-#include <vector>
 
-class ICoreModule
-{
-public:
-	virtual ~ICoreModule() = default;
-	virtual void storeGameEntity(AEntity* entity) = 0;
-	virtual AEntity& getEntity(std::string name) = 0;
-	virtual std::vector<enum gameInputs> getInputs() = 0;
-	virtual void renderAll() = 0;
-	virtual void setMap(GameMap& map) = 0;
+class ICoreModule {
+ public:
+  virtual ~ICoreModule() = default;
+  virtual void storeGameEntity(AEntity* entity) = 0;
+  virtual AEntity& getEntity(std::string name) = 0;
+  virtual Events getInputs() = 0;
+  virtual void renderAll() = 0;
+  virtual void setMap(GameMap& map) = 0;
+  virtual bool isOpen() const = 0;
 };
 
-#endif	/* !ICOREMODULE_HPP_ */
+#endif /* !ICOREMODULE_HPP_ */

@@ -12,7 +12,7 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {}
 
 void PacmanModule::play() {
   this->_core->renderAll();
-  while (1) {
+  while (this->_core->isOpen()) {
   }
 }
 

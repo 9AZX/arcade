@@ -12,7 +12,7 @@ NibblerModule::NibblerModule(ICoreModule *core) : _core(core) {}
 
 void NibblerModule::play() {
   this->_core->renderAll();
-  while (1) {
+  while (this->_core->isOpen()) {
   }
 }
 
