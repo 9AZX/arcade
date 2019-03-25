@@ -26,8 +26,8 @@ void SfmlModule::initGraphics(GameMap map) {
   this->_sprites["wall"].first.setColor(sf::Color::Blue);
 }
 
-std::vector<enum gameInputs> SfmlModule::getInputs() {
-  std::vector<enum gameInputs> mdr;
+Events SfmlModule::getInputs() {
+  Events mdr;
   return mdr;
 }
 
@@ -57,8 +57,7 @@ void SfmlModule::renderTextEntity(AEntity &) const {}
 
 void SfmlModule::renderGameEntity(AEntity &) const {}
 
-void SfmlModule::matchInputs(std::vector<enum gameInputs> &inputs,
-                             sf::Keyboard::Key key) {
+void SfmlModule::matchInputs(Events &inputs, sf::Keyboard::Key key) {
   (void)inputs;
   (void)key;
 }

@@ -27,7 +27,7 @@ class SfmlModule : public IDisplayModule, public IRender {
 
  public:
   void initGraphics(GameMap);
-  std::vector<enum gameInputs> getInputs() final;
+  Events getInputs() final;
   void displayEntity(AEntity&) final;
   void displayMap(GameMap) final;
   void renderTextEntity(AEntity&) const final;
@@ -37,7 +37,7 @@ class SfmlModule : public IDisplayModule, public IRender {
 
  private:
   std::unique_ptr<sf::RenderWindow> _window;
-  void matchInputs(std::vector<enum gameInputs>& inputs, sf::Keyboard::Key key);
+  void matchInputs(Events& inputs, sf::Keyboard::Key key);
   std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>> _sprites =
       {};
 };
