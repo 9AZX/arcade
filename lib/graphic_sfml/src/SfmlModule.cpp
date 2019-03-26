@@ -28,7 +28,22 @@ void SfmlModule::initGraphics(GameMap map) {
 
 Events SfmlModule::getInputs() {
   Events actual;
-  if (this->eventSFML.key.code != 0) std::cout << this->eventSFML.key.code;
+  this->_window->pollEvent(this->eventSFML);
+
+  switch (this->eventSFML.type) {
+    case sf::Event::Closed:
+      this->_window->close();
+      break;
+    case sf::Event::KeyPressed:
+      this->matchInputs(actual, this->eventSFML.key.code);
+      break;
+    case sf::Event::TextEntered:
+      if (eventSFML.text.unicode < 128)
+        actual.ascii += static_cast<char>(eventSFML.text.unicode);
+      break;
+    default:
+      break;
+  }
   return actual;
 }
 
@@ -59,6 +74,45 @@ void SfmlModule::renderTextEntity(AEntity &) const {}
 void SfmlModule::renderGameEntity(AEntity &) const {}
 
 void SfmlModule::matchInputs(Events &inputs, sf::Keyboard::Key key) {
-  (void)inputs;
-  (void)key;
+  std::cout << key << std::endl;
+  switch (key) {
+    case sf::Keyboard::Right:
+      inputs.keys.push_back(RIGHT);
+      break;
+    case sf::Keyboard::Left:
+      inputs.keys.push_back(LEFT);
+      break;
+    case sf::Keyboard::Down:
+      inputs.keys.push_back(DOWN);
+      break;
+    case sf::Keyboard::Up:
+      inputs.keys.push_back(UP);
+      break;
+    case sf::Keyboard::Escape:
+      inputs.keys.push_back(ESCAPE);
+      break;
+    case sf::Keyboard::Space:
+      inputs.keys.push_back(SPACE);
+      break;
+    case sf::Keyboard::BackSpace:
+      inputs.keys.push_back(BACK);
+      break;
+    case sf::Keyboard::F1:
+      inputs.keys.push_back(ONE);
+      break;
+    case sf::Keyboard::F2:
+      inputs.keys.push_back(TWO);
+      break;
+    case sf::Keyboard::F3:
+      inputs.keys.push_back(THREE);
+      break;
+    case sf::Keyboard::F4:
+      inputs.keys.push_back(FOUR);
+      break;
+    case sf::Keyboard::F5:
+      inputs.keys.push_back(FIVE);
+      break;
+    default:
+      break;
+  }
 }

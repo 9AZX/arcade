@@ -28,16 +28,16 @@ class SfmlModule : public IDisplayModule, public IRender {
  public:
   void initGraphics(GameMap);
   Events getInputs() final;
-  void displayEntity(AEntity&) final;
+  void displayEntity(AEntity &) final;
   void displayMap(GameMap) final;
-  void renderTextEntity(AEntity&) const final;
-  void renderGameEntity(AEntity&) const final;
+  void renderTextEntity(AEntity &) const final;
+  void renderGameEntity(AEntity &) const final;
   void destructor() final;
   bool isOpen() const final;
 
  private:
   std::unique_ptr<sf::RenderWindow> _window;
-  void matchInputs(Events& inputs, sf::Keyboard::Key key);
+  void matchInputs(Events &inputs, sf::Keyboard::Key key);
   std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>> _sprites =
       {};
   sf::Event eventSFML;
