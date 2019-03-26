@@ -21,11 +21,11 @@ Events NcursesModule::getInputs() {
   int ch = 'a';
   nodelay(stdscr, TRUE);
 
-  if ((ch = getch()) != ERR) actual.ascii += ((char)ch);
+  if ((ch = getch()) != ERR) this->matchInputs(actual, ch);
   return actual;
 }
 
-void NcursesModule::displayEntity(AEntity&) {}
+void NcursesModule::displayEntity(AEntity &) {}
 
 void NcursesModule::displayMap(GameMap map) {
   for (unsigned int i = 0; i < map.grid.size(); ++i) {
@@ -45,11 +45,50 @@ bool NcursesModule::isOpen() const { return true; }
 
 void NcursesModule::destructor() { delete this; }
 
-void NcursesModule::renderTextEntity(AEntity&) const {}
+void NcursesModule::renderTextEntity(AEntity &) const {}
 
-void NcursesModule::renderGameEntity(AEntity&) const {}
+void NcursesModule::renderGameEntity(AEntity &) const {}
 
-void NcursesModule::matchInputs(Events& inputs, int key) {
-  (void)inputs;
-  (void)key;
+void NcursesModule::matchInputs(Events &inputs, int key) {
+  switch (key) {
+    case KEY_RIGHT:
+      inputs.keys.push_back(RIGHT);
+      break;
+    case KEY_LEFT:
+      inputs.keys.push_back(LEFT);
+      break;
+    case KEY_DOWN:
+      inputs.keys.push_back(DOWN);
+      break;
+    case KEY_UP:
+      inputs.keys.push_back(UP);
+      break;
+    case 27:
+      inputs.keys.push_back(ESCAPE);
+      break;
+    case ' ':
+      inputs.keys.push_back(SPACE);
+      break;
+    case KEY_BACKSPACE:
+      inputs.keys.push_back(BACK);
+      break;
+    case KEY_F(1):
+      inputs.keys.push_back(ONE);
+      break;
+    case KEY_F(2):
+      inputs.keys.push_back(TWO);
+      break;
+    case KEY_F(3):
+      inputs.keys.push_back(THREE);
+      break;
+    case KEY_F(4):
+      inputs.keys.push_back(FOUR);
+      break;
+    case KEY_F(5):
+      inputs.keys.push_back(FIVE);
+      break;
+    default:
+      if (isprint(key)) inputs.ascii += ((char)key);
+      break;
+  }
 }
