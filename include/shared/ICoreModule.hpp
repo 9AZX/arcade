@@ -22,6 +22,9 @@ class ICoreModule {
   virtual void renderAll() = 0;
   virtual void setMap(GameMap& map) = 0;
   virtual bool isOpen() const = 0;
+
+ protected:
+  std::vector<AEntity> _entities;
 };
 
 #endif /* !ICOREMODULE_HPP_ */

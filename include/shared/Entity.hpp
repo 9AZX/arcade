@@ -5,33 +5,28 @@
 ** Entity
 */
 
-#ifndef	ENTITY_HPP_
-#define	ENTITY_HPP_
+#ifndef ENTITY_HPP_
+#define ENTITY_HPP_
 
 #include <iostream>
 
-class AEntity
-{
-public:
-	enum EntityType {
-		DEFAULT,
-		GAME,
-		TEXT
-	};
+class AEntity {
+ public:
+  enum EntityType { DEFAULT, GAME, TEXT };
 
-public:
-	AEntity() = delete;
-	AEntity(std::string id) : id(id) {}
-	~AEntity() = default;
-	std::pair<int, int> getPos() { return _pos; };
-	enum EntityType getType() const noexcept { return _type; }
+ public:
+  AEntity() = delete;
+  AEntity(std::string id) : id(id) {}
+  ~AEntity() = default;
+  std::pair<int, int> getPos() { return _pos; };
+  enum EntityType getType() const noexcept { return _type; };
+  void setPos(std::pair<int, int> newPos) noexcept { _pos = newPos; }
 
-public:
-	const std::string id;
+  const std::string id;
 
-protected:
-	std::pair<int, int> _pos;
-	enum EntityType _type = DEFAULT;
+ protected:
+  std::pair<int, int> _pos;
+  enum EntityType _type = DEFAULT;
 };
 
-#endif	/* !ENTITY_HPP_ */
+#endif /* !ENTITY_HPP_ */

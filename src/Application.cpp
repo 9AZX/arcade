@@ -96,9 +96,16 @@ void Application::switchLib(const int type, const std::string &path) {
   }
 }
 
-void Application::storeGameEntity(AEntity *entity) {}
+void Application::storeGameEntity(AEntity *entity) {
+  this->_entities.push_back(*entity);
+}
 
-AEntity &Application::getEntity(std::string name) {}
+AEntity &Application::getEntity(std::string name) {
+  std::vector<AEntity>::iterator i =
+      std::find(_entities.begin(), _entities.end(),
+                [name](AEntity n) { return n.id == name; });
+  return this->_entities.at(std::distance(this->_entities.begin(), i));
+}
 
 Events Application::getInputs() { return this->_graphClass->getInputs(); }
 

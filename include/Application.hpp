@@ -8,6 +8,7 @@
 #ifndef APPLICATION_HPP_
 #define APPLICATION_HPP_
 
+#include <algorithm>
 #include <memory>
 #include <string>
 #include "ICoreModule.hpp"
