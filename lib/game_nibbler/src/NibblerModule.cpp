@@ -13,6 +13,7 @@ NibblerModule::NibblerModule(ICoreModule *core) : _core(core) {}
 void NibblerModule::play() {
   this->_core->renderAll();
   while (this->_core->isOpen()) {
+    std::cout << this->_core->getInputs().ascii;
   }
 }
 

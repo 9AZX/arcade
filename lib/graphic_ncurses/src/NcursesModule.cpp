@@ -19,7 +19,7 @@ NcursesModule::~NcursesModule() { endwin(); }
 Events NcursesModule::getInputs() {
   Events actual;
   int ch = 'a';
-  nodelay(stdscr, TRUE);
+  halfdelay(5);
 
   if ((ch = getch()) != ERR) this->matchInputs(actual, ch);
   return actual;
