@@ -124,8 +124,12 @@ ifneq ($(origin CALL_FROM_LIBS),undefined)
 clean:
 	$(eval TMP_VAR_	:= $(subst /,$(space),$(sort $(dir $(wildcard */)))))
 	@for dir in $(TMP_VAR_); do					\
-		$(MAKE) --no-print-directory -C "$${dir}"		\
-			clean CALL_FROM_SUB_MAKEFILE=;			\
+		if [ -d "$${dir}" ] && [ -f "$${dir}/Makefile" ]; then	\
+			$(MAKE) --no-print-directory -C "$${dir}"	\
+				clean CALL_FROM_SUB_MAKEFILE=;		\
+		else							\
+			echo $(LANG_ERR_LIB_SUB_DIRECTORY);		\
+		fi;							\
 		if [ "$(DISP_SILENT_MODE)" = "$(BOOL_TRUE)" ] ||	\
 			[ "$(DISP_CLEAN_SILENT)" = "$(BOOL_TRUE)" ]; then\
 			echo "CLEAN ($${dir})";			\

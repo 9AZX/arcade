@@ -13,6 +13,8 @@ ifeq ($(LANGUAGE),"EN")
 
 LANG_ERR_PROJECT_LANGUAGE	=	"Language chosen is not supported"
 
+LANG_ERR_LIB_SUB_DIRECTORY	=	"Error: Makefile not found ($${dir})"
+
 LANG_COMPILATION_MESSAGE	=	"Compile file: "
 
 LANG_COMPILATION_BINARY	=	"The project $(PROJECT_BINARY_NAME) is compiled"
@@ -38,6 +40,8 @@ LANG_FCLEAN_HEADER2	=	"Delete header file: $${file}"
 else ifeq ($(LANGUAGE),"FR")
 
 LANG_ERR_PROJECT_LANGUAGE	=	"Le langage choisi n'est pas supporté"
+
+LANG_ERR_LIB_SUB_DIRECTORY	=	"Erreur: Makefile non trouvé ($${dir})"
 
 LANG_COMPILATION_MESSAGE	=	"Compilation du fichier: "
 
