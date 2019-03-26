@@ -38,7 +38,7 @@ Events SfmlModule::getInputs() {
       this->matchInputs(actual, this->eventSFML.key.code);
       break;
     case sf::Event::TextEntered:
-      if (eventSFML.text.unicode < 128)
+      if (eventSFML.text.unicode > 64 && eventSFML.text.unicode < 123)
         actual.ascii += static_cast<char>(eventSFML.text.unicode);
       break;
     default:
@@ -51,7 +51,6 @@ void SfmlModule::displayEntity(AEntity &) {}
 
 void SfmlModule::displayMap(GameMap map) {
   if (this->_sprites.empty()) {
-    std::cout << "init graphics" << std::endl;
     this->initGraphics(map);
   }
   for (int ith = 0; ith < map.height; ith++) {
@@ -74,7 +73,6 @@ void SfmlModule::renderTextEntity(AEntity &) const {}
 void SfmlModule::renderGameEntity(AEntity &) const {}
 
 void SfmlModule::matchInputs(Events &inputs, sf::Keyboard::Key key) {
-  std::cout << key << std::endl;
   switch (key) {
     case sf::Keyboard::Right:
       inputs.keys.push_back(RIGHT);

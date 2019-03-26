@@ -9,8 +9,4 @@
 
 extern "C" void *EntryGraph();
 
-void *EntryGraph()
-{
-	std::cout << "call (sfml): ok" << std::endl;
-	return new SfmlModule;
-}
+void *EntryGraph() { return new SfmlModule; }
