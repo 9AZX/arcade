@@ -102,8 +102,9 @@ void Application::storeGameEntity(AEntity *entity) {
 
 AEntity &Application::getEntity(std::string name) {
   std::vector<AEntity>::iterator i =
-      std::find(_entities.begin(), _entities.end(),
-                [name](AEntity n) { return n.id == name; });
+      std::find_if(this->_entities.begin(), this->_entities.end(),
+                   [&name](AEntity &n) { return name == n.id; });
+  if (i == this->_entities.end()) throw;
   return this->_entities.at(std::distance(this->_entities.begin(), i));
 }
 
