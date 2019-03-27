@@ -25,7 +25,16 @@ Events NcursesModule::getInputs() {
   return actual;
 }
 
-void NcursesModule::displayEntity(AEntity &) {}
+void NcursesModule::displayEntity(AEntity &tmp) {
+  GameEntity *entity = static_cast<GameEntity *>(&tmp);
+
+  init_pair(2, YELLOW, BLACK);
+  attron(COLOR_PAIR(2));
+
+  mvaddch(entity->getPos().second - 1, entity->getPos().first - 1,
+          entity->assetChar);
+  refresh();
+}
 
 void NcursesModule::displayMap(GameMap map) {
   for (unsigned int i = 0; i < map.grid.size(); ++i) {
