@@ -112,6 +112,8 @@ Events Application::getInputs() { return this->_graphClass->getInputs(); }
 
 void Application::renderAll() {
   this->_graphClass->displayMap(this->_gameClass->getMap());
+  std::for_each(this->_entities.begin(), this->_entities.end(),
+                [&, this](AEntity &n) { _graphClass->displayEntity(n); });
 }
 
 void Application::setMap(GameMap &map) {}

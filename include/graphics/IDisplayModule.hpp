@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include "Entity.hpp"
+#include "GameEntity.hpp"
 #include "GameMap.hpp"
 #include "Inputs.hpp"
 

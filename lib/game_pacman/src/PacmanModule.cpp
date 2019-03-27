@@ -9,12 +9,15 @@
 #include <iostream>
 
 PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
+  this->_core->storeGameEntity(new GameEntity('C', "assets/pacman/pacmans.png",
+                                              "Player",
+                                              std::make_pair<int, int>(9, 9)));
   this->_core->storeGameEntity(
-      new GameEntity('C', "assets/pacman/pacmans.png", "Player"));
+      new GameEntity('M', "assets/pacman/ghost.png", "Enemy1",
+                     std::make_pair<int, int>(420, 420)));
   this->_core->storeGameEntity(
-      new GameEntity('M', "assets/pacman/ghost.png", "Enemy1"));
-  this->_core->storeGameEntity(
-      new GameEntity('M', "assets/pacman/ghost.png", "Enemy2"));
+      new GameEntity('M', "assets/pacman/ghost.png", "Enemy2",
+                     std::make_pair<int, int>(69, 69)));
 }
 
 void PacmanModule::play() {

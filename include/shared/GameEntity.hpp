@@ -13,8 +13,9 @@
 class GameEntity : public AEntity {
  public:
   GameEntity() = delete;
-  GameEntity(char assetChar, std::string assetPath, std::string id)
-      : AEntity(id), assetChar(assetChar), assetPath(assetPath) {
+  GameEntity(char assetChar, std::string assetPath, std::string id,
+             std::pair<int, int> pos)
+      : AEntity(id, pos), assetChar(assetChar), assetPath(assetPath) {
     _type = AEntity::GAME;
   }
   ~GameEntity() = default;

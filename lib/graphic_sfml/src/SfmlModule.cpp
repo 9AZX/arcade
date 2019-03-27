@@ -10,12 +10,14 @@
 SfmlModule::SfmlModule() {
   this->_window = std::make_unique<sf::RenderWindow>(
       sf::VideoMode(SFML_WINDOW_HEIGHT, SFML_WINDOW_WIDTH), SFML_WINDOW_NAME);
+#if defined(__linux__)
   this->_window->setFramerateLimit(SFML_WINDOW_FRAMERATE);
+#endif
 }
 
 SfmlModule::~SfmlModule() {}
 
-void SfmlModule::initGraphics(GameMap map) {
+void SfmlModule::initGraphics(GameMap &map) {
   sf::Texture wallTexture;
   sf::Sprite wallSprite;
 
@@ -24,6 +26,21 @@ void SfmlModule::initGraphics(GameMap map) {
   this->_sprites.insert({"wall", std::make_pair(wallSprite, wallTexture)});
   this->_sprites["wall"].first.setTexture(this->_sprites["wall"].second, true);
   this->_sprites["wall"].first.setColor(sf::Color::Blue);
+}
+
+void SfmlModule::initGameEntity(AEntity &tmp) {
+  sf::Texture wallTexture;
+  sf::Sprite wallSprite;
+  std::cout << tmp.id << "pas crash";
+  GameEntity entity = dynamic_cast<GameEntity &>(tmp);
+
+  wallTexture.loadFromFile(entity.assetPath);
+  std::cout << entity.assetPath << std::endl;
+  wallSprite.setOrigin(16, 16);
+  this->_sprites.insert({entity.id, std::make_pair(wallSprite, wallTexture)});
+  this->_sprites[entity.id].first.setTexture(this->_sprites[entity.id].second,
+                                             true);
+  this->_sprites[entity.id].first.setColor(sf::Color::Blue);
 }
 
 Events SfmlModule::getInputs() {
@@ -47,7 +64,17 @@ Events SfmlModule::getInputs() {
   return actual;
 }
 
-void SfmlModule::displayEntity(AEntity &) {}
+void SfmlModule::displayEntity(AEntity &entity) {
+  std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>>::iterator
+      i = this->_sprites.find(entity.id);
+  if (i == this->_sprites.end()) {
+    this->initGameEntity(entity);
+  }
+  this->_sprites[entity.id].first.setPosition(entity.getPos().first,
+                                              entity.getPos().second);
+  this->_window->draw(this->_sprites[entity.id].first);
+  this->_window->display();
+}
 
 void SfmlModule::displayMap(GameMap map) {
   if (this->_sprites.empty()) {
@@ -61,7 +88,6 @@ void SfmlModule::displayMap(GameMap map) {
       }
     }
   }
-  this->_window->display();
 }
 
 bool SfmlModule::isOpen() const { return this->_window->isOpen(); }

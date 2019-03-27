@@ -16,8 +16,8 @@ class AEntity {
 
  public:
   AEntity() = delete;
-  AEntity(std::string id) : id(id) {}
-  ~AEntity() = default;
+  AEntity(std::string id, std::pair<int, int> pos) : id(id), _pos(pos) {}
+  virtual ~AEntity() = default;
   std::pair<int, int> getPos() { return _pos; };
   enum EntityType getType() const noexcept { return _type; };
   void setPos(std::pair<int, int> newPos) noexcept { _pos = newPos; }
