@@ -31,16 +31,13 @@ void SfmlModule::initGraphics(GameMap &map) {
 void SfmlModule::initGameEntity(AEntity &tmp) {
   sf::Texture wallTexture;
   sf::Sprite wallSprite;
-  std::cout << tmp.id << "pas crash";
-  GameEntity entity = dynamic_cast<GameEntity &>(tmp);
+  GameEntity *entity = static_cast<GameEntity *>(&tmp);
 
-  wallTexture.loadFromFile(entity.assetPath);
-  std::cout << entity.assetPath << std::endl;
+  wallTexture.loadFromFile(entity->assetPath);
   wallSprite.setOrigin(16, 16);
-  this->_sprites.insert({entity.id, std::make_pair(wallSprite, wallTexture)});
-  this->_sprites[entity.id].first.setTexture(this->_sprites[entity.id].second,
-                                             true);
-  this->_sprites[entity.id].first.setColor(sf::Color::Blue);
+  this->_sprites.insert({entity->id, std::make_pair(wallSprite, wallTexture)});
+  this->_sprites[entity->id].first.setTexture(this->_sprites[entity->id].second,
+                                              true);
 }
 
 Events SfmlModule::getInputs() {
