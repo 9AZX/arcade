@@ -24,7 +24,7 @@ class ICoreModule {
   virtual bool isOpen() const = 0;
 
  protected:
-  std::vector<AEntity> _entities;
+  std::vector<std::unique_ptr<AEntity>> _entities;
 };
 
 #endif /* !ICOREMODULE_HPP_ */

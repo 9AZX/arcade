@@ -97,15 +97,15 @@ void Application::switchLib(const int type, const std::string &path) {
 }
 
 void Application::storeGameEntity(AEntity *entity) {
-  this->_entities.push_back(*entity);
+  this->_entities.push_back(std::unique_ptr<AEntity>(entity));
 }
 
 AEntity &Application::getEntity(std::string name) {
-  std::vector<AEntity>::iterator i =
-      std::find_if(this->_entities.begin(), this->_entities.end(),
-                   [&name](AEntity &n) { return name == n.id; });
+  std::vector<std::unique_ptr<AEntity>>::iterator i = std::find_if(
+      this->_entities.begin(), this->_entities.end(),
+      [&name](std::unique_ptr<AEntity> &n) { return name == n->id; });
   if (i == this->_entities.end()) throw;
-  return this->_entities.at(std::distance(this->_entities.begin(), i));
+  return *this->_entities.at(std::distance(this->_entities.begin(), i)).get();
 }
 
 Events Application::getInputs() { return this->_graphClass->getInputs(); }
@@ -113,7 +113,9 @@ Events Application::getInputs() { return this->_graphClass->getInputs(); }
 void Application::renderAll() {
   this->_graphClass->displayMap(this->_gameClass->getMap());
   std::for_each(this->_entities.begin(), this->_entities.end(),
-                [&, this](AEntity &n) { _graphClass->displayEntity(n); });
+                [&, this](std::unique_ptr<AEntity> &n) {
+                  _graphClass->displayEntity(*n);
+                });
 }
 
 void Application::setMap(GameMap &map) {}
