@@ -20,6 +20,8 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
                      std::make_pair<int, int>(11, 10)));
 }
 
+bool PacmanModule::checkCollision() { return true; }
+
 void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
   std::pair<int, int> playerPos = this->_core->getEntity("Player").getPos();
 

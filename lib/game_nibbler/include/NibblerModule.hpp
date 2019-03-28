@@ -23,6 +23,7 @@ class NibblerModule : public IGameModule {
   void pauseMenu() final;
   void endGame() final;
   const GameMap &getMap() const noexcept;
+  bool checkCollision() final{};
 
  private:
   ICoreModule *_core;
