@@ -20,10 +20,31 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
                      std::make_pair<int, int>(11, 10)));
 }
 
+void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
+  std::pair<int, int> playerPos = this->_core->getEntity("Player").getPos();
+
+  if (keys.back() == RIGHT) {
+    this->_core->getEntity("Player").setPos(
+        std::pair<int, int>(playerPos.first + 1, playerPos.second));
+  } else if (keys.back() == LEFT) {
+    this->_core->getEntity("Player").setPos(
+        std::pair<int, int>(playerPos.first - 1, playerPos.second));
+  } else if (keys.back() == UP) {
+    this->_core->getEntity("Player").setPos(
+        std::pair<int, int>(playerPos.first, playerPos.second - 1));
+  } else if (keys.back() == DOWN) {
+    this->_core->getEntity("Player").setPos(
+        std::pair<int, int>(playerPos.first, playerPos.second + 1));
+  }
+}
+
 void PacmanModule::play() {
+  Events event;
+
   while (this->_core->isOpen()) {
     this->_core->renderAll();
-    this->_core->getInputs();
+    event = this->_core->getInputs();
+    if (event.keys.size() > 0) this->computeInput(event.keys);
   }
 }
 

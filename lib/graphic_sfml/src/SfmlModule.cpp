@@ -16,8 +16,7 @@ SfmlModule::SfmlModule() {
 
 SfmlModule::~SfmlModule() {}
 
-const std::string &SfmlModule::getLibraryName() const noexcept
-{
+const std::string &SfmlModule::getLibraryName() const noexcept {
   return this->_name;
 }
 
@@ -79,7 +78,6 @@ int SfmlModule::animateEntity(AEntity &entity) noexcept {
     entity.animIt = 0;
   }
   entity.animIt += 1;
-  std::cout << entity.animIt << std::endl;
   return entity.animIt;
 }
 
@@ -91,16 +89,15 @@ void SfmlModule::displayEntity(AEntity &entity) {
   }
   this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
                                               entity.getPos().second * 32);
-  if (entity.isAnimated && entity.id == "Player") {
+  if (entity.id == "Player") {
     entity.animIt = this->animateEntity(entity);
-    // this->_sprites[entity.id].first.setTextureRect(sf::IntRect(32, 0, 32,
-    // 32));
   }
   this->_window->draw(this->_sprites[entity.id].first);
   this->_window->display();
 }
 
 void SfmlModule::displayMap(GameMap map) {
+  this->_window->clear();
   if (this->_sprites.empty()) {
     this->initGraphics(map);
   }
@@ -114,10 +111,9 @@ void SfmlModule::displayMap(GameMap map) {
   }
 }
 
-bool SfmlModule::isOpen() const
-{
+bool SfmlModule::isOpen() const {
   if (this->_window) {
-    return SFML_IS_OPEN;
+    return this->_window->isOpen();
   }
   return false;
 }

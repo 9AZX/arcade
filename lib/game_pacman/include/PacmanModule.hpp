@@ -23,6 +23,7 @@ class PacmanModule : public IGameModule {
   void endGame() final;
   const GameMap &getMap() const noexcept;
   long getScore() const final;
+  void computeInput(std::vector<enum gameInputs> keys);
 
  private:
   ICoreModule *_core;
