@@ -67,7 +67,7 @@ Events SfmlModule::getInputs() {
 int SfmlModule::animateEntity(AEntity &entity) noexcept {
   sf::IntRect r1(0, 0, 32, 32);
   sf::IntRect r2(32, 0, 32, 32);
-  sf::IntRect r3(64, 0, 32, 32);
+  sf::IntRect r3(64, 0, 32, 32);  // do declaration outside game loop
 
   if (entity.animIt < 16) {
     this->_sprites[entity.id].first.setTextureRect(r2);
@@ -87,6 +87,7 @@ void SfmlModule::displayEntity(AEntity &entity) {
   if (i == this->_sprites.end()) {
     this->initGameEntity(entity);
   }
+  this->_sprites[entity.id].first.setRotation(entity.getRotation());
   this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
                                               entity.getPos().second * 32);
   if (entity.id == "Player") {

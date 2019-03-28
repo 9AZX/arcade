@@ -24,15 +24,19 @@ void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
   std::pair<int, int> playerPos = this->_core->getEntity("Player").getPos();
 
   if (keys.back() == RIGHT) {
+    this->_core->getEntity("Player").setRotation(0);
     this->_core->getEntity("Player").setPos(
         std::pair<int, int>(playerPos.first + 1, playerPos.second));
   } else if (keys.back() == LEFT) {
+    this->_core->getEntity("Player").setRotation(180);
     this->_core->getEntity("Player").setPos(
         std::pair<int, int>(playerPos.first - 1, playerPos.second));
   } else if (keys.back() == UP) {
+    this->_core->getEntity("Player").setRotation(270);
     this->_core->getEntity("Player").setPos(
         std::pair<int, int>(playerPos.first, playerPos.second - 1));
   } else if (keys.back() == DOWN) {
+    this->_core->getEntity("Player").setRotation(90);
     this->_core->getEntity("Player").setPos(
         std::pair<int, int>(playerPos.first, playerPos.second + 1));
   }
