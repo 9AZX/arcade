@@ -16,8 +16,7 @@ NcursesModule::NcursesModule() {
 
 NcursesModule::~NcursesModule() { endwin(); }
 
-const std::string &NcursesModule::getLibraryName() const noexcept
-{
+const std::string &NcursesModule::getLibraryName() const noexcept {
   return this->_name;
 }
 
@@ -42,6 +41,7 @@ void NcursesModule::displayEntity(AEntity &tmp) {
 }
 
 void NcursesModule::displayMap(GameMap map) {
+  clear();
   for (unsigned int i = 0; i < map.grid.size(); ++i) {
     for (unsigned int idx = 0; idx < map.grid.at(i).length(); ++idx) {
       start_color();
