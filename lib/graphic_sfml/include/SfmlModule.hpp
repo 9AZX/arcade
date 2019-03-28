@@ -20,6 +20,15 @@
 #define SFML_WINDOW_HEIGHT 650
 #define SFML_WINDOW_FRAMERATE 60
 
+# if  defined(__APPLE__)
+#   include <TargetConditionals.h>
+#   if  defined(TARGET_OS_MAC)
+#     define  SFML_IS_OPEN true
+#   else
+#     define  SFML_IS_OPEN this->_window->isOpen()
+#   endif
+# endif
+
 class SfmlModule : public IDisplayModule, public IRender {
  public:
   SfmlModule();
@@ -39,7 +48,7 @@ class SfmlModule : public IDisplayModule, public IRender {
   const std::string _name = "sfml";
   void initGraphics(GameMap &);
   void initGameEntity(AEntity &);
-  std::unique_ptr<sf::RenderWindow> _window;
+  std::unique_ptr<sf::RenderWindow> _window = nullptr;
   void matchInputs(Events &inputs, sf::Keyboard::Key key);
   std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>> _sprites =
       {};

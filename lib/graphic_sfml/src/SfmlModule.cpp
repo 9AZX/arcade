@@ -10,9 +10,8 @@
 SfmlModule::SfmlModule() {
   this->_window = std::make_unique<sf::RenderWindow>(
       sf::VideoMode(SFML_WINDOW_HEIGHT, SFML_WINDOW_WIDTH), SFML_WINDOW_NAME);
-#if defined(__linux__)
   this->_window->setFramerateLimit(SFML_WINDOW_FRAMERATE);
-#endif
+  this->_window->clear();
 }
 
 SfmlModule::~SfmlModule() {}
@@ -92,7 +91,13 @@ void SfmlModule::displayMap(GameMap map) {
   }
 }
 
-bool SfmlModule::isOpen() const { return this->_window->isOpen(); }
+bool SfmlModule::isOpen() const
+{
+  if (this->_window) {
+    return SFML_IS_OPEN;
+  }
+  return false;
+}
 
 void SfmlModule::destructor() { delete this; }
 
