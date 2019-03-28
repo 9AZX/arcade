@@ -72,8 +72,8 @@ void SfmlModule::displayEntity(AEntity &entity) {
   if (i == this->_sprites.end()) {
     this->initGameEntity(entity);
   }
-  this->_sprites[entity.id].first.setPosition(entity.getPos().first,
-                                              entity.getPos().second);
+  this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
+                                              entity.getPos().second * 32);
   this->_window->draw(this->_sprites[entity.id].first);
   this->_window->display();
 }
