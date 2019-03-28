@@ -5,8 +5,9 @@
 ** Application
 */
 
-#include "Application.hpp"
+#include <cstring>
 #include <iostream>
+#include "Application.hpp"
 #include "Exception.hpp"
 
 static const struct libs libraries[] = {
@@ -24,7 +25,6 @@ void Application::init(const int argc, const char **argv) {
     this->_graphic->open();
     this->open_graphical_library();
     this->_graphClass = (IDisplayModule *)(*this->fptr_graphic)();
-    // this->switchLib(Library::LIB_GRAPHIC, libraries[3].path);
     this->_game = std::make_unique<Library>(argv[2]);
     this->_game->open();
     this->open_game_library();
@@ -108,7 +108,35 @@ AEntity &Application::getEntity(std::string name) {
   return *this->_entities.at(std::distance(this->_entities.begin(), i)).get();
 }
 
-Events Application::getInputs() { return this->_graphClass->getInputs(); }
+Events Application::getInputs()
+{
+  Events input = this->_graphClass->getInputs();
+  auto inputs = input.keys;
+
+  if (std::find(inputs.begin(), inputs.end(), ONE) != inputs.end()) {
+    if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
+      this->switchLib(Library::LIB_GRAPHIC, libraries[3].path);
+    }
+    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
+      this->switchLib(Library::LIB_GRAPHIC, libraries[2].path);
+    }
+  }
+  else if (std::find(inputs.begin(), inputs.end(), TWO) != inputs.end()) {
+    if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
+      std::cout << "TWO: ncurses" << std::endl;
+    }
+    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
+      std::cout << "TWO: sfml" << std::endl;
+    }
+  }
+  else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
+    std::cout << "THREE (game)" << std::endl;
+  }
+  else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
+    std::cout << "FOUR (game)" << std::endl;
+  }
+  return input;
+}
 
 void Application::renderAll() {
   this->_graphClass->displayMap(this->_gameClass->getMap());
