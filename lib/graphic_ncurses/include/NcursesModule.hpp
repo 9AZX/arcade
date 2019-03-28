@@ -27,8 +27,10 @@ class NcursesModule : public IDisplayModule, public IRender {
   void renderGameEntity(AEntity &) const final;
   void destructor() final;
   bool isOpen() const final;
+  const std::string &getLibraryName() const noexcept final;
 
  private:
+  const std::string _name = "ncurses";
   void matchInputs(Events &inputs, int key);
 };
 

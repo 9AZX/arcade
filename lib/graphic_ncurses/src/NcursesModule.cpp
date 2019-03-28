@@ -16,6 +16,11 @@ NcursesModule::NcursesModule() {
 
 NcursesModule::~NcursesModule() { endwin(); }
 
+const std::string &NcursesModule::getLibraryName() const noexcept
+{
+  return this->_name;
+}
+
 Events NcursesModule::getInputs() {
   Events actual;
   int ch = 'a';

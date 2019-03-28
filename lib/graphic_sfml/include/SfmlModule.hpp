@@ -33,8 +33,10 @@ class SfmlModule : public IDisplayModule, public IRender {
   void renderGameEntity(AEntity &) const final;
   void destructor() final;
   bool isOpen() const final;
+  const std::string &getLibraryName() const noexcept final;
 
  private:
+  const std::string _name = "sfml";
   void initGraphics(GameMap &);
   void initGameEntity(AEntity &);
   std::unique_ptr<sf::RenderWindow> _window;

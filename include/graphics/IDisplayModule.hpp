@@ -22,6 +22,7 @@ class IDisplayModule {
   virtual void destructor() = 0;
   virtual bool isOpen() const = 0;
   virtual Events getInputs() = 0;
+  virtual const std::string &getLibraryName() const noexcept = 0;
 };
 
 #endif /* !IDISPLAYMODULE_HPP_ */

@@ -17,6 +17,11 @@ SfmlModule::SfmlModule() {
 
 SfmlModule::~SfmlModule() {}
 
+const std::string &SfmlModule::getLibraryName() const noexcept
+{
+  return this->_name;
+}
+
 void SfmlModule::initGraphics(GameMap &map) {
   sf::Texture wallTexture;
   sf::Sprite wallSprite;
