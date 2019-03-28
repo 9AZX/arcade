@@ -33,6 +33,7 @@ class SfmlModule : public IDisplayModule, public IRender {
   void renderGameEntity(AEntity &) const final;
   void destructor() final;
   bool isOpen() const final;
+  int animateEntity(AEntity &) noexcept;
 
  private:
   void initGraphics(GameMap &);

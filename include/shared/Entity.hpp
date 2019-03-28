@@ -23,6 +23,8 @@ class AEntity {
   void setPos(std::pair<int, int> newPos) noexcept { _pos = newPos; }
 
   const std::string id;
+  bool isAnimated = true;
+  int animIt = 0;
 
  protected:
   std::pair<int, int> _pos;

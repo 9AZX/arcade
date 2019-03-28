@@ -61,6 +61,24 @@ Events SfmlModule::getInputs() {
   return actual;
 }
 
+int SfmlModule::animateEntity(AEntity &entity) noexcept {
+  sf::IntRect r1(0, 0, 32, 32);
+  sf::IntRect r2(32, 0, 32, 32);
+  sf::IntRect r3(64, 0, 32, 32);
+
+  if (entity.animIt < 16) {
+    this->_sprites[entity.id].first.setTextureRect(r2);
+  } else if (entity.animIt < 32) {
+    this->_sprites[entity.id].first.setTextureRect(r3);
+  } else {
+    this->_sprites[entity.id].first.setTextureRect(r1);
+    entity.animIt = 0;
+  }
+  entity.animIt += 1;
+  std::cout << entity.animIt << std::endl;
+  return entity.animIt;
+}
+
 void SfmlModule::displayEntity(AEntity &entity) {
   std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>>::iterator
       i = this->_sprites.find(entity.id);
@@ -69,6 +87,11 @@ void SfmlModule::displayEntity(AEntity &entity) {
   }
   this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
                                               entity.getPos().second * 32);
+  if (entity.isAnimated && entity.id == "Player") {
+    entity.animIt = this->animateEntity(entity);
+    // this->_sprites[entity.id].first.setTextureRect(sf::IntRect(32, 0, 32,
+    // 32));
+  }
   this->_window->draw(this->_sprites[entity.id].first);
   this->_window->display();
 }

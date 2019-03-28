@@ -10,7 +10,7 @@
 
 PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
   this->_core->storeGameEntity(
-      new GameEntity('C', "./assets/pacman/pacman.png", "Player",
+      new GameEntity('C', "./assets/pacman/pacmans.png", "Player",
                      std::make_pair<int, int>(10, 12)));
   this->_core->storeGameEntity(new GameEntity('M', "./assets/pacman/ghost.png",
                                               "Enemy1",
@@ -21,8 +21,8 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
 }
 
 void PacmanModule::play() {
-  this->_core->renderAll();
   while (this->_core->isOpen()) {
+    this->_core->renderAll();
     this->_core->getInputs();
   }
 }
