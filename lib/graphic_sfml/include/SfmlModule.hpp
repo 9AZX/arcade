@@ -42,6 +42,7 @@ class SfmlModule : public IDisplayModule, public IRender {
   void renderGameEntity(AEntity &) const final;
   void destructor() final;
   bool isOpen() const final;
+  int animateEntity(AEntity &) noexcept;
   const std::string &getLibraryName() const noexcept final;
 
  private:
