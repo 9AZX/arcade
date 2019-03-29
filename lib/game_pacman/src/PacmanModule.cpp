@@ -76,3 +76,5 @@ void PacmanModule::endGame() {}
 long PacmanModule::getScore() const { return 0; }
 
 const GameMap &PacmanModule::getMap() const noexcept { return this->_map; }
+
+void PacmanModule::checkApple() {}
