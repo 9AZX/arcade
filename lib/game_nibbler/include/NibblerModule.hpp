@@ -23,7 +23,7 @@ class NibblerModule : public IGameModule {
   void pauseMenu() final;
   void endGame() final;
   const GameMap &getMap() const noexcept;
-  bool checkCollision(std::pair<int, int> nextPos) final { return true; };
+  bool checkCollision(std::pair<int, int> nextPos) final;
   void computeInput(std::vector<enum gameInputs> keys);
 
  private:
