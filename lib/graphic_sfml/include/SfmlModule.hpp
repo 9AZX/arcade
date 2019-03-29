@@ -20,14 +20,14 @@
 #define SFML_WINDOW_HEIGHT 650
 #define SFML_WINDOW_FRAMERATE 60
 
-# if  defined(__APPLE__)
-#   include <TargetConditionals.h>
-#   if  defined(TARGET_OS_MAC)
-#     define  SFML_IS_OPEN true
-#   else
-#     define  SFML_IS_OPEN this->_window->isOpen()
-#   endif
-# endif
+#if defined(__APPLE__)
+#include <TargetConditionals.h>
+#if defined(TARGET_OS_MAC)
+#define SFML_IS_OPEN true
+#else
+#define SFML_IS_OPEN this->_window->isOpen()
+#endif
+#endif
 
 class SfmlModule : public IDisplayModule, public IRender {
  public:
@@ -36,14 +36,15 @@ class SfmlModule : public IDisplayModule, public IRender {
 
  public:
   Events getInputs() final;
-  void displayEntity(AEntity &) final;
+  bool displayEntity(AEntity &) final;
   void displayMap(GameMap) final;
-  void renderTextEntity(AEntity &) const final;
-  void renderGameEntity(AEntity &) const final;
+  bool renderTextEntity(AEntity &) const final;
+  bool renderGameEntity(AEntity &) const final;
   void destructor() final;
   bool isOpen() const final;
   int animateEntity(AEntity &) noexcept;
   const std::string &getLibraryName() const noexcept final;
+  void refreshWindow() const noexcept final;
 
  private:
   const std::string _name = "sfml";

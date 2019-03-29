@@ -5,9 +5,9 @@
 ** Application
 */
 
+#include "Application.hpp"
 #include <cstring>
 #include <iostream>
-#include "Application.hpp"
 #include "Exception.hpp"
 
 static const struct libs libraries[] = {
@@ -108,31 +108,27 @@ AEntity &Application::getEntity(std::string name) {
   return *this->_entities.at(std::distance(this->_entities.begin(), i)).get();
 }
 
-Events Application::getInputs()
-{
+Events Application::getInputs() {
   Events input = this->_graphClass->getInputs();
   auto inputs = input.keys;
 
   if (std::find(inputs.begin(), inputs.end(), ONE) != inputs.end()) {
     if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[3].path);
-    }
-    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
+    } else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") ==
+               0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[2].path);
     }
-  }
-  else if (std::find(inputs.begin(), inputs.end(), TWO) != inputs.end()) {
+  } else if (std::find(inputs.begin(), inputs.end(), TWO) != inputs.end()) {
     if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
       std::cout << "TWO: ncurses" << std::endl;
-    }
-    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
+    } else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") ==
+               0) {
       std::cout << "TWO: sfml" << std::endl;
     }
-  }
-  else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
+  } else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
     std::cout << "THREE (game)" << std::endl;
-  }
-  else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
+  } else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
     std::cout << "FOUR (game)" << std::endl;
   }
   return input;
@@ -144,6 +140,7 @@ void Application::renderAll() {
                 [&, this](std::unique_ptr<AEntity> &n) {
                   _graphClass->displayEntity(*n);
                 });
+  this->_graphClass->refreshWindow();
 }
 
 void Application::setMap(GameMap &map) {}

@@ -81,7 +81,7 @@ int SfmlModule::animateEntity(AEntity &entity) noexcept {
   return entity.animIt;
 }
 
-void SfmlModule::displayEntity(AEntity &entity) {
+bool SfmlModule::displayEntity(AEntity &entity) {
   std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>>::iterator
       i = this->_sprites.find(entity.id);
   if (i == this->_sprites.end()) {
@@ -94,11 +94,10 @@ void SfmlModule::displayEntity(AEntity &entity) {
     entity.animIt = this->animateEntity(entity);
   }
   this->_window->draw(this->_sprites[entity.id].first);
-  this->_window->display();
+  return true;
 }
 
 void SfmlModule::displayMap(GameMap map) {
-  this->_window->clear();
   if (this->_sprites.empty()) {
     this->initGraphics(map);
   }
@@ -121,9 +120,9 @@ bool SfmlModule::isOpen() const {
 
 void SfmlModule::destructor() { delete this; }
 
-void SfmlModule::renderTextEntity(AEntity &) const {}
+bool SfmlModule::renderTextEntity(AEntity &) const { return true; }
 
-void SfmlModule::renderGameEntity(AEntity &) const {}
+bool SfmlModule::renderGameEntity(AEntity &) const { return false; }
 
 void SfmlModule::matchInputs(Events &inputs, sf::Keyboard::Key key) {
   switch (key) {
@@ -166,4 +165,9 @@ void SfmlModule::matchInputs(Events &inputs, sf::Keyboard::Key key) {
     default:
       break;
   }
+}
+
+void SfmlModule::refreshWindow() const noexcept {
+  this->_window->display();
+  this->_window->clear();
 }

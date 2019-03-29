@@ -29,7 +29,7 @@ Events NcursesModule::getInputs() {
   return actual;
 }
 
-void NcursesModule::displayEntity(AEntity &tmp) {
+bool NcursesModule::displayEntity(AEntity &tmp) {
   GameEntity *entity = static_cast<GameEntity *>(&tmp);
 
   init_pair(2, YELLOW, BLACK);
@@ -38,6 +38,7 @@ void NcursesModule::displayEntity(AEntity &tmp) {
   mvaddch(entity->getPos().second - 1, entity->getPos().first - 1,
           entity->assetChar);
   refresh();
+  return true;
 }
 
 void NcursesModule::displayMap(GameMap map) {
@@ -52,16 +53,15 @@ void NcursesModule::displayMap(GameMap map) {
     }
     addch('\n');
   }
-  refresh();
 }
 
 bool NcursesModule::isOpen() const { return true; }
 
 void NcursesModule::destructor() { delete this; }
 
-void NcursesModule::renderTextEntity(AEntity &) const {}
+bool NcursesModule::renderTextEntity(AEntity &) const { return true; }
 
-void NcursesModule::renderGameEntity(AEntity &) const {}
+bool NcursesModule::renderGameEntity(AEntity &) const { return true; }
 
 void NcursesModule::matchInputs(Events &inputs, int key) {
   switch (key) {
@@ -106,3 +106,5 @@ void NcursesModule::matchInputs(Events &inputs, int key) {
       break;
   }
 }
+
+void NcursesModule::refreshWindow() const noexcept { refresh(); }
