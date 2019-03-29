@@ -8,6 +8,8 @@
 #ifndef IGAMEMODULE_HPP_
 #define IGAMEMODULE_HPP_
 
+#include <stdlib.h>
+#include <time.h>
 #include <memory>
 #include "GameEntity.hpp"
 #include "GameMap.hpp"

@@ -11,13 +11,13 @@
 PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
   this->_core->storeGameEntity(
       new GameEntity('C', "./assets/pacman/pacmans.png", "Player",
-                     std::make_pair<int, int>(10, 12)));
-  this->_core->storeGameEntity(new GameEntity('M', "./assets/pacman/ghost.png",
-                                              "Enemy1",
-                                              std::make_pair<int, int>(9, 10)));
+                     std::make_pair<int, int>(10, 12), true));
+  this->_core->storeGameEntity(
+      new GameEntity('M', "./assets/pacman/ghost.png", "Enemy1",
+                     std::make_pair<int, int>(9, 10), false));
   this->_core->storeGameEntity(
       new GameEntity('M', "./assets/pacman/ghost.png", "Enemy2",
-                     std::make_pair<int, int>(11, 10)));
+                     std::make_pair<int, int>(11, 10), false));
 }
 
 bool PacmanModule::checkCollision() { return true; }
