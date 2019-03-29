@@ -21,14 +21,8 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
 }
 
 bool PacmanModule::checkCollision(std::pair<int, int> nextPos) {
-  // std::cout << nextPos.second - 1 << ", " << nextPos.first - 1 << " ";
-  // std::cout << this->_map.grid.at(nextPos.second - 1).at(nextPos.first - 1)
-  //           << std::endl;
   char cell = this->_map.grid.at(nextPos.second - 1).at(nextPos.first - 1);
-  // this->_map.blockProperties[this->_map.grid.at(nextPos.second - 1)
-  //                                .at(nextPos.first - 1)];
   if (this->_map.blockProperties.at(cell).isSolid) return false;
-  // this->_map.grid.at(nextPos.second).at(nextPos.first);
   return true;
 }
 
@@ -36,6 +30,7 @@ void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
   std::pair<int, int> playerPos = this->_core->getEntity("Player").getPos();
 
   if (keys.back() == RIGHT) {
+    this->_core->getEntity("Player").moveRight = true;
     this->_core->getEntity("Player").setRotation(0);
     if (this->checkCollision(
             std::pair<int, int>(playerPos.first + 1, playerPos.second)))

@@ -28,6 +28,10 @@ class AEntity {
 
   const std::string id;
   int animIt = 0;
+  bool moveRight = false;
+  bool moveLeft = false;
+  bool moveUp = false;
+  bool moveDown = false;
 
  protected:
   std::pair<int, int> _pos;

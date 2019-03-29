@@ -11,6 +11,7 @@ SfmlModule::SfmlModule() {
   this->_window = std::make_unique<sf::RenderWindow>(
       sf::VideoMode(SFML_WINDOW_HEIGHT, SFML_WINDOW_WIDTH), SFML_WINDOW_NAME);
   this->_window->setFramerateLimit(SFML_WINDOW_FRAMERATE);
+  this->_window->setKeyRepeatEnabled(false);
   this->_window->clear();
 }
 
@@ -81,6 +82,20 @@ int SfmlModule::animateEntity(AEntity &entity) noexcept {
   return entity.animIt;
 }
 
+void SfmlModule::smoothlyMove(AEntity &entity) {
+  std::cout << "here" << std::endl;
+  sf::Vector2 pos = this->_sprites[entity.id].first.getPosition();
+  if (entity.animIt < 32) {
+    this->_sprites[entity.id].first.move(1, 0);
+  } else {
+    entity.moveDown = false;
+    entity.moveUp = false;
+    entity.moveRight = false;
+    entity.moveLeft = false;
+  }
+  return;
+}
+
 bool SfmlModule::displayEntity(AEntity &entity) {
   std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>>::iterator
       i = this->_sprites.find(entity.id);
@@ -88,8 +103,11 @@ bool SfmlModule::displayEntity(AEntity &entity) {
     this->initGameEntity(entity);
   }
   this->_sprites[entity.id].first.setRotation(entity.getRotation());
-  this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
-                                              entity.getPos().second * 32);
+  if (entity.moveRight || entity.moveLeft || entity.moveUp || entity.moveDown)
+    this->smoothlyMove(entity);
+  else
+    this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
+                                                entity.getPos().second * 32);
   if (entity.getAnimated()) {
     entity.animIt = this->animateEntity(entity);
   }
