@@ -25,6 +25,7 @@ class PacmanModule : public IGameModule {
   long getScore() const final;
   void computeInput(std::vector<enum gameInputs> keys);
   bool checkCollision(std::pair<int, int> nextPos) final;
+  void checkApple();
 
  private:
   ICoreModule *_core;
