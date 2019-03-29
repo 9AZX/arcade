@@ -24,6 +24,7 @@ class NibblerModule : public IGameModule {
   void endGame() final;
   const GameMap &getMap() const noexcept;
   bool checkCollision(std::pair<int, int> nextPos) final { return true; };
+  void computeInput(std::vector<enum gameInputs> keys);
 
  private:
   ICoreModule *_core;

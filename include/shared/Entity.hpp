@@ -16,20 +16,22 @@ class AEntity {
 
  public:
   AEntity() = delete;
-  AEntity(std::string id, std::pair<int, int> pos) : id(id), _pos(pos) {}
+  AEntity(std::string id, std::pair<int, int> pos, bool anim)
+      : id(id), _pos(pos), _isAnimated(anim) {}
   virtual ~AEntity() = default;
   std::pair<int, int> getPos() { return _pos; };
   enum EntityType getType() const noexcept { return _type; };
   void setPos(std::pair<int, int> newPos) noexcept { _pos = newPos; }
   int getRotation() { return this->_rotation; }
   void setRotation(int angle) { _rotation = angle; }
+  bool getAnimated() const noexcept { return _isAnimated; };
 
   const std::string id;
-  bool isAnimated = true;
   int animIt = 0;
 
  protected:
   std::pair<int, int> _pos;
+  bool _isAnimated;
   int _rotation = 0;
   enum EntityType _type = DEFAULT;
 };

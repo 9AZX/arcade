@@ -90,7 +90,7 @@ void SfmlModule::displayEntity(AEntity &entity) {
   this->_sprites[entity.id].first.setRotation(entity.getRotation());
   this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
                                               entity.getPos().second * 32);
-  if (entity.id == "Player") {
+  if (entity.getAnimated()) {
     entity.animIt = this->animateEntity(entity);
   }
   this->_window->draw(this->_sprites[entity.id].first);
