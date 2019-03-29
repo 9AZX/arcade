@@ -24,7 +24,7 @@ class PacmanModule : public IGameModule {
   const GameMap &getMap() const noexcept;
   long getScore() const final;
   void computeInput(std::vector<enum gameInputs> keys);
-  bool checkCollision() final;
+  bool checkCollision(std::pair<int, int> nextPos) final;
 
  private:
   ICoreModule *_core;

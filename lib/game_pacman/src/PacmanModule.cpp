@@ -20,27 +20,47 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
                      std::make_pair<int, int>(11, 10)));
 }
 
-bool PacmanModule::checkCollision() { return true; }
+bool PacmanModule::checkCollision(std::pair<int, int> nextPos) {
+  // std::cout << nextPos.second - 1 << ", " << nextPos.first - 1 << " ";
+  // std::cout << this->_map.grid.at(nextPos.second - 1).at(nextPos.first - 1)
+  //           << std::endl;
+  char cell = this->_map.grid.at(nextPos.second - 1).at(nextPos.first - 1);
+  // this->_map.blockProperties[this->_map.grid.at(nextPos.second - 1)
+  //                                .at(nextPos.first - 1)];
+  if (this->_map.blockProperties.at(cell).isSolid) return false;
+  // this->_map.grid.at(nextPos.second).at(nextPos.first);
+  return true;
+}
 
 void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
   std::pair<int, int> playerPos = this->_core->getEntity("Player").getPos();
 
   if (keys.back() == RIGHT) {
     this->_core->getEntity("Player").setRotation(0);
-    this->_core->getEntity("Player").setPos(
-        std::pair<int, int>(playerPos.first + 1, playerPos.second));
+    if (this->checkCollision(
+            std::pair<int, int>(playerPos.first + 1, playerPos.second)))
+      this->_core->getEntity("Player").setPos(
+          std::pair<int, int>(playerPos.first + 1, playerPos.second));
   } else if (keys.back() == LEFT) {
     this->_core->getEntity("Player").setRotation(180);
-    this->_core->getEntity("Player").setPos(
-        std::pair<int, int>(playerPos.first - 1, playerPos.second));
+    if (this->checkCollision(
+            std::pair<int, int>(playerPos.first - 1, playerPos.second)))
+      this->_core->getEntity("Player").setPos(
+          std::pair<int, int>(playerPos.first - 1, playerPos.second));
   } else if (keys.back() == UP) {
     this->_core->getEntity("Player").setRotation(270);
-    this->_core->getEntity("Player").setPos(
-        std::pair<int, int>(playerPos.first, playerPos.second - 1));
+    if (this->checkCollision(
+            std::pair<int, int>(playerPos.first, playerPos.second - 1)))
+      this->_core->getEntity("Player").setPos(
+          std::pair<int, int>(playerPos.first, playerPos.second - 1));
   } else if (keys.back() == DOWN) {
     this->_core->getEntity("Player").setRotation(90);
-    this->_core->getEntity("Player").setPos(
-        std::pair<int, int>(playerPos.first, playerPos.second + 1));
+    if (this->checkCollision(
+            std::pair<int, int>(playerPos.first, playerPos.second + 1)))
+      this->_core->getEntity("Player").setPos(
+          std::pair<int, int>(playerPos.first, playerPos.second + 1));
+  } else if (keys.back() == ESCAPE) {
+    std::cout << "You quit the game" << std::endl;
   }
 }
 
