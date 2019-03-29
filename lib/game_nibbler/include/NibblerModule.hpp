@@ -17,7 +17,6 @@ class NibblerModule : public IGameModule {
   NibblerModule(ICoreModule *core);
   ~NibblerModule() = default;
 
- public:
   void play() final;
   long getScore() const final;
   void pauseMenu() final;
@@ -53,6 +52,8 @@ class NibblerModule : public IGameModule {
           {'#', {"./assets/pacman/wall.png", true, CYAN, BLACK}},
           {' ', {"", false, BLACK, BLACK}},
       }};
+  void checkApple();
+  void bodyMove();
 };
 
 #endif /* !NIBBLERMODULE_HPP_ */

@@ -21,7 +21,10 @@ class AEntity {
   virtual ~AEntity() = default;
   std::pair<int, int> getPos() { return _pos; };
   enum EntityType getType() const noexcept { return _type; };
-  void setPos(std::pair<int, int> newPos) noexcept { _pos = newPos; }
+  void setPos(std::pair<int, int> newPos) noexcept {
+    _prevPos = _pos;
+    _pos = newPos;
+  }
   int getRotation() { return this->_rotation; }
   void setRotation(int angle) { _rotation = angle; }
   bool getAnimated() const noexcept { return _isAnimated; };
@@ -31,6 +34,8 @@ class AEntity {
 
  protected:
   std::pair<int, int> _pos;
+  std::pair<int, int> _prevPos;
+  std::pair<float, float> _absCurrentPos;
   bool _isAnimated;
   int _rotation = 0;
   enum EntityType _type = DEFAULT;
