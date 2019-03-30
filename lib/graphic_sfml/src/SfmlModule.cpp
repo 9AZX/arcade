@@ -90,12 +90,20 @@ int SfmlModule::animateEntity(AEntity &entity) noexcept {
 void SfmlModule::smoothlyMove(AEntity &entity) {
   sf::Vector2 pos = this->_sprites[entity.id].first.getPosition();
   if (entity.animIt < 16) {
-    this->_sprites[entity.id].first.move(2, 0);
+    if (entity.moveRight)
+      this->_sprites[entity.id].first.move(2, 0);
+    else if (entity.moveLeft)
+      this->_sprites[entity.id].first.move(-2, 0);
+    else if (entity.moveUp)
+      this->_sprites[entity.id].first.move(0, -2);
+    else if (entity.moveDown)
+      this->_sprites[entity.id].first.move(0, 2);
   } else {
     entity.moveDown = false;
     entity.moveUp = false;
     entity.moveRight = false;
     entity.moveLeft = false;
+    entity.isMoving = false;
   }
   if (entity.getAnimated()) {
     entity.animIt = this->animateEntity(entity);
@@ -110,7 +118,7 @@ bool SfmlModule::displayEntity(AEntity &entity) {
     this->initGameEntity(entity);
   }
   this->_sprites[entity.id].first.setRotation(entity.getRotation());
-  if (entity.moveRight || entity.moveLeft || entity.moveUp || entity.moveDown)
+  if (entity.isMoving)
     this->smoothlyMove(entity);
   else
     this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,

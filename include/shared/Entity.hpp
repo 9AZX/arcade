@@ -32,6 +32,7 @@ class AEntity {
 
   const int id;
   int animIt = 0;
+  bool isMoving = false;
   bool moveRight = false;
   bool moveLeft = false;
   bool moveUp = false;
