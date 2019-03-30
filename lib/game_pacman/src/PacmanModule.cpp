@@ -21,6 +21,15 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
 }
 
 bool PacmanModule::checkCollision(std::pair<int, int> nextPos) {
+  if (nextPos.first == 20 && nextPos.second == 10) {
+    this->_core->getEntity(0).setPos(std::pair<int, int>(1, 10));
+    return false;
+  }
+  if (nextPos.first == 0 && nextPos.second == 10) {
+    this->_core->getEntity(0).setPos(std::pair<int, int>(19, 10));
+    this->_core->getEntity(0).setRotation(180);
+    return false;
+  }
   char cell = this->_map.grid.at(nextPos.second - 1).at(nextPos.first - 1);
   if (this->_map.blockProperties.at(cell).isSolid) return false;
   return true;

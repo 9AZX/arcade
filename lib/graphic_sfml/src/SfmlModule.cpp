@@ -88,7 +88,6 @@ int SfmlModule::animateEntity(AEntity &entity) noexcept {
 }
 
 void SfmlModule::smoothlyMove(AEntity &entity) {
-  sf::Vector2 pos = this->_sprites[entity.id].first.getPosition();
   if (entity.animIt < 16) {
     if (entity.moveRight)
       this->_sprites[entity.id].first.move(2, 0);
