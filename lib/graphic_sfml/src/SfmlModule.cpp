@@ -11,6 +11,7 @@ SfmlModule::SfmlModule() {
   this->_window = std::make_unique<sf::RenderWindow>(
       sf::VideoMode(SFML_WINDOW_HEIGHT, SFML_WINDOW_WIDTH), SFML_WINDOW_NAME);
   this->_window->setFramerateLimit(SFML_WINDOW_FRAMERATE);
+  this->_window->setKeyRepeatEnabled(false);
   this->_window->clear();
 }
 
@@ -35,31 +36,34 @@ void SfmlModule::initGameEntity(AEntity &tmp) {
   sf::Texture wallTexture;
   sf::Sprite wallSprite;
   GameEntity *entity = static_cast<GameEntity *>(&tmp);
+  sf::IntRect r1(0, 0, 32, 32);
 
   wallTexture.loadFromFile(entity->assetPath);
   wallSprite.setOrigin(16, 16);
   this->_sprites.insert({entity->id, std::make_pair(wallSprite, wallTexture)});
   this->_sprites[entity->id].first.setTexture(this->_sprites[entity->id].second,
                                               true);
+  this->_sprites[entity->id].first.setTextureRect(r1);
 }
 
 Events SfmlModule::getInputs() {
   Events actual;
-  this->_window->pollEvent(this->eventSFML);
-
-  switch (this->eventSFML.type) {
-    case sf::Event::Closed:
-      this->_window->close();
-      break;
-    case sf::Event::KeyPressed:
-      this->matchInputs(actual, this->eventSFML.key.code);
-      break;
-    case sf::Event::TextEntered:
-      if (eventSFML.text.unicode > 64 && eventSFML.text.unicode < 123)
-        actual.ascii += static_cast<char>(eventSFML.text.unicode);
-      break;
-    default:
-      break;
+  this->_window->setKeyRepeatEnabled(false);
+  while (this->_window->pollEvent(this->eventSFML)) {
+    switch (this->eventSFML.type) {
+      case sf::Event::Closed:
+        this->_window->close();
+        break;
+      case sf::Event::KeyPressed:
+        this->matchInputs(actual, this->eventSFML.key.code);
+        break;
+      case sf::Event::TextEntered:
+        if (eventSFML.text.unicode > 64 && eventSFML.text.unicode < 123)
+          actual.ascii += static_cast<char>(eventSFML.text.unicode);
+        break;
+      default:
+        break;
+    }
   }
   return actual;
 }
@@ -69,16 +73,34 @@ int SfmlModule::animateEntity(AEntity &entity) noexcept {
   sf::IntRect r2(32, 0, 32, 32);
   sf::IntRect r3(64, 0, 32, 32);  // do declaration outside game loop
 
-  if (entity.animIt < 16) {
+  if (entity.animIt < 6) {
     this->_sprites[entity.id].first.setTextureRect(r2);
-  } else if (entity.animIt < 32) {
+  } else if (entity.animIt < 10) {
     this->_sprites[entity.id].first.setTextureRect(r3);
+  } else if (entity.animIt < 16) {
+    this->_sprites[entity.id].first.setTextureRect(r2);
   } else {
     this->_sprites[entity.id].first.setTextureRect(r1);
     entity.animIt = 0;
   }
   entity.animIt += 1;
   return entity.animIt;
+}
+
+void SfmlModule::smoothlyMove(AEntity &entity) {
+  sf::Vector2 pos = this->_sprites[entity.id].first.getPosition();
+  if (entity.animIt < 16) {
+    this->_sprites[entity.id].first.move(2, 0);
+  } else {
+    entity.moveDown = false;
+    entity.moveUp = false;
+    entity.moveRight = false;
+    entity.moveLeft = false;
+  }
+  if (entity.getAnimated()) {
+    entity.animIt = this->animateEntity(entity);
+  }
+  return;
 }
 
 bool SfmlModule::displayEntity(AEntity &entity) {
@@ -88,11 +110,11 @@ bool SfmlModule::displayEntity(AEntity &entity) {
     this->initGameEntity(entity);
   }
   this->_sprites[entity.id].first.setRotation(entity.getRotation());
-  this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
-                                              entity.getPos().second * 32);
-  if (entity.getAnimated()) {
-    entity.animIt = this->animateEntity(entity);
-  }
+  if (entity.moveRight || entity.moveLeft || entity.moveUp || entity.moveDown)
+    this->smoothlyMove(entity);
+  else
+    this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
+                                                entity.getPos().second * 32);
   this->_window->draw(this->_sprites[entity.id].first);
   return true;
 }
@@ -140,6 +162,7 @@ void SfmlModule::matchInputs(Events &inputs, sf::Keyboard::Key key) {
       break;
     case sf::Keyboard::Escape:
       inputs.keys.push_back(ESCAPE);
+      this->_window->close();
       break;
     case sf::Keyboard::Space:
       inputs.keys.push_back(SPACE);
