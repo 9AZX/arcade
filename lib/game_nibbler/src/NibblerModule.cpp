@@ -9,7 +9,6 @@
 #include <iostream>
 
 NibblerModule::NibblerModule(ICoreModule *core) : _core(core) {
-  srand((unsigned)time(NULL));
   this->_core->storeGameEntity(
       new GameEntity('0', "./assets/nibbler/head-snake.png", 0,
                      std::make_pair<int, int>(12, 10), false));
@@ -19,10 +18,27 @@ NibblerModule::NibblerModule(ICoreModule *core) : _core(core) {
   this->_core->storeGameEntity(
       new GameEntity('o', "./assets/nibbler/tail-snake.png", 99,
                      std::make_pair<int, int>(10, 10), false));
-  this->_core->storeGameEntity(new GameEntity(
-      'P', "./assets/nibbler/apple.png", 101,
-      std::make_pair<int, int>(rand() % 18 + 1, rand() % 18 + 1), false));
+  this->_core->storeGameEntity(
+      new GameEntity('P', "./assets/nibbler/apple.png", 100,
+                     std::make_pair<int, int>(14, 16), false));
+  this->_core->storeGameEntity(
+      new GameEntity('P', "./assets/nibbler/apple.png", 101,
+                     std::make_pair<int, int>(14, 6), false));
+  this->_core->storeGameEntity(
+      new GameEntity('P', "./assets/nibbler/apple.png", 102,
+                     std::make_pair<int, int>(6, 6), false));
+  this->_core->storeGameEntity(
+      new GameEntity('P', "./assets/nibbler/apple.png", 103,
+                     std::make_pair<int, int>(6, 16), false));
+  this->_core->storeGameEntity(
+      new GameEntity('P', "./assets/nibbler/apple.png", 104,
+                     std::make_pair<int, int>(10, 14), false));
+  this->_core->storeGameEntity(
+      new GameEntity('P', "./assets/nibbler/apple.png", 105,
+                     std::make_pair<int, int>(10, 4), false));
 }
+
+void NibblerModule::destructor() { delete this; }
 
 void NibblerModule::play() {
   Events event;
@@ -33,6 +49,7 @@ void NibblerModule::play() {
     if (event.keys.size() > 0) {
       this->computeInput(event.keys);
       bodyMove();
+      checkApple();
     }
   }
 }
@@ -83,7 +100,22 @@ bool NibblerModule::checkCollision(std::pair<int, int> nextPos) {
   return true;
 }
 
-void NibblerModule::checkApple() {}
+void NibblerModule::checkApple() {
+  std::pair<int, int> playerPos = this->_core->getEntity(0).getPos();
+
+  for (unsigned int i = 0; i < appleRemain; ++i) {
+    if ((playerPos.first == _core->getEntity(i + 100).getPos().first) &&
+        (playerPos.second == _core->getEntity(i + 100).getPos().second) &&
+        this->_core->getEntity(i + 100).isAlive) {
+      snakeWidth++;
+      appleRemain--;
+      this->_core->getEntity(i + 100).isAlive = false;
+      this->_core->storeGameEntity(
+          new GameEntity('O', "./assets/nibbler/body-snake.png", snakeWidth,
+                         std::make_pair<int, int>(11, 10), false));
+    }
+  }
+}
 
 void NibblerModule::bodyMove() {
   for (unsigned int it = 0; it < snakeWidth; ++it) {
