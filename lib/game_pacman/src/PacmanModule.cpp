@@ -30,6 +30,7 @@ void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
   std::pair<int, int> playerPos = this->_core->getEntity("Player").getPos();
 
   if (keys.back() == RIGHT) {
+    std::cout << "right" << std::endl;
     this->_core->getEntity("Player").moveRight = true;
     this->_core->getEntity("Player").setRotation(0);
     if (this->checkCollision(

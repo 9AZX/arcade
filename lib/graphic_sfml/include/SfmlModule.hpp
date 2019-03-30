@@ -15,7 +15,7 @@
 #include "IDisplayModule.hpp"
 #include "IRender.hpp"
 
-#define SFML_WINDOW_NAME "Pacman"
+#define SFML_WINDOW_NAME "Google Chrome"
 #define SFML_WINDOW_WIDTH 700
 #define SFML_WINDOW_HEIGHT 650
 #define SFML_WINDOW_FRAMERATE 60
