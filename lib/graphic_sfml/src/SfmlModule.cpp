@@ -27,9 +27,9 @@ void SfmlModule::initGraphics(GameMap &map) {
 
   wallTexture.loadFromFile(map.blockProperties['#'].assetPath);
   wallSprite.setOrigin(16, 16);
-  this->_sprites.insert({"wall", std::make_pair(wallSprite, wallTexture)});
-  this->_sprites["wall"].first.setTexture(this->_sprites["wall"].second, true);
-  this->_sprites["wall"].first.setColor(sf::Color::Blue);
+  this->_sprites.insert({666, std::make_pair(wallSprite, wallTexture)});
+  this->_sprites[666].first.setTexture(this->_sprites[666].second, true);
+  this->_sprites[666].first.setColor(sf::Color::Blue);
 }
 
 void SfmlModule::initGameEntity(AEntity &tmp) {
@@ -104,8 +104,8 @@ void SfmlModule::smoothlyMove(AEntity &entity) {
 }
 
 bool SfmlModule::displayEntity(AEntity &entity) {
-  std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>>::iterator
-      i = this->_sprites.find(entity.id);
+  std::unordered_map<int, std::pair<sf::Sprite, sf::Texture>>::iterator i =
+      this->_sprites.find(entity.id);
   if (i == this->_sprites.end()) {
     this->initGameEntity(entity);
   }
@@ -126,8 +126,8 @@ void SfmlModule::displayMap(GameMap map) {
   for (int ith = 0; ith < map.height; ith++) {
     for (int itl = 0; itl < map.width; itl++) {
       if (map.grid[ith][itl] == '#') {
-        this->_sprites["wall"].first.setPosition(itl * 32 + 32, ith * 32 + 32);
-        this->_window->draw(this->_sprites["wall"].first);
+        this->_sprites[666].first.setPosition(itl * 32 + 32, ith * 32 + 32);
+        this->_window->draw(this->_sprites[666].first);
       }
     }
   }

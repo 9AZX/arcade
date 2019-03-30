@@ -31,7 +31,7 @@ class Application : public ICoreModule {
   void open_game_library();
   void switchLib(const int type, const std::string &path);
   void storeGameEntity(AEntity *entity) final;
-  AEntity &getEntity(std::string name) final;
+  AEntity &getEntity(int name) final;
   Events getInputs() final;
   void renderAll() final;
   void setMap(GameMap &map) final;

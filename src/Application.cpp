@@ -100,7 +100,7 @@ void Application::storeGameEntity(AEntity *entity) {
   this->_entities.push_back(std::unique_ptr<AEntity>(entity));
 }
 
-AEntity &Application::getEntity(std::string name) {
+AEntity &Application::getEntity(int name) {
   std::vector<std::unique_ptr<AEntity>>::iterator i = std::find_if(
       this->_entities.begin(), this->_entities.end(),
       [&name](std::unique_ptr<AEntity> &n) { return name == n->id; });
