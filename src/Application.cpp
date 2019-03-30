@@ -115,20 +115,22 @@ Events Application::getInputs() {
   if (std::find(inputs.begin(), inputs.end(), ONE) != inputs.end()) {
     if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[3].path);
-    } else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") ==
-               0) {
+    }
+    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[2].path);
     }
   } else if (std::find(inputs.begin(), inputs.end(), TWO) != inputs.end()) {
     if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
-      std::cout << "TWO: ncurses" << std::endl;
-    } else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") ==
-               0) {
-      std::cout << "TWO: sfml" << std::endl;
+      this->switchLib(Library::LIB_GRAPHIC, libraries[3].path);
     }
-  } else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
+    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
+      this->switchLib(Library::LIB_GRAPHIC, libraries[2].path);
+    }
+  }
+  else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
     std::cout << "THREE (game)" << std::endl;
-  } else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
+  }
+  else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
     std::cout << "FOUR (game)" << std::endl;
   }
   return input;
