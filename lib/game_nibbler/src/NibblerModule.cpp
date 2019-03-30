@@ -50,7 +50,6 @@ void NibblerModule::play() {
       this->computeInput(event.keys);
     }
     forward();
-    bodyMove();
     checkApple();
   }
 }
@@ -146,7 +145,10 @@ void NibblerModule::bodyMove() {
 }
 
 void NibblerModule::makeMove(std::pair<int, int> pos) {
-  if (this->checkCollision(pos)) this->_core->getEntity(0).setPos(pos);
+  if (this->checkCollision(pos)) {
+    this->_core->getEntity(0).setPos(pos);
+    bodyMove();
+  }
 }
 
 void NibblerModule::forward() {
