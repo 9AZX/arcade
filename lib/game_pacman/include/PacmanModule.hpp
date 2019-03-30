@@ -19,6 +19,7 @@ class PacmanModule : public IGameModule {
 
  public:
   void play() final;
+  void destructor() final;
   void pauseMenu() final;
   void endGame() final;
   const GameMap &getMap() const noexcept;

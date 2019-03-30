@@ -33,7 +33,12 @@ bool NcursesModule::displayEntity(AEntity &tmp) {
   GameEntity *entity = static_cast<GameEntity *>(&tmp);
 
   init_pair(2, YELLOW, BLACK);
-  attron(COLOR_PAIR(2));
+  init_pair(3, RED, BLACK);
+
+  if (entity->assetChar == 'P')
+    attron(COLOR_PAIR(3));
+  else
+    attron(COLOR_PAIR(2));
 
   mvaddch(entity->getPos().second - 1, entity->getPos().first - 1,
           entity->assetChar);

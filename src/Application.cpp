@@ -38,7 +38,7 @@ void Application::init(const int argc, const char **argv) {
 void Application::stop() {
   try {
     if (this->_game) {
-      // this->_gameClass->destructor();
+      this->_gameClass->destructor();
       this->_game->close();
     }
     if (this->_graphic) {
@@ -86,7 +86,7 @@ void Application::switchLib(const int type, const std::string &path) {
       this->open_graphical_library();
       this->_graphClass = (IDisplayModule *)(*this->fptr_graphic)();
     } else if (type == Library::LIB_GAME && this->_game) {
-      // this->_gameClass->destructor();
+      this->_gameClass->destructor();
       this->_game->openNew(path);
       this->open_game_library();
       this->_gameClass = (IGameModule *)(*this->fptr_game)(this);
@@ -115,20 +115,22 @@ Events Application::getInputs() {
   if (std::find(inputs.begin(), inputs.end(), ONE) != inputs.end()) {
     if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[3].path);
-    } else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") ==
-               0) {
+    }
+    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[2].path);
     }
   } else if (std::find(inputs.begin(), inputs.end(), TWO) != inputs.end()) {
     if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
-      std::cout << "TWO: ncurses" << std::endl;
-    } else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") ==
-               0) {
-      std::cout << "TWO: sfml" << std::endl;
+      this->switchLib(Library::LIB_GRAPHIC, libraries[3].path);
     }
-  } else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
+    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
+      this->switchLib(Library::LIB_GRAPHIC, libraries[2].path);
+    }
+  }
+  else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
     std::cout << "THREE (game)" << std::endl;
-  } else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
+  }
+  else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
     std::cout << "FOUR (game)" << std::endl;
   }
   return input;
@@ -138,7 +140,7 @@ void Application::renderAll() {
   this->_graphClass->displayMap(this->_gameClass->getMap());
   std::for_each(this->_entities.begin(), this->_entities.end(),
                 [&, this](std::unique_ptr<AEntity> &n) {
-                  _graphClass->displayEntity(*n);
+                  if (n->isAlive) _graphClass->displayEntity(*n);
                 });
   this->_graphClass->refreshWindow();
 }

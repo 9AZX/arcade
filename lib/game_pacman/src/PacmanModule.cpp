@@ -20,6 +20,8 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
                      std::make_pair<int, int>(11, 10), false));
 }
 
+void PacmanModule::destructor() { delete this; }
+
 bool PacmanModule::checkCollision(std::pair<int, int> nextPos) {
   if (nextPos.first == 20 && nextPos.second == 10) {
     this->_core->getEntity(0).setPos(std::pair<int, int>(1, 10));

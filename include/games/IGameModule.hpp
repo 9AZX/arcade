@@ -24,6 +24,7 @@ class IGameModule {
   virtual void endGame() = 0;
   virtual const GameMap &getMap() const noexcept = 0;
   virtual long getScore() const = 0;
+  virtual void destructor() = 0;
   virtual bool checkCollision(std::pair<int, int> nextPos) = 0;
 
  private:
