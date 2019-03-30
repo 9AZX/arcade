@@ -16,7 +16,7 @@ class AEntity {
 
  public:
   AEntity() = delete;
-  AEntity(std::string id, std::pair<int, int> pos, bool anim)
+  AEntity(int id, std::pair<int, int> pos, bool anim)
       : id(id), _pos(pos), _isAnimated(anim) {}
   virtual ~AEntity() = default;
   std::pair<int, int> getPos() { return _pos; };
@@ -29,12 +29,12 @@ class AEntity {
   void setRotation(int angle) { _rotation = angle; }
   bool getAnimated() const noexcept { return _isAnimated; };
 
-  const std::string id;
+  const int id;
   int animIt = 0;
 
  protected:
   std::pair<int, int> _pos;
-  std::pair<int, int> _prevPos;
+  std::pair<int, int> _prevPos = _pos;
   std::pair<float, float> _absCurrentPos;
   bool _isAnimated;
   int _rotation = 0;

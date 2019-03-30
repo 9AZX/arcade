@@ -17,7 +17,7 @@ class ICoreModule {
  public:
   virtual ~ICoreModule() = default;
   virtual void storeGameEntity(AEntity* entity) = 0;
-  virtual AEntity& getEntity(std::string name) = 0;
+  virtual AEntity& getEntity(int name) = 0;
   virtual Events getInputs() = 0;
   virtual void renderAll() = 0;
   virtual void setMap(GameMap& map) = 0;

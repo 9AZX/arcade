@@ -13,7 +13,7 @@
 class GameEntity : public AEntity {
  public:
   GameEntity() = delete;
-  GameEntity(char assetChar, std::string assetPath, std::string id,
+  GameEntity(char assetChar, std::string assetPath, int id,
              std::pair<int, int> pos, bool anim)
       : AEntity(id, pos, anim), assetChar(assetChar), assetPath(assetPath) {
     _type = AEntity::GAME;
