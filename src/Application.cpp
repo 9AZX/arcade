@@ -45,7 +45,7 @@ void Application::init(const int argc, const char **argv) {
 void Application::stop() {
   try {
     if (this->_game) {
-      // this->_gameClass->destructor();
+      this->_gameClass->destructor();
       this->_game->close();
     }
     if (this->_graphic) {
@@ -93,7 +93,7 @@ void Application::switchLib(const int type, const std::string &path) {
       this->open_graphical_library();
       this->_graphClass = (IDisplayModule *)(*this->fptr_graphic)();
     } else if (type == Library::LIB_GAME && this->_game) {
-      // this->_gameClass->destructor();
+      this->_gameClass->destructor();
       this->_game->openNew(path);
       this->open_game_library();
       this->_gameClass = (IGameModule *)(*this->fptr_game)(this);
@@ -147,7 +147,7 @@ void Application::renderAll() {
   this->_graphClass->displayMap(this->_gameClass->getMap());
   std::for_each(this->_entities.begin(), this->_entities.end(),
                 [&, this](std::unique_ptr<AEntity> &n) {
-                  _graphClass->displayEntity(*n);
+                  if (n->isAlive) _graphClass->displayEntity(*n);
                 });
   this->_graphClass->refreshWindow();
 }

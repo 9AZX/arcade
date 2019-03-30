@@ -37,6 +37,7 @@ class AEntity {
   bool moveLeft = false;
   bool moveUp = false;
   bool moveDown = false;
+  bool isAlive = true;
 
  protected:
   std::pair<int, int> _pos;

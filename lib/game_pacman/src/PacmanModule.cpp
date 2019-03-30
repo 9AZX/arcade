@@ -20,6 +20,8 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
                      std::make_pair<int, int>(11, 10), false));
 }
 
+void PacmanModule::destructor() { delete this; }
+
 bool PacmanModule::checkCollision(std::pair<int, int> nextPos) {
   char cell = this->_map.grid.at(nextPos.second - 1).at(nextPos.first - 1);
   if (this->_map.blockProperties.at(cell).isSolid) return false;

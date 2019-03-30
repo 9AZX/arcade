@@ -20,6 +20,7 @@ class NibblerModule : public IGameModule {
   void play() final;
   long getScore() const final;
   void pauseMenu() final;
+  void destructor() final;
   void endGame() final;
   const GameMap &getMap() const noexcept;
   bool checkCollision(std::pair<int, int> nextPos) final;
@@ -53,6 +54,7 @@ class NibblerModule : public IGameModule {
           {' ', {"", false, BLACK, BLACK}},
       }};
   unsigned int snakeWidth = 1;
+  unsigned int appleRemain = 6;
   void checkApple();
   void bodyMove();
 };
