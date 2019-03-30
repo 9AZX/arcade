@@ -5,31 +5,38 @@
 ** Application
 */
 
-#include "Application.hpp"
 #include <cstring>
 #include <iostream>
+#include "Application.hpp"
 #include "Exception.hpp"
+#include "Choose.hpp"
 
 static const struct libs libraries[] = {
-    {Library::LIB_GAME, "nibbler", LIB_GAME_NIBBLER},
     {Library::LIB_GAME, "pacman", LIB_GAME_PACMAN},
+    {Library::LIB_GAME, "nibbler", LIB_GAME_NIBBLER},
     {Library::LIB_GRAPHIC, "ncurses", LIB_GRAPHIC_NCURSES},
     {Library::LIB_GRAPHIC, "sfml", LIB_GRAPHIC_SFML}};
 
 void Application::init(const int argc, const char **argv) {
-  if (argc < 2) {
+  if (argc != 2) {
     throw Exception(ERR_USAGE);
   }
   try {
-    this->_graphic = std::make_unique<Library>(argv[1]);
-    this->_graphic->open();
-    this->open_graphical_library();
-    this->_graphClass = (IDisplayModule *)(*this->fptr_graphic)();
-    this->_game = std::make_unique<Library>(argv[2]);
-    this->_game->open();
-    this->open_game_library();
-    this->_gameClass = (IGameModule *)(*this->fptr_game)(this);
-    this->_gameClass->play();
+    std::unique_ptr<Choose> choose(new Choose);
+
+    choose->launchLibraries(*this);
+    if (this->_choose != -1) {
+      std::cout << "game choose: " << libraries[this->_choose].name << std::endl;
+      this->_graphic = std::make_unique<Library>(argv[1]);
+      this->_graphic->open();
+      this->open_graphical_library();
+      this->_graphClass = (IDisplayModule *)(*this->fptr_graphic)();
+      this->_game = std::make_unique<Library>(libraries[this->_choose].path);
+      this->_game->open();
+      this->open_game_library();
+      this->_gameClass = (IGameModule *)(*this->fptr_game)(this);
+      this->_gameClass->play();
+    }
   } catch (...) {
     throw;
   }

@@ -18,7 +18,7 @@ PROJECT_BINARY_NAME	:=	"arcade"
 
 PROJECT_LIBRARY_DIR	:=	-L./build/
 
-PROJECT_LIB	:=	-ldl -ltools
+PROJECT_LIB	:=	-lncurses -ldl -ltools
 
 PROJECT_INCLUDE	:=	-I./build/include/	\
 			-I./include/games/	\
@@ -27,6 +27,7 @@ PROJECT_INCLUDE	:=	-I./build/include/	\
 			-I./include/
 
 PROJECT_SRC	:=	./src/Application.cpp	\
+			./src/Choose.cpp	\
 			./src/Library.cpp	\
 			./src/main.cpp
 

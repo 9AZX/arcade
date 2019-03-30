@@ -37,6 +37,9 @@ class Application : public ICoreModule {
   void setMap(GameMap &map) final;
   bool isOpen() const final;
 
+public:
+  int _choose = -1;
+
  protected:
   std::unique_ptr<Library> _game = nullptr;
   std::unique_ptr<Library> _graphic = nullptr;
