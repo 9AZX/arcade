@@ -13,6 +13,9 @@ NibblerModule::NibblerModule(ICoreModule *core) : _core(core) {
   this->_core->storeGameEntity(
       new GameEntity('0', "./assets/nibbler/head-snake.png", "Player",
                      std::make_pair<int, int>(10, 10), false));
+  this->_core->storeGameEntity(
+      new GameEntity('0', "./assets/nibbler/tail-snake.png", "PlayerTail",
+                     std::make_pair<int, int>(10, 11), false));
   this->_core->storeGameEntity(new GameEntity(
       'P', "./assets/nibbler/apple.png", "Apple",
       std::make_pair<int, int>(rand() % 18 + 1, rand() % 18 + 1), false));
@@ -79,3 +82,7 @@ bool NibblerModule::checkCollision(std::pair<int, int> nextPos) {
   // this->_map.grid.at(nextPos.second).at(nextPos.first);
   return true;
 }
+
+void NibblerModule::checkApple() {}
+
+void NibblerModule::bodyMove() {}
