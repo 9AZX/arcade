@@ -47,7 +47,8 @@ void Application::stop() {
       this->_game->close();
     }
     if (this->_graphic) {
-      this->_graphClass->destructor();
+      if (this->_choose != -1)
+        this->_graphClass->destructor();
       this->_graphic->close();
     }
   } catch (...) {
