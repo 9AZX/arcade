@@ -52,6 +52,7 @@ class NibblerModule : public IGameModule {
           {'#', {"./assets/pacman/wall.png", true, CYAN, BLACK}},
           {' ', {"", false, BLACK, BLACK}},
       }};
+  unsigned int snakeWidth = 1;
   void checkApple();
   void bodyMove();
 };

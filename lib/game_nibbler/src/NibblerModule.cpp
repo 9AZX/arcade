@@ -31,6 +31,7 @@ void NibblerModule::play() {
     this->_core->renderAll();
     event = this->_core->getInputs();
     if (event.keys.size() > 0) this->computeInput(event.keys);
+    bodyMove();
   }
 }
 
@@ -82,4 +83,15 @@ bool NibblerModule::checkCollision(std::pair<int, int> nextPos) {
 
 void NibblerModule::checkApple() {}
 
-void NibblerModule::bodyMove() {}
+void NibblerModule::bodyMove() {
+  std::cout << this->_core->getEntity(snakeWidth).getPrevPos().first
+            << std::endl;
+  for (unsigned int it = 0; it < snakeWidth; ++it) {
+    if (this->_core->getEntity(it).getPrevPos().first != -1)
+      this->_core->getEntity(it + 1).setPos(
+          this->_core->getEntity(it).getPrevPos());
+  }
+  if (this->_core->getEntity(snakeWidth).getPrevPos().first != -1)
+    this->_core->getEntity(99).setPos(
+        this->_core->getEntity(snakeWidth).getPrevPos());
+}

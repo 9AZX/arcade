@@ -28,13 +28,14 @@ class AEntity {
   int getRotation() { return this->_rotation; }
   void setRotation(int angle) { _rotation = angle; }
   bool getAnimated() const noexcept { return _isAnimated; };
+  std::pair<int, int> getPrevPos() const noexcept { return _prevPos; };
 
   const int id;
   int animIt = 0;
 
  protected:
   std::pair<int, int> _pos;
-  std::pair<int, int> _prevPos = _pos;
+  std::pair<int, int> _prevPos = {-1, -1};
   std::pair<float, float> _absCurrentPos;
   bool _isAnimated;
   int _rotation = 0;
