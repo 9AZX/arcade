@@ -58,6 +58,8 @@ class SfmlModule : public IDisplayModule, public IRender {
   void matchInputs(Events &inputs, sf::Keyboard::Key key);
   std::unordered_map<int, std::pair<sf::Sprite, sf::Texture>> _sprites = {};
   sf::Event eventSFML;
+  sf::Music _music;
+  bool _isPlayingMusic = false;
 };
 
 #endif /* !SFMLMODULE_HPP_ */

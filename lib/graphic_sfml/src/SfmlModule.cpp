@@ -23,14 +23,11 @@ const std::string &SfmlModule::getLibraryName() const noexcept {
 }
 
 void SfmlModule::startMusic(std::string path) {
-  sf::SoundBuffer soundBuffer;
-  sf::Sound sound;
-
-  if (!soundBuffer.loadFromFile(path)) std::cout << "Music failed" << std::endl;
-  std::cout << "music..." << std::endl;
-  sound.setBuffer(soundBuffer);
-  sound.setLoop(true);
-  sound.play();
+  if (this->_isPlayingMusic) return;
+  this->_music.openFromFile(path);
+  this->_music.setLoop(true);
+  this->_music.play();
+  this->_isPlayingMusic = true;
 }
 
 void SfmlModule::initGraphics(GameMap &map) {
