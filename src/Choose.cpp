@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:10
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 18:10:09
+** @Last Modified time: 31-03-2019 18:25:09
 */
 
 #include <memory>
@@ -70,6 +70,7 @@ void Choose::sfml_init(Application &app, std::string &lib) {
     while (window->pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         window->close();
+        this->_global_loop = false;
       }
       if (sf::Event::KeyPressed) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && choose < 2) {
@@ -80,16 +81,13 @@ void Choose::sfml_init(Application &app, std::string &lib) {
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
           this->_global_loop = false;
           window->close();
-          return;
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
           app._choose = (choose >= 2 ? 1 : choose);
           this->_global_loop = false;
           window->close();
-          return;
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
-          lib = "ncurses";
-          window->close();
-          return;
+			lib = "ncurses";
+			window->close();
         }
       }
     }
