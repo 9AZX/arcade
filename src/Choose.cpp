@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:10
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 18:37:12
+** @Last Modified time: 31-03-2019 18:48:38
 */
 
 #include <memory>
@@ -89,6 +89,8 @@ void Choose::sfml_init(Application &app, std::string &lib) {
 			lib = "ncurses";
 			app._lib = 2;
 			window->close();
+			window.reset(nullptr);
+			return;
         }
       }
     }
