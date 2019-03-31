@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:10
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 18:25:09
+** @Last Modified time: 31-03-2019 18:37:12
 */
 
 #include <memory>
@@ -87,6 +87,7 @@ void Choose::sfml_init(Application &app, std::string &lib) {
           window->close();
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
 			lib = "ncurses";
+			app._lib = 2;
 			window->close();
         }
       }
@@ -188,6 +189,7 @@ void Choose::print_menu(Application &app, std::string &lib) noexcept {
       break;
     case KEY_F(2):
     	lib = "sfml";
+    	app._lib = 3;
     	this->setLoop(false);
     	break;
     default:
