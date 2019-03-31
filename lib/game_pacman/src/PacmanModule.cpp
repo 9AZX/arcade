@@ -15,12 +15,10 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
   this->_core->storeGameEntity(
       new GameEntity('M', "./assets/pacman/ghost.png", 201,
                      std::make_pair<int, int>(9, 10), false));
-  // this->_core->getEntity(201).isMoving = true;
   this->_core->getEntity(201).moveRandom = true;
   this->_core->storeGameEntity(
       new GameEntity('M', "./assets/pacman/ghost.png", 202,
                      std::make_pair<int, int>(11, 10), false));
-  // this->_core->getEntity(202).isMoving = true;
   this->_core->getEntity(202).moveRandom = true;
 }
 
