@@ -6,7 +6,7 @@
 */
 
 #include "NibblerModule.hpp"
-#include <iostream>
+#include <unistd.h>
 
 NibblerModule::NibblerModule(ICoreModule *core) : _core(core) {
   this->_core->storeGameEntity(
@@ -60,6 +60,7 @@ void NibblerModule::play() {
     eatTail();
     checkApple();
     getScore();
+    usleep(100000);
   }
 }
 
