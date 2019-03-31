@@ -61,6 +61,8 @@ class SfmlModule : public IDisplayModule, public IRender {
   std::unordered_map<int, sf::Text> _texts = {};
   sf::Font _font;
   sf::Event eventSFML;
+  sf::Music _music;
+  bool _isPlayingMusic = false;
 };
 
 #endif /* !SFMLMODULE_HPP_ */

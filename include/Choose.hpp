@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:46
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 01:51:35
+** @Last Modified time: 31-03-2019 17:56:33
 */
 
 #ifndef	CHOOSE_HPP_
@@ -25,19 +25,23 @@ public:
 	Choose() = default;
 	~Choose() = default;
 	void launchLibraries(Application &app, const std::string &path);
+	void init(Application &app, const std::string &defaultInit);
 
 public:
-	void sfml_init(Application &app);
+	void sfml_init(Application &app, std::string &lib);
 
 public:
-	void ncurses_init(Application &app) noexcept;
+	void ncurses_init(Application &app, std::string &lib) noexcept;
 	void print_name() noexcept;
-	void print_menu(Application &app) noexcept;
+	void print_menu(Application &app, std::string &lib) noexcept;
 	void print_game_pacman(int &interval) noexcept;
 	void print_game_nibbler(int &interval) noexcept;
 	int getKey() const noexcept;
 	void setLoop(const bool status) noexcept;
 	void setKey(const int key) noexcept;
+
+public:
+	bool _global_loop = true;
 
 private:
 	WINDOW *_windowLeft = nullptr;
