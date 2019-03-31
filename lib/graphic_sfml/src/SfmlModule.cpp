@@ -138,18 +138,19 @@ void SfmlModule::smoothlyMove(AEntity &entity) {
 void SfmlModule::moveRandom(AEntity *entity) {
   int res = rand() % 4;
   res = (res + entity->id) % 4;
+  std::pair<int, int> pos = entity->getPos();
 
   entity->moveRight = false;
   entity->moveLeft = false;
   entity->moveUp = false;
   entity->moveDown = false;
-  if (res == 0)
+  if (res == 0 && pos.first < 18)
     entity->moveRight = true;
-  else if (res == 1)
+  else if (res == 1 && pos.first > 2)
     entity->moveLeft = true;
-  else if (res == 2)
+  else if (res == 2 && pos.second > 2)
     entity->moveUp = true;
-  else if (res == 3)
+  else if (res == 3 && pos.second < 18)
     entity->moveDown = true;
 }
 
