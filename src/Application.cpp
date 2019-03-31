@@ -26,7 +26,7 @@ void Application::init(const int argc, const char **argv) {
     this->_graphic = std::make_unique<Library>(argv[1]);
     this->_graphic->open();
     this->open_graphical_library();
-    choose->launchLibraries(*this);
+    choose->launchLibraries(*this, argv[1]);
     if (this->_choose != -1) {
       this->_graphClass = (IDisplayModule *)(*this->fptr_graphic)();
       this->_game = std::make_unique<Library>(libraries[this->_choose].path);

@@ -6,6 +6,7 @@
 */
 
 #include "SfmlModule.hpp"
+#include <unistd.h>
 
 SfmlModule::SfmlModule() {
   this->_window = std::make_unique<sf::RenderWindow>(
@@ -53,6 +54,8 @@ void SfmlModule::initGameEntity(AEntity &tmp) {
 
 Events SfmlModule::getInputs() {
   Events actual;
+
+  usleep(100000);
   this->_window->setKeyRepeatEnabled(false);
   while (this->_window->pollEvent(this->eventSFML)) {
     switch (this->eventSFML.type) {
