@@ -24,8 +24,8 @@ ifeq ($(PROJECT_PRODUCTION),$(BOOL_TRUE))
 	ifeq ($(DISP_RETURN_BLANK_LINE),$(BOOL_TRUE))
 		override DISP_RETURN_BLANK_LINE	=	$(BOOL_FALSE)
 	endif
-	$(filter-out -lSDL2_ttf,$(PROJECT_LIB))
-	$(filter-out -lSDL2_image,$(PROJECT_LIB))
+	PROJECT_LIB	:=	$(filter-out -lSDL2_ttf,$())
+	PROJECT_LIB	:=	$(filter-out -lSDL2_image,$(PROJECT_LIB))
 endif
 
 ifeq ($(DISP_SILENT_MODE),$(BOOL_TRUE))
