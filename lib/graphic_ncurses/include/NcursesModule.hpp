@@ -23,8 +23,8 @@ class NcursesModule : public IDisplayModule, public IRender {
   Events getInputs() final;
   bool displayEntity(AEntity &) final;
   void displayMap(GameMap) final;
-  bool renderTextEntity(AEntity &) const final;
-  bool renderGameEntity(AEntity &) const final;
+  bool renderTextEntity(AEntity &) final;
+  bool renderGameEntity(AEntity &) final;
   void destructor() final;
   bool isOpen() const final;
   const std::string &getLibraryName() const noexcept final;

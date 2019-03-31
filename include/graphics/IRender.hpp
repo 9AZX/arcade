@@ -12,8 +12,8 @@
 
 class IRender {
  public:
-  virtual bool renderTextEntity(AEntity &) const = 0;
-  virtual bool renderGameEntity(AEntity &) const = 0;
+  virtual bool renderTextEntity(AEntity &) = 0;
+  virtual bool renderGameEntity(AEntity &) = 0;
 };
 
 #endif /* !IRENDER_HPP_ */

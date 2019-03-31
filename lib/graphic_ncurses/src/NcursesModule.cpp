@@ -29,21 +29,17 @@ Events NcursesModule::getInputs() {
   return actual;
 }
 
-bool NcursesModule::displayEntity(AEntity &tmp) {
-  GameEntity *entity = static_cast<GameEntity *>(&tmp);
-
-  init_pair(2, YELLOW, BLACK);
-  init_pair(3, RED, BLACK);
-
-  if (entity->assetChar == 'P')
-    attron(COLOR_PAIR(3));
-  else
-    attron(COLOR_PAIR(2));
-
-  mvaddch(entity->getPos().second - 1, entity->getPos().first - 1,
-          entity->assetChar);
-  refresh();
-  return true;
+bool NcursesModule::displayEntity(AEntity &entity) {
+  switch (entity.getType()) {
+    case AEntity::GAME:
+      return renderGameEntity(entity);
+      break;
+    case AEntity::TEXT:
+      return renderTextEntity(entity);
+      break;
+    default:
+      return false;
+  }
 }
 
 void NcursesModule::displayMap(GameMap map) {
@@ -64,9 +60,24 @@ bool NcursesModule::isOpen() const { return true; }
 
 void NcursesModule::destructor() { delete this; }
 
-bool NcursesModule::renderTextEntity(AEntity &) const { return true; }
+bool NcursesModule::renderTextEntity(AEntity &entity) { return true; }
 
-bool NcursesModule::renderGameEntity(AEntity &) const { return true; }
+bool NcursesModule::renderGameEntity(AEntity &tmp) {
+  GameEntity *entity = static_cast<GameEntity *>(&tmp);
+
+  init_pair(2, YELLOW, BLACK);
+  init_pair(3, RED, BLACK);
+
+  if (entity->assetChar == 'P')
+    attron(COLOR_PAIR(3));
+  else
+    attron(COLOR_PAIR(2));
+
+  mvaddch(entity->getPos().second - 1, entity->getPos().first - 1,
+          entity->assetChar);
+  refresh();
+  return true;
+}
 
 void NcursesModule::matchInputs(Events &inputs, int key) {
   switch (key) {

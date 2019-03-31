@@ -162,23 +162,16 @@ void SfmlModule::moveGhost(AEntity *entity) {
 }
 
 bool SfmlModule::displayEntity(AEntity &entity) {
-  std::unordered_map<int, std::pair<sf::Sprite, sf::Texture>>::iterator i =
-      this->_sprites.find(entity.id);
-  if (i == this->_sprites.end()) {
-    this->initGameEntity(entity);
+  switch (entity.getType()) {
+    case AEntity::GAME:
+      return renderGameEntity(entity);
+      break;
+    case AEntity::TEXT:
+      return renderTextEntity(entity);
+      break;
+    default:
+      return false;
   }
-  this->_sprites[entity.id].first.setRotation(entity.getRotation());
-  if (entity.isMoving)
-    this->smoothlyMove(entity);
-  else
-    this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
-                                                entity.getPos().second * 32);
-  if (entity.id >= 201) {
-    this->moveRandom(&entity);
-    // this->moveGhost(&entity);
-  }
-  this->_window->draw(this->_sprites[entity.id].first);
-  return true;
 }
 
 void SfmlModule::displayMap(GameMap map) {
@@ -204,9 +197,27 @@ bool SfmlModule::isOpen() const {
 
 void SfmlModule::destructor() { delete this; }
 
-bool SfmlModule::renderTextEntity(AEntity &) const { return true; }
+bool SfmlModule::renderTextEntity(AEntity &) { return true; }
 
-bool SfmlModule::renderGameEntity(AEntity &) const { return false; }
+bool SfmlModule::renderGameEntity(AEntity &entity) {
+  std::unordered_map<int, std::pair<sf::Sprite, sf::Texture>>::iterator i =
+      this->_sprites.find(entity.id);
+  if (i == this->_sprites.end()) {
+    this->initGameEntity(entity);
+  }
+  this->_sprites[entity.id].first.setRotation(entity.getRotation());
+  if (entity.isMoving)
+    this->smoothlyMove(entity);
+  else
+    this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
+                                                entity.getPos().second * 32);
+  if (entity.id >= 201) {
+    this->moveRandom(&entity);
+    // this->moveGhost(&entity);
+  }
+  this->_window->draw(this->_sprites[entity.id].first);
+  return true;
+}
 
 void SfmlModule::matchInputs(Events &inputs, sf::Keyboard::Key key) {
   switch (key) {
