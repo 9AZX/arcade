@@ -10,7 +10,9 @@
 
 #include <stdlib.h>
 #include <time.h>
+#include <fstream>
 #include <memory>
+
 #include "GameEntity.hpp"
 #include "GameMap.hpp"
 #include "TextEntity.hpp"

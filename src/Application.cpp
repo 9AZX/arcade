@@ -154,6 +154,6 @@ void Application::renderAll() {
   this->_graphClass->refreshWindow();
 }
 
-void Application::setMap(GameMap &map) {}
+void Application::setMap(GameMap &) {}
 
 bool Application::isOpen() const { return this->_graphClass->isOpen(); }
