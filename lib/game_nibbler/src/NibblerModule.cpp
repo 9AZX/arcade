@@ -87,31 +87,25 @@ void NibblerModule::computeInput(std::vector<enum gameInputs> keys) {
   switch (ch) {
     case RIGHT:
       resetPos();
-      makeMove(std::pair<int, int>(this->_core->getEntity(0).getPos().first + 1,
-                                   this->_core->getEntity(0).getPos().second));
+      makeMove(std::pair<int, int>(playerPos.first + 1, playerPos.second));
       this->_core->getEntity(0).setRotation(90);
       this->_core->getEntity(0).moveRight = true;
       break;
     case LEFT:
       resetPos();
-      makeMove(std::pair<int, int>(this->_core->getEntity(0).getPos().first - 1,
-                                   this->_core->getEntity(0).getPos().second));
+      makeMove(std::pair<int, int>(playerPos.first - 1, playerPos.second));
       this->_core->getEntity(0).setRotation(270);
       this->_core->getEntity(0).moveLeft = true;
       break;
     case UP:
       resetPos();
-      makeMove(
-          std::pair<int, int>(this->_core->getEntity(0).getPos().first,
-                              this->_core->getEntity(0).getPos().second - 1));
+      makeMove(std::pair<int, int>(playerPos.first, playerPos.second - 1));
       this->_core->getEntity(0).setRotation(0);
       this->_core->getEntity(0).moveUp = true;
       break;
     case DOWN:
       resetPos();
-      makeMove(
-          std::pair<int, int>(this->_core->getEntity(0).getPos().first,
-                              this->_core->getEntity(0).getPos().second + 1));
+      makeMove(std::pair<int, int>(playerPos.first, playerPos.second + 1));
       this->_core->getEntity(0).setRotation(180);
       this->_core->getEntity(0).moveDown = true;
       break;
