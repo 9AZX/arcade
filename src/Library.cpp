@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:05
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 25-03-2019 14:37:14
+** @Last Modified time: 31-03-2019 23:22:51
 */
 
 #include "Library.hpp"
@@ -64,10 +64,18 @@ void Library::openNew(const std::string &path)
 	}
 }
 
-void Library::close()
+void Library::closeSafe()
 {
 	if (this->_handle && dlclose(this->_handle) == -1) {
 		throw Exception(dlerror());
+	}
+	this->_handle = nullptr;
+}
+
+void Library::close()
+{
+	if (this->_handle == nullptr) {
+		return;
 	}
 	this->_handle = nullptr;
 }
