@@ -49,6 +49,7 @@ class PacmanModule : public IGameModule {
           {' ', {"", false, BLACK, BLACK}},
       }};
   std::string musicPath = "./assets/pacman/pacman_chomp.wav";
+  int pacgumRemain = 1;
 };
 
 #endif /* !PACMANMODULE_HPP_ */

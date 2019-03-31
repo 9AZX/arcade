@@ -30,6 +30,15 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
       new GameEntity('M', "./assets/pacman/ghost_yellow.png", 204,
                      std::make_pair<int, int>(10, 9), false));
   this->_core->getEntity(204).moveRandom = true;
+  this->_core->storeGameEntity(
+      new TextEntity(420, "Score: 0", TextEntity::WHITE,
+                     std::make_pair<int, int>(1, 22), false));
+  this->_core->storeGameEntity(
+      new TextEntity(421, "Highscore: ", TextEntity::WHITE,
+                     std::make_pair<int, int>(1, 23), false));
+  this->_core->storeGameEntity(
+      new GameEntity('*', "./assets/pacman/pacgum.png", 100,
+                     std::make_pair<int, int>(14, 16), false));
 }
 
 void PacmanModule::destructor() { delete this; }
@@ -100,6 +109,8 @@ void PacmanModule::play() {
     this->_core->renderAll();
     event = this->_core->getInputs();
     if (event.keys.size() > 0) this->computeInput(event.keys);
+    checkApple();
+    getScore();
   }
 }
 
@@ -107,8 +118,25 @@ void PacmanModule::pauseMenu() {}
 
 void PacmanModule::endGame() {}
 
-long PacmanModule::getScore() const { return 0; }
+long PacmanModule::getScore() const {
+  TextEntity *entity = static_cast<TextEntity *>(&this->_core->getEntity(420));
+
+  entity->setText("Score: " + std::to_string(_score));
+  return _score;
+}
 
 const GameMap &PacmanModule::getMap() const noexcept { return this->_map; }
 
-void PacmanModule::checkApple() {}
+void PacmanModule::checkApple() {
+  std::pair<int, int> playerPos = this->_core->getEntity(0).getPos();
+
+  for (unsigned int i = 0; i < 1; i++) {
+    if ((playerPos.first == _core->getEntity(i + 100).getPos().first) &&
+        (playerPos.second == _core->getEntity(i + 100).getPos().second) &&
+        (this->_core->getEntity(i + 100).isAlive)) {
+      pacgumRemain--;
+      _score += 10;
+      this->_core->getEntity(i + 100).isAlive = false;
+    }
+  }
+}

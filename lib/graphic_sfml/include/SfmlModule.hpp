@@ -16,7 +16,7 @@
 #include "IRender.hpp"
 
 #define SFML_WINDOW_NAME "Arcade"
-#define SFML_WINDOW_WIDTH 700
+#define SFML_WINDOW_WIDTH 780
 #define SFML_WINDOW_HEIGHT 650
 #define SFML_WINDOW_FRAMERATE 60
 
