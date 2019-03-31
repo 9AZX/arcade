@@ -11,6 +11,14 @@ SdlModule::SdlModule() {}
 
 SdlModule::~SdlModule() {}
 
+const std::string &SdlModule::getLibraryName() const noexcept {
+  return this->_name;
+}
+
+void SdlModule::destructor() { delete this; }
+
+bool SdlModule::isOpen() const { return true; }
+
 Events SdlModule::getInputs() {}
 bool SdlModule::displayEntity(AEntity &) {}
 void SdlModule::displayMap(GameMap) {}
@@ -24,3 +32,4 @@ void SdlModule::initGraphics(GameMap &) {}
 void SdlModule::initGameEntity(AEntity &) {}
 void SdlModule::initTextEntity(AEntity &) {}
 void SdlModule::smoothlyMove(AEntity &) {}
+void SdlModule::startMusic(std::string) {}
