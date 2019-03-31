@@ -12,12 +12,15 @@ NibblerModule::NibblerModule(ICoreModule *core) : _core(core) {
   this->_core->storeGameEntity(
       new GameEntity('0', "./assets/nibbler/head-snake.png", 0,
                      std::make_pair<int, int>(12, 10), false));
+  this->_core->getEntity(0).setRotation(90);
   this->_core->storeGameEntity(
       new GameEntity('O', "./assets/nibbler/body-snake.png", 1,
                      std::make_pair<int, int>(11, 10), false));
+  this->_core->getEntity(1).setRotation(90);
   this->_core->storeGameEntity(
       new GameEntity('o', "./assets/nibbler/tail-snake.png", 99,
                      std::make_pair<int, int>(10, 10), false));
+  this->_core->getEntity(99).setRotation(90);
   this->_core->storeGameEntity(
       new GameEntity('P', "./assets/nibbler/apple.png", 100,
                      std::make_pair<int, int>(14, 16), false));
@@ -151,13 +154,19 @@ void NibblerModule::checkApple() {
 
 void NibblerModule::bodyMove() {
   for (unsigned int it = 0; it < snakeWidth; ++it) {
-    if (this->_core->getEntity(it).getPrevPos().first != -1)
+    if (this->_core->getEntity(it).getPrevPos().first != -1) {
       this->_core->getEntity(it + 1).setPos(
           this->_core->getEntity(it).getPrevPos());
+      this->_core->getEntity(it + 1).setRotation(
+          this->_core->getEntity(it).getRotation());
+    }
   }
-  if (this->_core->getEntity(snakeWidth).getPrevPos().first != -1)
+  if (this->_core->getEntity(snakeWidth).getPrevPos().first != -1) {
     this->_core->getEntity(99).setPos(
         this->_core->getEntity(snakeWidth).getPrevPos());
+    this->_core->getEntity(99).setRotation(
+        this->_core->getEntity(snakeWidth).getRotation());
+  }
 }
 
 void NibblerModule::makeMove(std::pair<int, int> pos) {
