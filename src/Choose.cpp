@@ -6,11 +6,12 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:10
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 01:16:42
+** @Last Modified time: 31-03-2019 01:54:26
 */
 
-#include <iostream>
+#include <memory>
 #include "Choose.hpp"
+#include "Exception.hpp"
 
 static const std::string paths[] {
 	"ncurses",
@@ -40,20 +41,43 @@ void Choose::launchLibraries(Application &app, const std::string &path)
 
 void Choose::sfml_init(Application &app)
 {
-	sf::Window window(sf::VideoMode(800, 600), "My window");
+	std::unique_ptr<sf::RenderWindow> window(new sf::RenderWindow(
+		sf::VideoMode(800, 600),
+		"Arcade - Select a game"
+		)
+	);
+	sf::Font font;
+	sf::Text text[2];
 
-	while (window.isOpen()) {
+	if (!font.loadFromFile("./assets/no-continue.regular.ttf")) {
+		throw Exception("Error while loading text font.");
+	}
+	window->setFramerateLimit(30);
+	window->setKeyRepeatEnabled(false);
+	text[0].setString("PAC-MAN");
+	text[1].setString("Nibbler");
+	text[0].setFont(font);
+	text[1].setFont(font);
+	text[0].setCharacterSize(50);
+	text[1].setCharacterSize(50);
+	text[0].setFillColor(sf::Color::White);
+	text[1].setFillColor(sf::Color::White);
+	while (window->isOpen()) {
 		sf::Event event;
 
-		while (window.pollEvent(event)) {
+		while (window->pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				window.close();
+				window->close();
 			}
+			window->clear(sf::Color(0, 0, 0));
+			window->draw(text[0]);
+			//window->draw(text[1]);
+			window->display();
 		}
 	}
 }
 
-void Choose::ncurses_init(Application &app)
+void Choose::ncurses_init(Application &app) noexcept
 {
 	initscr();
 	noecho();
@@ -81,7 +105,7 @@ void Choose::print_name() noexcept
 		this->_windowLeft,
 		1,
 		(COLS / 2) - ((COLS / 4) + 4),
-		"Select a game"
+		"Arcade - Select a game"
 	);
 	wattroff(this->_windowLeft, A_UNDERLINE | A_BOLD);
 }

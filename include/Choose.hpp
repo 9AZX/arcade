@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:46
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 01:15:33
+** @Last Modified time: 31-03-2019 01:51:35
 */
 
 #ifndef	CHOOSE_HPP_
@@ -14,7 +14,9 @@
 
 #include <string>
 #include <ncurses.h>
+#include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include "Application.hpp"
 
 class Choose
@@ -28,7 +30,7 @@ public:
 	void sfml_init(Application &app);
 
 public:
-	void ncurses_init(Application &app);
+	void ncurses_init(Application &app) noexcept;
 	void print_name() noexcept;
 	void print_menu(Application &app) noexcept;
 	void print_game_pacman(int &interval) noexcept;
