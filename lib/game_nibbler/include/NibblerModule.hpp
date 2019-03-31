@@ -57,6 +57,9 @@ class NibblerModule : public IGameModule {
   unsigned int appleRemain = 6;
   void checkApple();
   void bodyMove();
+  void forward();
+  void resetPos();
+  void makeMove(std::pair<int, int>);
 };
 
 #endif /* !NIBBLERMODULE_HPP_ */
