@@ -37,6 +37,7 @@ class AEntity {
   bool moveLeft = false;
   bool moveUp = false;
   bool moveDown = false;
+  bool moveRandom = false;
   bool isAlive = true;
 
  protected:

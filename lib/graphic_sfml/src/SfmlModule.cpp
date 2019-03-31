@@ -44,6 +44,11 @@ void SfmlModule::initGameEntity(AEntity &tmp) {
   this->_sprites[entity->id].first.setTexture(this->_sprites[entity->id].second,
                                               true);
   this->_sprites[entity->id].first.setTextureRect(r1);
+  // if (entity->id >= 201) {
+  // entity->isMoving = true;
+  //   entity->moveRandom = true;
+  //   entity->setPos(std::pair<int, int>(9, 10));
+  // }
 }
 
 Events SfmlModule::getInputs() {
@@ -110,6 +115,19 @@ void SfmlModule::smoothlyMove(AEntity &entity) {
   return;
 }
 
+void SfmlModule::moveRandom(AEntity *entity) {
+  srand((unsigned)time(NULL));
+  int res = rand() % 4;
+  if (res == 0)
+    entity->moveRight = true;
+  else if (res == 1)
+    entity->moveLeft = true;
+  else if (res == 2)
+    entity->moveUp = true;
+  else if (res == 3)
+    entity->moveDown = true;
+}
+
 bool SfmlModule::displayEntity(AEntity &entity) {
   std::unordered_map<int, std::pair<sf::Sprite, sf::Texture>>::iterator i =
       this->_sprites.find(entity.id);
@@ -122,6 +140,10 @@ bool SfmlModule::displayEntity(AEntity &entity) {
   else
     this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
                                                 entity.getPos().second * 32);
+  if (entity.id >= 201) {
+    this->moveRandom(&entity);
+    this->smoothlyMove(entity);
+  }
   this->_window->draw(this->_sprites[entity.id].first);
   return true;
 }
