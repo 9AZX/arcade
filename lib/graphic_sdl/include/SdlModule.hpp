@@ -15,7 +15,7 @@
 #include "IRender.hpp"
 #include "Inputs.hpp"
 
-class SDLModule : public IDisplayModule, public IRender {
+class SdlModule : public IDisplayModule, public IRender {
  public:
   SDLModule();
   ~SDLModule();

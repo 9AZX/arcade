@@ -10,3 +10,18 @@
 SdlModule::SdlModule() {}
 
 SdlModule::~SdlModule() {}
+
+Events SdlModule::getInputs() {}
+bool SdlModule::displayEntity(AEntity &) {}
+void SdlModule::displayMap() {}
+void SdlModule::setMap(GameMap &map) {}
+bool SdlModule::renderTextEntity(AEntity &) {}
+bool SdlModule::renderGameEntity(AEntity &) {}
+void SdlModule::refreshWindow() {}
+
+bool SdlModule::matchInputs(std::vector<enum gameInputs> &inputs,
+                            SDL_Keycode key) {}
+void SdlModule::initGraphics(GameMap &) {}
+void SdlModule::initGameEntity(AEntity &) {}
+void SdlModule::initTextEntity(AEntity &) {}
+void SdlModule::smoothlyMove(AEntity &) {}
