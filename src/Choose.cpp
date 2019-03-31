@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:10
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 18:48:38
+** @Last Modified time: 31-03-2019 22:19:04
 */
 
 #include <memory>
@@ -41,7 +41,17 @@ void Choose::init(Application &app, const std::string &defaultInit)
 		else if (lib == "sfml") {
 			this->sfml_init(app, lib);
 		}
+    else if (lib == "sdl2") {
+      this->sdl2_init(app, lib);
+    }
 	}
+}
+
+void Choose::sdl2_init(Application &app, std::string &lib)
+{
+  std::cout << "sdl2 init" << std::endl;
+  app._choose = 0;
+  this->_global_loop = false;
 }
 
 void Choose::sfml_init(Application &app, std::string &lib) {
@@ -93,6 +103,12 @@ void Choose::sfml_init(Application &app, std::string &lib) {
 			return;
         }
       }
+    }
+    if (choose >= 2) {
+      choose = 1;
+    }
+    else if (choose < 0) {
+      choose = 0;
     }
     window->clear(sf::Color(0, 0, 0));
     if (choose == 0) {

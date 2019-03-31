@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:46
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 17:56:33
+** @Last Modified time: 31-03-2019 22:17:42
 */
 
 #ifndef	CHOOSE_HPP_
@@ -26,6 +26,9 @@ public:
 	~Choose() = default;
 	void launchLibraries(Application &app, const std::string &path);
 	void init(Application &app, const std::string &defaultInit);
+
+public:
+	void sdl2_init(Application &app, std::string &lib);
 
 public:
 	void sfml_init(Application &app, std::string &lib);
