@@ -36,6 +36,12 @@ NibblerModule::NibblerModule(ICoreModule *core) : _core(core) {
   this->_core->storeGameEntity(
       new GameEntity('P', "./assets/nibbler/apple.png", 105,
                      std::make_pair<int, int>(10, 4), false));
+  this->_core->storeGameEntity(
+      new TextEntity(420, "Score: 0", TextEntity::WHITE,
+                     std::make_pair<int, int>(1, 20), false));
+  this->_core->storeGameEntity(
+      new TextEntity(421, "Highscore: ", TextEntity::WHITE,
+                     std::make_pair<int, int>(1, 21), false));
 }
 
 void NibblerModule::destructor() { delete this; }
@@ -53,6 +59,7 @@ void NibblerModule::play() {
     }
     eatTail();
     checkApple();
+    getScore();
   }
 }
 
@@ -60,7 +67,12 @@ void NibblerModule::pauseMenu() {}
 
 void NibblerModule::endGame() {}
 
-long NibblerModule::getScore() const { return 0; }
+long NibblerModule::getScore() const {
+  TextEntity *entity = static_cast<TextEntity *>(&this->_core->getEntity(420));
+
+  entity->setText("Score: " + std::to_string(_score));
+  return _score;
+}
 
 const GameMap &NibblerModule::getMap() const noexcept { return this->_map; }
 
@@ -127,6 +139,7 @@ void NibblerModule::checkApple() {
         (this->_core->getEntity(i + 100).isAlive)) {
       snakeWidth++;
       appleRemain--;
+      _score += 10;
       this->_core->getEntity(i + 100).isAlive = false;
       this->_core->storeGameEntity(new GameEntity(
           'O', "./assets/nibbler/body-snake.png", snakeWidth,

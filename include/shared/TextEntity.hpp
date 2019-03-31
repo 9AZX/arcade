@@ -25,6 +25,7 @@ class TextEntity : public AEntity {
 
   const std::string &getText() const noexcept { return _text; }
   enum TextColor getColor() const noexcept { return _color; }
+  void setText(std::string str) noexcept { _text = str; }
 
  private:
   std::string _text;

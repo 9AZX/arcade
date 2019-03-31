@@ -70,6 +70,7 @@ void SfmlModule::initTextEntity(AEntity &tmp) {
   text.setFont(_font);
   text.setString(entity->getText());
   text.setFillColor(sf::Color::White);
+  text.setCharacterSize(18);
   this->_texts.insert({entity->id, text});
 }
 
@@ -216,6 +217,8 @@ bool SfmlModule::renderTextEntity(AEntity &entity) {
   } else if (textEntity->getText() != this->_texts[entity.id].getString()) {
     this->_texts[entity.id].setString((textEntity->getText()));
   }
+  this->_texts[entity.id].setPosition(entity.getPos().first * 32,
+                                      entity.getPos().second * 32);
   this->_window->draw(this->_texts[entity.id]);
   return true;
 }
