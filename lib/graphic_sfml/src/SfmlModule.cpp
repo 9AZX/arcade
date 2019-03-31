@@ -249,7 +249,7 @@ bool SfmlModule::renderGameEntity(AEntity &entity) {
   else
     this->_sprites[entity.id].first.setPosition(entity.getPos().first * 32,
                                                 entity.getPos().second * 32);
-  if (entity.id >= 201) {
+  if (entity.id >= 401 && entity.id <= 404) {
     this->moveRandom(&entity);
     this->moveGhost(&entity);
   }
