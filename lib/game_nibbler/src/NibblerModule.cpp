@@ -73,8 +73,16 @@ void NibblerModule::endGame() {}
 
 long NibblerModule::getScore() const {
   TextEntity *entity = static_cast<TextEntity *>(&this->_core->getEntity(420));
+  std::fstream file;
+  long highScore = 0;
+
+  file.open("./highscore.txt", std::fstream::out);
+
+  if (highScore < _score) file << _score;
 
   entity->setText("Score: " + std::to_string(_score));
+  entity->setText("Score: " + std::to_string(highScore));
+  file.close();
   return _score;
 }
 
