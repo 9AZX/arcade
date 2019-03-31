@@ -60,7 +60,15 @@ bool NcursesModule::isOpen() const { return true; }
 
 void NcursesModule::destructor() { delete this; }
 
-bool NcursesModule::renderTextEntity(AEntity &entity) { return true; }
+bool NcursesModule::renderTextEntity(AEntity &tmp) {
+  TextEntity *entity = static_cast<TextEntity *>(&tmp);
+
+  attron(COLOR_PAIR(1));
+
+  mvprintw(entity->getPos().second - 1, entity->getPos().first - 1,
+           entity->getText().c_str());
+  return true;
+}
 
 bool NcursesModule::renderGameEntity(AEntity &tmp) {
   GameEntity *entity = static_cast<GameEntity *>(&tmp);
