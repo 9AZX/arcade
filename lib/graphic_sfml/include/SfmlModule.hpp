@@ -23,7 +23,7 @@
 #if defined(__APPLE__)
 #include <TargetConditionals.h>
 #if defined(TARGET_OS_MAC)
-#define SFML_IS_OPEN true
+#define SFML_IS_OPEN this->_window->isOpen()
 #else
 #define SFML_IS_OPEN this->_window->isOpen()
 #endif
