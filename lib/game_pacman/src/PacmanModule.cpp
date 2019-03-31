@@ -123,7 +123,10 @@ void PacmanModule::play() {
 
 void PacmanModule::pauseMenu() {}
 
-void PacmanModule::endGame() {}
+void PacmanModule::endGame() {
+  std::cout << "Game over" << std::endl;
+  std::cout << "Your score: " << this->_score << std::endl;
+}
 
 long PacmanModule::getScore() const {
   TextEntity *entity = static_cast<TextEntity *>(&this->_core->getEntity(420));
@@ -155,7 +158,6 @@ void PacmanModule::collisionGhost() {
   for (unsigned int i = 401; i < 405; i++) {
     if ((playerPos.first == this->_core->getEntity(i).getPos().first) &&
         (playerPos.second == this->_core->getEntity(i).getPos().second)) {
-      std::cout << "you loose" << std::endl;
       this->endGame();
     }
   }
