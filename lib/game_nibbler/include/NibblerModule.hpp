@@ -26,8 +26,12 @@ class NibblerModule : public IGameModule {
   bool checkCollision(std::pair<int, int> nextPos) final;
   void computeInput(std::vector<enum gameInputs> keys);
   std::string getMusicPath() final { return musicPath; };
+  const std::string &getLibraryName() const noexcept final {
+    return this->_name;
+  };
 
  private:
+  const std::string _name = "nibbler";
   ICoreModule *_core;
   const GameMap _map = {
       19, 19,

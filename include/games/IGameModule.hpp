@@ -30,6 +30,7 @@ class IGameModule {
   virtual void destructor() = 0;
   virtual bool checkCollision(std::pair<int, int> nextPos) = 0;
   virtual std::string getMusicPath() = 0;
+  virtual const std::string &getLibraryName() const noexcept = 0;
 
  protected:
   long _score = 0;

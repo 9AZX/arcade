@@ -137,9 +137,19 @@ Events Application::getInputs() {
       this->switchLib(Library::LIB_GRAPHIC, libraries[2].path);
     }
   } else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
-    std::cout << "THREE (game)" << std::endl;
+    if (strcmp(this->_gameClass->getLibraryName().c_str(), "pacman") == 0) {
+      this->switchLib(Library::LIB_GAME, libraries[1].path);
+    } else if (strcmp(this->_gameClass->getLibraryName().c_str(), "nibbler") ==
+               0) {
+      this->switchLib(Library::LIB_GAME, libraries[0].path);
+    }
   } else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
-    std::cout << "FOUR (game)" << std::endl;
+    if (strcmp(this->_gameClass->getLibraryName().c_str(), "pacman") == 0) {
+      this->switchLib(Library::LIB_GAME, libraries[1].path);
+    } else if (strcmp(this->_gameClass->getLibraryName().c_str(), "nibbler") ==
+               0) {
+      this->switchLib(Library::LIB_GAME, libraries[0].path);
+    }
   }
   return input;
 }

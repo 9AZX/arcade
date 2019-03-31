@@ -28,8 +28,12 @@ class PacmanModule : public IGameModule {
   bool checkCollision(std::pair<int, int> nextPos) final;
   void checkApple();
   std::string getMusicPath() final { return musicPath; };
+  const std::string &getLibraryName() const noexcept final {
+    return this->_name;
+  };
 
  private:
+  const std::string _name = "pacman";
   ICoreModule *_core;
   const GameMap _map = {
       21, 19,
