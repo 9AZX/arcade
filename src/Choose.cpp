@@ -6,11 +6,12 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:10
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 03:23:01
+** @Last Modified time: 31-03-2019 18:10:09
 */
 
-#include "Choose.hpp"
 #include <memory>
+#include <iostream>
+#include "Choose.hpp"
 #include "Exception.hpp"
 
 static const std::string paths[]{"ncurses", "sfml", "sdl2"};
@@ -19,13 +20,9 @@ void Choose::launchLibraries(Application &app, const std::string &path) {
   try {
     for (const auto &e : paths) {
       std::size_t found = path.find(e);
-      ;
       if (found != std::string::npos) {
-        if (e == "ncurses") {
-          this->ncurses_init(app);
-        } else if (e == "sfml") {
-          this->sfml_init(app);
-        }
+		this->init(app, e);
+		return;
       }
     }
   } catch (...) {
@@ -33,7 +30,21 @@ void Choose::launchLibraries(Application &app, const std::string &path) {
   }
 }
 
-void Choose::sfml_init(Application &app) {
+void Choose::init(Application &app, const std::string &defaultInit)
+{
+	std::string lib = defaultInit;
+
+	while (this->_global_loop) {
+		if (lib == "ncurses") {
+			this->ncurses_init(app, lib);
+		}
+		else if (lib == "sfml") {
+			this->sfml_init(app, lib);
+		}
+	}
+}
+
+void Choose::sfml_init(Application &app, std::string &lib) {
   int choose = 0;
   std::unique_ptr<sf::RenderWindow> window(
       new sf::RenderWindow(sf::VideoMode(800, 600), "Arcade - Select a game"));
@@ -67,9 +78,17 @@ void Choose::sfml_init(Application &app) {
                    choose > 0) {
           --choose;
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+          this->_global_loop = false;
+          window->close();
           return;
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
           app._choose = (choose >= 2 ? 1 : choose);
+          this->_global_loop = false;
+          window->close();
+          return;
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+          lib = "ncurses";
+          window->close();
           return;
         }
       }
@@ -84,7 +103,7 @@ void Choose::sfml_init(Application &app) {
   }
 }
 
-void Choose::ncurses_init(Application &app) noexcept {
+void Choose::ncurses_init(Application &app, std::string &lib) noexcept {
   initscr();
   noecho();
   cbreak();
@@ -99,7 +118,7 @@ void Choose::ncurses_init(Application &app) noexcept {
   curs_set(0);
   while (this->_loop) {
     this->print_name();
-    this->print_menu(app);
+    this->print_menu(app, lib);
   }
   endwin();
 }
@@ -111,7 +130,7 @@ void Choose::print_name() noexcept {
   wattroff(this->_windowLeft, A_UNDERLINE | A_BOLD);
 }
 
-void Choose::print_menu(Application &app) noexcept {
+void Choose::print_menu(Application &app, std::string &lib) noexcept {
   int interval = 1;
   static int highlight = 0;
   std::string disp = "";
@@ -163,10 +182,16 @@ void Choose::print_menu(Application &app) noexcept {
     case 10:
       app._choose = highlight;
       this->setLoop(false);
+      this->_global_loop = false;
       break;
     case 27:
       this->setLoop(false);
+      this->_global_loop = false;
       break;
+    case KEY_F(2):
+    	lib = "sfml";
+    	this->setLoop(false);
+    	break;
     default:
       break;
   }
