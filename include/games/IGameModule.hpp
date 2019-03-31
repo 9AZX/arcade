@@ -30,7 +30,7 @@ class IGameModule {
   virtual std::string getMusicPath() = 0;
 
  protected:
-  long _score = -1;
+  long _score = 0;
   std::string musicPath;
 };
 
