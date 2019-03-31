@@ -115,14 +115,18 @@ void PacmanModule::play() {
     this->_core->renderAll();
     event = this->_core->getInputs();
     if (event.keys.size() > 0) this->computeInput(event.keys);
-    checkApple();
-    getScore();
+    this->checkApple();
+    this->collisionGhost();
+    this->getScore();
   }
 }
 
 void PacmanModule::pauseMenu() {}
 
-void PacmanModule::endGame() {}
+void PacmanModule::endGame() {
+  std::cout << "Game over" << std::endl;
+  std::cout << "Your score: " << this->_score << std::endl;
+}
 
 long PacmanModule::getScore() const {
   TextEntity *entity = static_cast<TextEntity *>(&this->_core->getEntity(420));
@@ -144,6 +148,17 @@ void PacmanModule::checkApple() {
       pacgumRemain--;
       _score += 10;
       this->_core->getEntity(i + 1000).isAlive = false;
+    }
+  }
+}
+
+void PacmanModule::collisionGhost() {
+  std::pair<int, int> playerPos = this->_core->getEntity(0).getPos();
+
+  for (unsigned int i = 401; i < 405; i++) {
+    if ((playerPos.first == this->_core->getEntity(i).getPos().first) &&
+        (playerPos.second == this->_core->getEntity(i).getPos().second)) {
+      this->endGame();
     }
   }
 }

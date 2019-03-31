@@ -32,6 +32,7 @@ class PacmanModule : public IGameModule {
   const std::string &getLibraryName() const noexcept final {
     return this->_name;
   };
+  void collisionGhost();
 
  private:
   const std::string _name = "pacman";
@@ -81,4 +82,3 @@ class PacmanModule : public IGameModule {
   int pacgumRemain = this->_pacgumPos.size();
 };
 #endif /* !PACMANMODULE_HPP_ */
-

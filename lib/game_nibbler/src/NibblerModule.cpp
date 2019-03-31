@@ -69,7 +69,10 @@ void NibblerModule::play() {
 
 void NibblerModule::pauseMenu() {}
 
-void NibblerModule::endGame() {}
+void NibblerModule::endGame() {
+  std::cout << "Game over" << std::endl;
+  std::cout << "Your score: " << this->_score << std::endl;
+}
 
 long NibblerModule::getScore() const {
   TextEntity *entity = static_cast<TextEntity *>(&this->_core->getEntity(420));
