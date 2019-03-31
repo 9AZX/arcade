@@ -71,6 +71,7 @@ void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
     this->_core->getEntity(0).setRotation(0);
     if (this->checkCollision(
             std::pair<int, int>(playerPos.first + 1, playerPos.second))) {
+      resetPos();
       this->_core->getEntity(0).moveRight = true;
       this->_core->getEntity(0).isMoving = true;
       this->_core->getEntity(0).setPos(
@@ -80,6 +81,7 @@ void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
     this->_core->getEntity(0).moveLeft = true;
     if (this->checkCollision(
             std::pair<int, int>(playerPos.first - 1, playerPos.second))) {
+      resetPos();
       this->_core->getEntity(0).isMoving = true;
       this->_core->getEntity(0).setRotation(180);
       this->_core->getEntity(0).setPos(
@@ -89,6 +91,7 @@ void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
     this->_core->getEntity(0).moveUp = true;
     if (this->checkCollision(
             std::pair<int, int>(playerPos.first, playerPos.second - 1))) {
+      resetPos();
       this->_core->getEntity(0).isMoving = true;
       this->_core->getEntity(0).setRotation(270);
       this->_core->getEntity(0).setPos(
@@ -98,6 +101,7 @@ void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
     this->_core->getEntity(0).moveDown = true;
     if (this->checkCollision(
             std::pair<int, int>(playerPos.first, playerPos.second + 1))) {
+      resetPos();
       this->_core->getEntity(0).isMoving = true;
       this->_core->getEntity(0).setRotation(90);
       this->_core->getEntity(0).setPos(
@@ -106,6 +110,13 @@ void PacmanModule::computeInput(std::vector<enum gameInputs> keys) {
   } else if (keys.back() == ESCAPE) {
     std::cout << "You quit the game" << std::endl;
   }
+}
+
+void PacmanModule::resetPos() {
+  this->_core->getEntity(0).moveUp = false;
+  this->_core->getEntity(0).moveDown = false;
+  this->_core->getEntity(0).moveLeft = false;
+  this->_core->getEntity(0).moveRight = false;
 }
 
 void PacmanModule::play() {

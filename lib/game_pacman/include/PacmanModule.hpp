@@ -80,5 +80,6 @@ class PacmanModule : public IGameModule {
       {14, 20}, {15, 20}, {16, 20}, {17, 20}, {18, 20},
   };
   int pacgumRemain = this->_pacgumPos.size();
+  void resetPos();
 };
 #endif /* !PACMANMODULE_HPP_ */

@@ -42,13 +42,11 @@ class SdlModule : public IDisplayModule, public IRender {
   void initGameEntity(AEntity &);
   void initTextEntity(AEntity &);
   void smoothlyMove(AEntity &);
-  GameMap *_map;
   std::unordered_map<int, SDL_Texture *> _sprites;
   SDL_Window *_window;
   SDL_Renderer *_renderer;
   SDL_Surface *_screen;
-  TTF_Font *_default_font;
-  SDL_Color WHITE = {255, 255, 255, 255};
+  TTF_Font *_font;
 };
 
 #endif /* ifndef SDL_MODULE_HPP_ */

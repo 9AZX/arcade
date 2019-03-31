@@ -23,7 +23,7 @@ const std::string &NcursesModule::getLibraryName() const noexcept {
 Events NcursesModule::getInputs() {
   Events actual;
   int ch = 'a';
-  halfdelay(5);
+  halfdelay(3);
 
   if ((ch = getch()) != ERR) this->matchInputs(actual, ch);
   return actual;
