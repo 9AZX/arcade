@@ -11,22 +11,25 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <iostream>
+#include <memory>
+#include <unordered_map>
+#include <vector>
 #include "IDisplayModule.hpp"
 #include "IRender.hpp"
 #include "Inputs.hpp"
 
 class SdlModule : public IDisplayModule, public IRender {
  public:
-  SDLModule();
-  ~SDLModule();
+  SdlModule();
+  ~SdlModule();
 
   Events getInputs() final;
   bool displayEntity(AEntity &) final;
-  void displayMap() final;
-  void setMap(GameMap &map) final;
+  void displayMap(GameMap) final;
   bool renderTextEntity(AEntity &) final;
   bool renderGameEntity(AEntity &) final;
-  void refreshWindow() final;
+  void refreshWindow() const noexcept final;
 
  private:
   bool matchInputs(std::vector<enum gameInputs> &inputs, SDL_Keycode key);
@@ -37,8 +40,7 @@ class SdlModule : public IDisplayModule, public IRender {
 
  private:
   GameMap *_map;
-  std::map<char, SDL_Texture *> _mapSprites;
-  std::unordered_map<int, SDL_Texture *> _entityCache;
+  std::unordered_map<int, SDL_Texture *> _sprites;
   SDL_Window *_window;
   SDL_Renderer *_renderer;
   SDL_Surface *_screen;
