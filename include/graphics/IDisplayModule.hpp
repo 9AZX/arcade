@@ -14,6 +14,7 @@
 #include "GameEntity.hpp"
 #include "GameMap.hpp"
 #include "Inputs.hpp"
+#include "TextEntity.hpp"
 
 class IDisplayModule {
  public:

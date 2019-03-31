@@ -54,9 +54,12 @@ class SfmlModule : public IDisplayModule, public IRender {
   const std::string _name = "sfml";
   void initGraphics(GameMap &);
   void initGameEntity(AEntity &);
+  void initTextEntity(AEntity &);
   std::unique_ptr<sf::RenderWindow> _window = nullptr;
   void matchInputs(Events &inputs, sf::Keyboard::Key key);
   std::unordered_map<int, std::pair<sf::Sprite, sf::Texture>> _sprites = {};
+  std::unordered_map<int, sf::Text> _texts = {};
+  sf::Font _font;
   sf::Event eventSFML;
 };
 
