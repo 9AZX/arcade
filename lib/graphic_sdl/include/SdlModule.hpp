@@ -22,23 +22,26 @@
 class SdlModule : public IDisplayModule, public IRender {
  public:
   SdlModule();
-  ~SdlModule();
+  virtual ~SdlModule();
 
   Events getInputs() final;
+  void destructor() final;
+  bool isOpen() const final;
   bool displayEntity(AEntity &) final;
   void displayMap(GameMap) final;
   bool renderTextEntity(AEntity &) final;
   bool renderGameEntity(AEntity &) final;
   void refreshWindow() const noexcept final;
+  const std::string &getLibraryName() const noexcept final;
+  void startMusic(std::string) final;
 
  private:
+  const std::string _name = "sdl";
   bool matchInputs(std::vector<enum gameInputs> &inputs, SDL_Keycode key);
   void initGraphics(GameMap &);
   void initGameEntity(AEntity &);
   void initTextEntity(AEntity &);
   void smoothlyMove(AEntity &);
-
- private:
   GameMap *_map;
   std::unordered_map<int, SDL_Texture *> _sprites;
   SDL_Window *_window;
