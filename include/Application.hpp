@@ -39,6 +39,7 @@ class Application : public ICoreModule {
 
 public:
   int _choose = -1;
+  int _lib = -1;
 
  protected:
   std::unique_ptr<Library> _game = nullptr;
