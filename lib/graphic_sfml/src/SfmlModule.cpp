@@ -55,7 +55,6 @@ void SfmlModule::initGameEntity(AEntity &tmp) {
 Events SfmlModule::getInputs() {
   Events actual;
 
-  usleep(100000);
   this->_window->setKeyRepeatEnabled(false);
   while (this->_window->pollEvent(this->eventSFML)) {
     switch (this->eventSFML.type) {
@@ -131,6 +130,26 @@ void SfmlModule::moveRandom(AEntity *entity) {
     entity->moveDown = true;
 }
 
+void SfmlModule::moveGhost(AEntity *entity) {
+  std::pair<int, int> pos = entity->getPos();
+  std::cout << pos.first << " " << pos.second << std::endl;
+  if (entity->animIt < 16) {
+    if (entity->moveRight) {
+      // this->_sprites[201].first.setPosition(5, 5);
+      entity->setPos(std::pair<int, int>(pos.first + 2, pos.second));
+      entity->moveRight = false;
+      // std::cout << "right" << std::endl;
+    } else if (entity->moveLeft)
+      this->_sprites[201].first.move(-2, 0);
+    else if (entity->moveUp)
+      this->_sprites[201].first.move(0, -2);
+    else if (entity->moveDown)
+      this->_sprites[201].first.move(0, 2);
+  } else {
+    entity->animIt = 0;
+  }
+}
+
 bool SfmlModule::displayEntity(AEntity &entity) {
   std::unordered_map<int, std::pair<sf::Sprite, sf::Texture>>::iterator i =
       this->_sprites.find(entity.id);
@@ -145,7 +164,7 @@ bool SfmlModule::displayEntity(AEntity &entity) {
                                                 entity.getPos().second * 32);
   if (entity.id >= 201) {
     this->moveRandom(&entity);
-    this->smoothlyMove(entity);
+    // this->moveGhost(&entity);
   }
   this->_window->draw(this->_sprites[entity.id].first);
   return true;
