@@ -48,8 +48,9 @@ void NibblerModule::play() {
     event = this->_core->getInputs();
     if (event.keys.size() > 0) {
       this->computeInput(event.keys);
+    } else {
+      forward();
     }
-    forward();
     checkApple();
   }
 }
@@ -119,10 +120,10 @@ bool NibblerModule::checkCollision(std::pair<int, int> nextPos) {
 void NibblerModule::checkApple() {
   std::pair<int, int> playerPos = this->_core->getEntity(0).getPos();
 
-  for (unsigned int i = 0; i < appleRemain; i++) {
+  for (unsigned int i = 0; i < 6; i++) {
     if ((playerPos.first == _core->getEntity(i + 100).getPos().first) &&
         (playerPos.second == _core->getEntity(i + 100).getPos().second) &&
-        this->_core->getEntity(i + 100).isAlive) {
+        (this->_core->getEntity(i + 100).isAlive)) {
       snakeWidth++;
       appleRemain--;
       this->_core->getEntity(i + 100).isAlive = false;
