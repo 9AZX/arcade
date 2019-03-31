@@ -18,7 +18,12 @@ PROJECT_BINARY_NAME	:=	"arcade"
 
 PROJECT_LIBRARY_DIR	:=	-L./build/
 
-PROJECT_LIB	:=	-lncurses -ldl -ltools
+PROJECT_LIB	:=	-lncurses	\
+			-lsfml-graphics	\
+			-lsfml-window	\
+			-lsfml-system	\
+			-ldl		\
+			-ltools
 
 PROJECT_INCLUDE	:=	-I./build/include/	\
 			-I./include/games/	\

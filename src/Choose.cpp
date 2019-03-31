@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:10
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 01:08:29
+** @Last Modified time: 31-03-2019 01:16:42
 */
 
 #include <iostream>
@@ -27,11 +27,29 @@ void Choose::launchLibraries(Application &app, const std::string &path)
 				if (e == "ncurses") {
 					this->ncurses_init(app);
 				}
+				else if (e == "sfml") {
+					this->sfml_init(app);
+				}
 			}
 		}
 	}
 	catch (...) {
 		throw;
+	}
+}
+
+void Choose::sfml_init(Application &app)
+{
+	sf::Window window(sf::VideoMode(800, 600), "My window");
+
+	while (window.isOpen()) {
+		sf::Event event;
+
+		while (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
+		}
 	}
 }
 
