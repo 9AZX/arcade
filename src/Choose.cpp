@@ -6,13 +6,36 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:10
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 30-03-2019 20:11:39
+** @Last Modified time: 31-03-2019 01:08:29
 */
 
 #include <iostream>
 #include "Choose.hpp"
 
-void Choose::launchLibraries(Application &app)
+static const std::string paths[] {
+	"ncurses",
+	"sfml",
+	"sdl2"
+};
+
+void Choose::launchLibraries(Application &app, const std::string &path)
+{
+	try {
+		for (const auto &e : paths) {
+			std::size_t found = path.find(e);;
+			if (found != std::string::npos) {
+				if (e == "ncurses") {
+					this->ncurses_init(app);
+				}
+			}
+		}
+	}
+	catch (...) {
+		throw;
+	}
+}
+
+void Choose::ncurses_init(Application &app)
 {
 	initscr();
 	noecho();
@@ -51,8 +74,8 @@ void Choose::print_menu(Application &app) noexcept
 	static int highlight = 0;
 	std::string disp = "";
 	std::string module_name[4] = {
-		"GAME / PAC-MAN",
-		"GAME / Nibbler"
+		"PAC-MAN",
+		"Nibbler"
 	};
 	static bool module_state[4] = {
 		true,
