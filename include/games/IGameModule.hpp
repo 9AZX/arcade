@@ -13,6 +13,7 @@
 #include <memory>
 #include "GameEntity.hpp"
 #include "GameMap.hpp"
+#include "TextEntity.hpp"
 
 class IGameModule {
  public:

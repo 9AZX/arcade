@@ -14,6 +14,9 @@ SfmlModule::SfmlModule() {
   this->_window->setFramerateLimit(SFML_WINDOW_FRAMERATE);
   this->_window->setKeyRepeatEnabled(false);
   this->_window->clear();
+  if (!_font.loadFromFile("./assets/retro.ttf")) {
+    throw;
+  }
 }
 
 SfmlModule::~SfmlModule() {}
@@ -58,6 +61,16 @@ void SfmlModule::initGameEntity(AEntity &tmp) {
   //   entity->moveRandom = true;
   //   entity->setPos(std::pair<int, int>(9, 10));
   // }
+}
+
+void SfmlModule::initTextEntity(AEntity &tmp) {
+  sf::Text text;
+  TextEntity *entity = static_cast<TextEntity *>(&tmp);
+
+  text.setFont(_font);
+  text.setString(entity->getText());
+  text.setFillColor(sf::Color::White);
+  this->_texts.insert({entity->id, text});
 }
 
 Events SfmlModule::getInputs() {
@@ -194,11 +207,21 @@ bool SfmlModule::isOpen() const {
 
 void SfmlModule::destructor() { delete this; }
 
-bool SfmlModule::renderTextEntity(AEntity &) { return true; }
+bool SfmlModule::renderTextEntity(AEntity &entity) {
+  auto i = this->_texts.find(entity.id);
+  const auto textEntity = static_cast<TextEntity *>(&entity);
+
+  if (i == this->_texts.end()) {
+    initTextEntity(entity);
+  } else if (textEntity->getText() != this->_texts[entity.id].getString()) {
+    this->_texts[entity.id].setString((textEntity->getText()));
+  }
+  this->_window->draw(this->_texts[entity.id]);
+  return true;
+}
 
 bool SfmlModule::renderGameEntity(AEntity &entity) {
-  std::unordered_map<int, std::pair<sf::Sprite, sf::Texture>>::iterator i =
-      this->_sprites.find(entity.id);
+  auto i = this->_sprites.find(entity.id);
   if (i == this->_sprites.end()) {
     this->initGameEntity(entity);
   }
