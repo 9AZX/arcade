@@ -20,6 +20,16 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
       new GameEntity('M', "./assets/pacman/ghost.png", 202,
                      std::make_pair<int, int>(11, 10), false));
   this->_core->getEntity(202).moveRandom = true;
+
+  this->_core->storeGameEntity(
+      new GameEntity('M', "./assets/pacman/ghost.png", 203,
+                     std::make_pair<int, int>(10, 10), false));
+  this->_core->getEntity(203).moveRandom = true;
+
+  this->_core->storeGameEntity(
+      new GameEntity('M', "./assets/pacman/ghost.png", 204,
+                     std::make_pair<int, int>(10, 9), false));
+  this->_core->getEntity(204).moveRandom = true;
 }
 
 void PacmanModule::destructor() { delete this; }

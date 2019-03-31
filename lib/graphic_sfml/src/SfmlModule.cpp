@@ -14,6 +14,7 @@ SfmlModule::SfmlModule() {
   this->_window->setFramerateLimit(SFML_WINDOW_FRAMERATE);
   this->_window->setKeyRepeatEnabled(false);
   this->_window->clear();
+  srand((unsigned)time(NULL));
 }
 
 SfmlModule::~SfmlModule() {}
@@ -53,11 +54,6 @@ void SfmlModule::initGameEntity(AEntity &tmp) {
   this->_sprites[entity->id].first.setTexture(this->_sprites[entity->id].second,
                                               true);
   this->_sprites[entity->id].first.setTextureRect(r1);
-  // if (entity->id >= 201) {
-  // entity->isMoving = true;
-  //   entity->moveRandom = true;
-  //   entity->setPos(std::pair<int, int>(9, 10));
-  // }
 }
 
 Events SfmlModule::getInputs() {
@@ -126,8 +122,13 @@ void SfmlModule::smoothlyMove(AEntity &entity) {
 }
 
 void SfmlModule::moveRandom(AEntity *entity) {
-  srand((unsigned)time(NULL));
   int res = rand() % 4;
+  res = (res + entity->id) % 4;
+
+  entity->moveRight = false;
+  entity->moveLeft = false;
+  entity->moveUp = false;
+  entity->moveDown = false;
   if (res == 0)
     entity->moveRight = true;
   else if (res == 1)
@@ -140,21 +141,34 @@ void SfmlModule::moveRandom(AEntity *entity) {
 
 void SfmlModule::moveGhost(AEntity *entity) {
   std::pair<int, int> pos = entity->getPos();
-  std::cout << pos.first << " " << pos.second << std::endl;
-  if (entity->animIt < 16) {
+  if (entity->animIt == 16) {
     if (entity->moveRight) {
-      // this->_sprites[201].first.setPosition(5, 5);
-      entity->setPos(std::pair<int, int>(pos.first + 2, pos.second));
+      entity->setPos(std::pair<int, int>(pos.first + 1, pos.second));
       entity->moveRight = false;
-      // std::cout << "right" << std::endl;
-    } else if (entity->moveLeft)
-      this->_sprites[201].first.move(-2, 0);
-    else if (entity->moveUp)
-      this->_sprites[201].first.move(0, -2);
-    else if (entity->moveDown)
-      this->_sprites[201].first.move(0, 2);
-  } else {
+      entity->animIt = 16;
+
+    } else if (entity->moveLeft) {
+      entity->setPos(std::pair<int, int>(pos.first - 1, pos.second));
+      entity->moveLeft = false;
+      entity->animIt = 16;
+
+      this->_sprites[201].first.move(-1, 0);
+    } else if (entity->moveUp) {
+      entity->moveUp = false;
+      entity->animIt = 16;
+
+      entity->setPos(std::pair<int, int>(pos.first, pos.second - 1));
+      this->_sprites[201].first.move(0, -1);
+    } else if (entity->moveDown) {
+      entity->moveDown = false;
+      entity->animIt = 16;
+
+      entity->setPos(std::pair<int, int>(pos.first, pos.second + 1));
+      this->_sprites[201].first.move(0, 1);
+    }
     entity->animIt = 0;
+  } else {
+    entity->animIt += 1;
   }
 }
 
@@ -210,7 +224,7 @@ bool SfmlModule::renderGameEntity(AEntity &entity) {
                                                 entity.getPos().second * 32);
   if (entity.id >= 201) {
     this->moveRandom(&entity);
-    // this->moveGhost(&entity);
+    this->moveGhost(&entity);
   }
   this->_window->draw(this->_sprites[entity.id].first);
   return true;
