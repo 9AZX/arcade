@@ -120,6 +120,8 @@ void NibblerModule::computeInput(std::vector<enum gameInputs> keys) {
     case ESCAPE:
       std::cout << "You quit the game" << std::endl;
       break;
+    default:
+      break;
   }
 }
 
