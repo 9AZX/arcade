@@ -15,14 +15,27 @@ PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
   this->_core->storeGameEntity(
       new GameEntity('M', "./assets/pacman/ghost.png", 201,
                      std::make_pair<int, int>(9, 10), false));
+  // this->_core->getEntity(201).isMoving = true;
+  this->_core->getEntity(201).moveRandom = true;
   this->_core->storeGameEntity(
       new GameEntity('M', "./assets/pacman/ghost.png", 202,
                      std::make_pair<int, int>(11, 10), false));
+  // this->_core->getEntity(202).isMoving = true;
+  this->_core->getEntity(202).moveRandom = true;
 }
 
 void PacmanModule::destructor() { delete this; }
 
 bool PacmanModule::checkCollision(std::pair<int, int> nextPos) {
+  if (nextPos.first == 20 && nextPos.second == 10) {
+    this->_core->getEntity(0).setPos(std::pair<int, int>(1, 10));
+    return false;
+  }
+  if (nextPos.first == 0 && nextPos.second == 10) {
+    this->_core->getEntity(0).setPos(std::pair<int, int>(19, 10));
+    this->_core->getEntity(0).setRotation(180);
+    return false;
+  }
   char cell = this->_map.grid.at(nextPos.second - 1).at(nextPos.first - 1);
   if (this->_map.blockProperties.at(cell).isSolid) return false;
   return true;

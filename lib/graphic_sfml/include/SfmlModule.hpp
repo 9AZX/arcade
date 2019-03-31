@@ -46,6 +46,7 @@ class SfmlModule : public IDisplayModule, public IRender {
   const std::string &getLibraryName() const noexcept final;
   void refreshWindow() const noexcept final;
   void smoothlyMove(AEntity &);
+  void moveRandom(AEntity *);
 
  private:
   const std::string _name = "sfml";
