@@ -9,36 +9,42 @@
 #include <iostream>
 
 PacmanModule::PacmanModule(ICoreModule *core) : _core(core) {
+  this->initPacgums();
   this->_core->storeGameEntity(
       new GameEntity('C', "./assets/pacman/pacmans.png", 0,
                      std::make_pair<int, int>(10, 12), true));
   this->_core->storeGameEntity(
-      new GameEntity('M', "./assets/pacman/ghost_red.png", 201,
+      new GameEntity('M', "./assets/pacman/ghost_red.png", 401,
                      std::make_pair<int, int>(9, 10), false));
-  this->_core->getEntity(201).moveRandom = true;
+  this->_core->getEntity(401).moveRandom = true;
   this->_core->storeGameEntity(
-      new GameEntity('M', "./assets/pacman/ghost_blue.png", 202,
+      new GameEntity('M', "./assets/pacman/ghost_blue.png", 402,
                      std::make_pair<int, int>(11, 10), false));
-  this->_core->getEntity(202).moveRandom = true;
+  this->_core->getEntity(402).moveRandom = true;
 
   this->_core->storeGameEntity(
-      new GameEntity('M', "./assets/pacman/ghost_green.png", 203,
+      new GameEntity('M', "./assets/pacman/ghost_green.png", 403,
                      std::make_pair<int, int>(10, 10), false));
-  this->_core->getEntity(203).moveRandom = true;
+  this->_core->getEntity(403).moveRandom = true;
 
   this->_core->storeGameEntity(
-      new GameEntity('M', "./assets/pacman/ghost_yellow.png", 204,
+      new GameEntity('M', "./assets/pacman/ghost_yellow.png", 404,
                      std::make_pair<int, int>(10, 9), false));
-  this->_core->getEntity(204).moveRandom = true;
+  this->_core->getEntity(404).moveRandom = true;
   this->_core->storeGameEntity(
       new TextEntity(420, "Score: 0", TextEntity::WHITE,
                      std::make_pair<int, int>(1, 22), false));
   this->_core->storeGameEntity(
       new TextEntity(421, "Highscore: ", TextEntity::WHITE,
                      std::make_pair<int, int>(1, 23), false));
-  this->_core->storeGameEntity(
-      new GameEntity('*', "./assets/pacman/pacgum.png", 100,
-                     std::make_pair<int, int>(14, 16), false));
+}
+
+void PacmanModule::initPacgums() {
+  for (unsigned int it = 0; it < this->_pacgumPos.size(); it++) {
+    this->_core->storeGameEntity(
+        new GameEntity('*', "./assets/pacman/pacgum.png", 1000 + it,
+                       this->_pacgumPos[it], false));
+  }
 }
 
 void PacmanModule::destructor() { delete this; }
@@ -130,13 +136,14 @@ const GameMap &PacmanModule::getMap() const noexcept { return this->_map; }
 void PacmanModule::checkApple() {
   std::pair<int, int> playerPos = this->_core->getEntity(0).getPos();
 
-  for (unsigned int i = 0; i < 1; i++) {
-    if ((playerPos.first == _core->getEntity(i + 100).getPos().first) &&
-        (playerPos.second == _core->getEntity(i + 100).getPos().second) &&
-        (this->_core->getEntity(i + 100).isAlive)) {
+  for (unsigned int i = 0; i < this->_pacgumPos.size(); i++) {
+    if ((playerPos.first == this->_core->getEntity(i + 1000).getPos().first) &&
+        (playerPos.second ==
+         this->_core->getEntity(i + 1000).getPos().second) &&
+        (this->_core->getEntity(i + 1000).isAlive)) {
       pacgumRemain--;
       _score += 10;
-      this->_core->getEntity(i + 100).isAlive = false;
+      this->_core->getEntity(i + 1000).isAlive = false;
     }
   }
 }
