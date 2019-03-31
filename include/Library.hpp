@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   13-03-2019 11:29:35
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 25-03-2019 14:10:31
+** @Last Modified time: 31-03-2019 22:14:10
 */
 
 #ifndef	LIBRARY_HPP_
@@ -36,11 +36,13 @@
 #	define	LIB_GAME_PACMAN		"./games/lib_arcade_pacman.dylib"
 #	define	LIB_GRAPHIC_NCURSES	"./lib/lib_arcade_ncurses.dylib"
 #	define	LIB_GRAPHIC_SFML	"./lib/lib_arcade_sfml.dylib"
+#	define	LIB_GRAPHIC_SDL2	"./lib/lib_arcade_sdl2.dylib"
 #elif	defined(LIBRARY_PLATEFORM_FNC) && LIBRARY_PLATEFORM_FNC == 1
 #	define	LIB_GAME_NIBBLER	"./games/lib_arcade_nibbler.so"
 #	define	LIB_GAME_PACMAN		"./games/lib_arcade_pacman.so"
 #	define	LIB_GRAPHIC_NCURSES	"./lib/lib_arcade_ncurses.so"
 #	define	LIB_GRAPHIC_SFML	"./lib/lib_arcade_sfml.so"
+#	define	LIB_GRAPHIC_SDL2	"./lib/lib_arcade_sdl2.so"
 #endif
 
 class Library

@@ -15,7 +15,8 @@ static const struct libs libraries[] = {
     {Library::LIB_GAME, "pacman", LIB_GAME_PACMAN},
     {Library::LIB_GAME, "nibbler", LIB_GAME_NIBBLER},
     {Library::LIB_GRAPHIC, "ncurses", LIB_GRAPHIC_NCURSES},
-    {Library::LIB_GRAPHIC, "sfml", LIB_GRAPHIC_SFML}};
+    {Library::LIB_GRAPHIC, "sfml", LIB_GRAPHIC_SFML},
+    {Library::LIB_GRAPHIC, "sdl2", LIB_GRAPHIC_SDL2}};
 
 void Application::init(const int argc, const char **argv) {
   if (argc != 2) {

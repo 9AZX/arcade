@@ -11,7 +11,7 @@ PROJECT_LANGUAGE	:=	"C++"
 
 PROJECT_BINARY_TYPE	:=	"SHARED"
 
-PROJECT_BINARY_NAME	:=	"_arcade_sdl"
+PROJECT_BINARY_NAME	:=	"_arcade_sdl2"
 
 PROJECT_LIB	:=	-lSDL2 -lSDL2_ttf -lSDL2_image
 
