@@ -29,6 +29,7 @@ class NcursesModule : public IDisplayModule, public IRender {
   bool isOpen() const final;
   const std::string &getLibraryName() const noexcept final;
   void refreshWindow() const noexcept final;
+  void startMusic(std::string) final{};
 
  private:
   const std::string _name = "ncurses";

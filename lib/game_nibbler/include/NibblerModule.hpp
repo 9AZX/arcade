@@ -25,6 +25,7 @@ class NibblerModule : public IGameModule {
   const GameMap &getMap() const noexcept;
   bool checkCollision(std::pair<int, int> nextPos) final;
   void computeInput(std::vector<enum gameInputs> keys);
+  std::string getMusicPath() final { return musicPath; };
 
  private:
   ICoreModule *_core;
@@ -61,6 +62,7 @@ class NibblerModule : public IGameModule {
   void resetPos();
   void makeMove(std::pair<int, int>);
   void eatTail();
+  std::string musicPath = "./assets/nibbler/theme-music.wav";
 };
 
 #endif /* !NIBBLERMODULE_HPP_ */

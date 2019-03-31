@@ -22,6 +22,17 @@ const std::string &SfmlModule::getLibraryName() const noexcept {
   return this->_name;
 }
 
+void SfmlModule::startMusic(std::string path) {
+  sf::SoundBuffer soundBuffer;
+  sf::Sound sound;
+
+  if (!soundBuffer.loadFromFile(path)) std::cout << "Music failed" << std::endl;
+  std::cout << "music..." << std::endl;
+  sound.setBuffer(soundBuffer);
+  sound.setLoop(true);
+  sound.play();
+}
+
 void SfmlModule::initGraphics(GameMap &map) {
   sf::Texture wallTexture;
   sf::Sprite wallSprite;

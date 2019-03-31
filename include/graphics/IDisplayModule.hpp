@@ -24,6 +24,7 @@ class IDisplayModule {
   virtual Events getInputs() = 0;
   virtual const std::string &getLibraryName() const noexcept = 0;
   virtual void refreshWindow() const noexcept = 0;
+  virtual void startMusic(std::string) = 0;
 };
 
 #endif /* !IDISPLAYMODULE_HPP_ */

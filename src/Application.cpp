@@ -5,11 +5,11 @@
 ** Application
 */
 
+#include "Application.hpp"
 #include <cstring>
 #include <iostream>
-#include "Application.hpp"
-#include "Exception.hpp"
 #include "Choose.hpp"
+#include "Exception.hpp"
 
 static const struct libs libraries[] = {
     {Library::LIB_GAME, "pacman", LIB_GAME_PACMAN},
@@ -47,8 +47,7 @@ void Application::stop() {
       this->_game->close();
     }
     if (this->_graphic) {
-      if (this->_choose != -1)
-        this->_graphClass->destructor();
+      if (this->_choose != -1) this->_graphClass->destructor();
       this->_graphic->close();
     }
   } catch (...) {
@@ -121,28 +120,27 @@ Events Application::getInputs() {
   if (std::find(inputs.begin(), inputs.end(), ONE) != inputs.end()) {
     if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[3].path);
-    }
-    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
+    } else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") ==
+               0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[2].path);
     }
   } else if (std::find(inputs.begin(), inputs.end(), TWO) != inputs.end()) {
     if (strcmp(this->_graphClass->getLibraryName().c_str(), "ncurses") == 0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[3].path);
-    }
-    else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") == 0) {
+    } else if (strcmp(this->_graphClass->getLibraryName().c_str(), "sfml") ==
+               0) {
       this->switchLib(Library::LIB_GRAPHIC, libraries[2].path);
     }
-  }
-  else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
+  } else if (std::find(inputs.begin(), inputs.end(), THREE) != inputs.end()) {
     std::cout << "THREE (game)" << std::endl;
-  }
-  else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
+  } else if (std::find(inputs.begin(), inputs.end(), FOUR) != inputs.end()) {
     std::cout << "FOUR (game)" << std::endl;
   }
   return input;
 }
 
 void Application::renderAll() {
+  this->_graphClass->startMusic(this->_gameClass->getMusicPath());
   this->_graphClass->displayMap(this->_gameClass->getMap());
   std::for_each(this->_entities.begin(), this->_entities.end(),
                 [&, this](std::unique_ptr<AEntity> &n) {

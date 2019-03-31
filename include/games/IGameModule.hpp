@@ -26,9 +26,11 @@ class IGameModule {
   virtual long getScore() const = 0;
   virtual void destructor() = 0;
   virtual bool checkCollision(std::pair<int, int> nextPos) = 0;
+  virtual std::string getMusicPath() = 0;
 
- private:
+ protected:
   long _score = -1;
+  std::string musicPath;
 };
 
 #endif /* !IGAMEMODULE_HPP_ */

@@ -27,6 +27,7 @@ class PacmanModule : public IGameModule {
   void computeInput(std::vector<enum gameInputs> keys);
   bool checkCollision(std::pair<int, int> nextPos) final;
   void checkApple();
+  std::string getMusicPath() final { return musicPath; };
 
  private:
   ICoreModule *_core;
@@ -47,6 +48,7 @@ class PacmanModule : public IGameModule {
           {'#', {"./assets/pacman/wall.png", true, BLUE, BLACK}},
           {' ', {"", false, BLACK, BLACK}},
       }};
+  std::string musicPath = "./assets/pacman/pacman_chomp.wav";
 };
 
 #endif /* !PACMANMODULE_HPP_ */
