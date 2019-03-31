@@ -51,6 +51,7 @@ void NibblerModule::play() {
     } else {
       forward();
     }
+    eatTail();
     checkApple();
   }
 }
@@ -149,6 +150,20 @@ void NibblerModule::makeMove(std::pair<int, int> pos) {
   if (this->checkCollision(pos)) {
     this->_core->getEntity(0).setPos(pos);
     bodyMove();
+  }
+}
+
+void NibblerModule::eatTail() {
+  std::pair<int, int> playerPos = this->_core->getEntity(0).getPos();
+
+  for (unsigned int i = 1; i < snakeWidth; i++) {
+    if (((playerPos.first == _core->getEntity(i).getPos().first) &&
+         (playerPos.second == _core->getEntity(i).getPos().second)) ||
+        ((playerPos.first == _core->getEntity(99).getPos().first) &&
+         (playerPos.second == _core->getEntity(99).getPos().second))) {
+      this->_core->getEntity(0).isAlive = false;
+      this->endGame();
+    }
   }
 }
 

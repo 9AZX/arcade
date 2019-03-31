@@ -60,6 +60,7 @@ class NibblerModule : public IGameModule {
   void forward();
   void resetPos();
   void makeMove(std::pair<int, int>);
+  void eatTail();
 };
 
 #endif /* !NIBBLERMODULE_HPP_ */
