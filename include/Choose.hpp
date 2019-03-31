@@ -6,12 +6,13 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:46
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 30-03-2019 20:11:47
+** @Last Modified time: 31-03-2019 01:09:01
 */
 
 #ifndef	CHOOSE_HPP_
 #define	CHOOSE_HPP_
 
+#include <string>
 #include <ncurses.h>
 #include "Application.hpp"
 
@@ -20,9 +21,10 @@ class Choose
 public:
 	Choose() = default;
 	~Choose() = default;
+	void launchLibraries(Application &app, const std::string &path);
 
 public:
-	void launchLibraries(Application &app);
+	void ncurses_init(Application &app);
 	void print_name() noexcept;
 	void print_menu(Application &app) noexcept;
 	void print_game_pacman(int &interval) noexcept;
