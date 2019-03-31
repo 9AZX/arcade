@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   30-03-2019 18:21:10
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 31-03-2019 01:54:26
+** @Last Modified time: 31-03-2019 03:23:01
 */
 
 #include <memory>
@@ -41,6 +41,7 @@ void Choose::launchLibraries(Application &app, const std::string &path)
 
 void Choose::sfml_init(Application &app)
 {
+	int choose = 0;
 	std::unique_ptr<sf::RenderWindow> window(new sf::RenderWindow(
 		sf::VideoMode(800, 600),
 		"Arcade - Select a game"
@@ -54,8 +55,8 @@ void Choose::sfml_init(Application &app)
 	}
 	window->setFramerateLimit(30);
 	window->setKeyRepeatEnabled(false);
-	text[0].setString("PAC-MAN");
-	text[1].setString("Nibbler");
+	text[0].setString("PAC-MAN  -->");
+	text[1].setString("<-- Nibbler");
 	text[0].setFont(font);
 	text[1].setFont(font);
 	text[0].setCharacterSize(50);
@@ -69,11 +70,32 @@ void Choose::sfml_init(Application &app)
 			if (event.type == sf::Event::Closed) {
 				window->close();
 			}
-			window->clear(sf::Color(0, 0, 0));
-			window->draw(text[0]);
-			//window->draw(text[1]);
-			window->display();
+			if (sf::Event::KeyPressed) {
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)
+					&& choose < 2) {
+					++choose;
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+					&& choose > 0) {
+					--choose;
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					return;
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+					app._choose = (choose >= 2 ? 1 : choose);
+					return;
+				}
+			}
 		}
+		window->clear(sf::Color(0, 0, 0));
+		if (choose == 0) {
+			window->draw(text[0]);
+		}
+		else if (choose == 1) {
+			window->draw(text[1]);
+		}
+		window->display();
 	}
 }
 
